@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "KeQZwNh4RjU=",
+  "success": true,
+  "projectFilePath": "C:\\Programozas\\2025-26 susu\\Vizsgaremek\\Vizsgaremek-MKK\\WinellyApi\\WinellyApi.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Kukola Kende\\.nuget\\packages\\microsoft.aspnetcore.openapi\\10.0.0\\microsoft.aspnetcore.openapi.10.0.0.nupkg.sha512",
+    "C:\\Users\\Kukola Kende\\.nuget\\packages\\microsoft.openapi\\2.0.0\\microsoft.openapi.2.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
