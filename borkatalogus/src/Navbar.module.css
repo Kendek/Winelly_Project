@@ -1,0 +1,83 @@
+.navbar {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  background-color: #F9F6F2;
+  color: #fff;
+  padding: 1rem;
+  border-bottom: solid 4px #8B1E3F;
+}
+
+.logo {
+  max-width: 160px;
+  width: 100%;
+  height: auto;
+}
+
+.navbarcenter
+{
+  margin-left: 4vw;
+}
+
+.navlinks {
+  list-style-type: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  justify-content: space-between;
+}
+
+.navlinks li {
+  margin-right: 1rem;
+}
+
+.navbarright {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  margin-right: 2vw;
+  margin-left: 25vw;
+}
+
+.pageLinks {
+  color: #8B1E3F;
+  font-size: 20px;
+  font-weight: 600;
+  text-decoration: none;  
+  padding: 1rem;  
+}
+
+.carticon, .usericon
+{
+    color: #8B1E3F;
+    font-size: 20px;
+    text-decoration: none; 
+    padding: 1rem;
+}
+
+/* actives */
+
+.usericonlogin, .carticonactive
+{
+    color: white;
+    background-color: #8B1E3F;
+    font-size: 20px;
+    text-decoration: none; 
+    transition: 1s;
+    padding: 1rem;
+    border-radius: 30px;
+}
+
+.pageLinksmap,
+.pageLinkshome, 
+.pageLinkswebshop
+{
+  color: #ffffff;
+  font-size: 20px;
+  text-decoration: none;   
+  background-color: #8B1E3F;
+  font-weight: 600;
+  padding: 1rem;
+  border-radius: 30px;
+  transition: 1s;
+}
