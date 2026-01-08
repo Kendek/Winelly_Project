@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using WinellyApi.Data;
 using WinellyApi.DTOs.Wine;
 using WinellyApi.Mappers;
@@ -51,7 +52,7 @@ namespace WinellyApi.Controllers
         [Route("{id}")]
         public async Task<IActionResult> Update([FromRoute] int id, UpdateWineRequestDto updateDto)
         {
-            var wineModel = _context.Wines.FirstOrDefault(x => x.Id == id);
+            var wineModel = await _context.Wines.FirstOrDefaultAsync(x => x.Id == id);
             if(wineModel == null)
             {
                 return NotFound();
@@ -67,6 +68,21 @@ namespace WinellyApi.Controllers
             await _context.SaveChangesAsync();
 
             return Ok(wineModel.ToWineDto());
+        }
+
+        [HttpDelete]
+        [Route("{id}")]
+        public async Task<IActionResult> Delete([FromRoute] int id)
+        {
+            var wineModel = _context.Wines.FirstOrDefault(x => x.Id == id);
+            if(wineModel == null)
+            {
+                return NotFound();
+            }
+
+            _context.Wines.Remove(wineModel);
+            await _context.SaveChangesAsync();
+            return NoContent();
         }
     }
 }
