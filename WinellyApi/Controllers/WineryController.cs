@@ -20,15 +20,15 @@ namespace WinellyApi.Controllers
         [HttpGet]
         public async Task<IActionResult> GetWineries()
         {
-            var wineries = _context.Wineries.ToList()
-                .Select(winery => winery.ToWineryDto());
+            var wineries = await _context.Wineries.ToListAsync();
+            var wineriesDto = wineries.Select(winery => winery.ToWineryDto());
             return Ok(wineries);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetWineryById(int id)
         {
-            var winery = _context.Wineries.Find(id);
+            var winery = await _context.Wineries.FindAsync(id);
             if (winery == null)
             {
                 return NotFound();
@@ -40,7 +40,7 @@ namespace WinellyApi.Controllers
         public async Task<IActionResult> Create([FromBody] CreateWineryRequestDto wineryDto)
         {
             var wineryModel = wineryDto.ToWineryFromCreateDTO();
-            _context.Wineries.Add(wineryModel);
+            await _context.Wineries.AddAsync(wineryModel);
             await _context.SaveChangesAsync();
             return CreatedAtAction(nameof(GetWineryById), new { id = wineryModel.Id }, wineryModel.ToWineryDto());
         }

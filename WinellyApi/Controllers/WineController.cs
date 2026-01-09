@@ -19,15 +19,15 @@ namespace WinellyApi.Controllers
         [HttpGet]
         public async Task<IActionResult> GetWines()
         {
-            var wines = _context.Wines.ToList()
-                .Select(wine => wine.ToWineDto());
-            return Ok(wines);
+            var wines = await _context.Wines.ToListAsync();
+            var winesDto = wines.Select(wine => wine.ToWineDto());
+            return Ok(winesDto);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetWineById(int id)
         {
-            var wine = _context.Wines.Find(id);
+            var wine = await _context.Wines.FindAsync(id);
             if (wine == null)
             {
                 return NotFound();
@@ -43,7 +43,7 @@ namespace WinellyApi.Controllers
 
             var wineModel = wineDto.ToWineFromCreateDTO();
             wineModel.Winery = winery;
-            _context.Wines.Add(wineModel);
+            await _context.Wines.AddAsync(wineModel);
             await _context.SaveChangesAsync();
             return CreatedAtAction(nameof(GetWineById), new { id = wineModel.Id }, wineModel.ToWineDto());
         }
@@ -74,7 +74,7 @@ namespace WinellyApi.Controllers
         [Route("{id}")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
-            var wineModel = _context.Wines.FirstOrDefault(x => x.Id == id);
+            var wineModel = await _context.Wines.FirstOrDefaultAsync(x => x.Id == id);
             if(wineModel == null)
             {
                 return NotFound();
