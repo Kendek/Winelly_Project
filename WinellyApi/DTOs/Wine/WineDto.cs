@@ -1,4 +1,5 @@
-﻿using WinellyApi.Models;
+﻿using WinellyApi.DTOs.Grape;
+using WinellyApi.Models;
 
 namespace WinellyApi.DTOs.Wine
 {
@@ -11,5 +12,6 @@ namespace WinellyApi.DTOs.Wine
         public decimal Price { get; set; }
         public double AlcoholContent { get; set; }
         public int WineryId { get; set; }
+        public List<GrapeDto> Grapes { get; set; }
     }
 }

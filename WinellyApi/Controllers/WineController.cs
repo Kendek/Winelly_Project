@@ -20,7 +20,7 @@ namespace WinellyApi.Controllers
         [HttpGet]
         public async Task<IActionResult> GetWines()
         {
-            var wines = await _context.Wines.ToListAsync();
+            var wines = await _context.Wines.Include(w => w.Wine_GrapeConnections).ThenInclude(wg => wg.Grape).ToListAsync();
             var winesDto = wines.Select(wine => wine.ToWineDto());
             return Ok(winesDto);
         }
@@ -28,7 +28,7 @@ namespace WinellyApi.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetWineById(int id)
         {
-            var wine = await _context.Wines.FindAsync(id);
+            var wine = await _context.Wines.Include(w => w.Wine_GrapeConnections).ThenInclude(wg => wg.Grape).FirstOrDefaultAsync(x => x.Id == id);
             if (wine == null)
             {
                 return NotFound();
@@ -62,13 +62,8 @@ namespace WinellyApi.Controllers
             {
                 return NotFound();
             }
-            updateDto.ToWineFromUpdateDTO();
 
-            wineModel.Name = updateDto.Name;
-            wineModel.Type = updateDto.Type;
-            wineModel.Year = updateDto.Year;
-            wineModel.Price = updateDto.Price;
-            wineModel.AlcoholContent = updateDto.AlcoholContent;
+            wineModel = updateDto.ToWineFromUpdateDTO();
 
             await _context.SaveChangesAsync();
 

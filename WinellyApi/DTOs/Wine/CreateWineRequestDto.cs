@@ -9,5 +9,6 @@ namespace WinellyApi.DTOs.Wine
         public int Year { get; set; }
         public decimal Price { get; set; }
         public double AlcoholContent { get; set; }
+        public List<int> GrapeIds { get; set; }
     }
 }
