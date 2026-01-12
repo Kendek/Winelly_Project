@@ -1,0 +1,33 @@
+body{
+        background-image: url("../public/HomeBG.png");
+}
+.HomeMain{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    flex-direction: column;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
+.WineBottle{
+    transform: scale(10%);
+    position: absolute;
+    visibility: hidden;
+}
+.TextContainer
+{
+    margin-left: 40%;
+    color: white;
+    text-align: center;
+    text-shadow: 2px 2px black;
+    font-size: larger;
+    width: 40vw;
+    h2{
+        text-decoration: underline;
+    }
+    h1{
+        font-weight: bold;
+    }
+}

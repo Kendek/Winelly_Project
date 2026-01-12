@@ -1,10 +1,36 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import styles from "../Navbar.module.css"
 
 const Navbar = () => {
 
-    const[currentPage, setCurrentPage] = useState<"home" | "map" | "webshop" | "login" | "cart">("home")
+    const location = useLocation();
+
+    const [currentPage, setCurrentPage] = useState<"home" | "map" | "webshop" | "login" | "cart">("home");
+
+    useEffect(() => {
+    switch(location.pathname) 
+    {
+        case "/home":
+        setCurrentPage("home");
+        break;
+        case "/map":
+        setCurrentPage("map");
+        break;
+        case "/webshop":
+        setCurrentPage("webshop");
+        break;
+        case "/login":
+        setCurrentPage("login");
+        break;
+        case "/cart":
+        setCurrentPage("cart");
+        break;
+        default:
+        setCurrentPage("home");
+        }
+    }, [location.pathname])
+
     const[clicked, setClikced] = useState(false)
 
     useEffect(() => {
@@ -22,12 +48,12 @@ const Navbar = () => {
   return (
     <nav className={styles.navbar} >
         <div className={styles.navbarleft}>
-            <Link to="/" onClick={()=> setCurrentPage("home")}><img src="./logo.png" alt="" className={styles.logo} /></Link>
+            <Link to="/home" onClick={()=> setCurrentPage("home")}><img src="./logo.png" alt="" className={styles.logo} /></Link>
         </div>
         <div className={styles.navbarcenter}>
             <ul className={clicked ? styles.navlinksActive : styles.navlinks}>
             <li>
-                 <Link to="/" className={currentPage=="home" ? styles.pageLinkactive : styles.pageLink} onClick={()=> setCurrentPage("home")}>Home</Link>
+                 <Link to="/home" className={currentPage=="home" ? styles.pageLinkactive : styles.pageLink} onClick={()=> setCurrentPage("home")}>Home</Link>
             </li>
             <li>
                 <Link to="/map" className={currentPage=="map" ? styles.pageLinkactive : styles.pageLink} onClick={()=> setCurrentPage("map")}>Map</Link>

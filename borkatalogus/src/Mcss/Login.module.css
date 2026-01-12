@@ -62,14 +62,6 @@
         text-align: center;
     }
 
-    .container input {
-        background-color: #eee;
-        border: none;
-        padding: 12px 15px;
-        margin: 8px 0;
-        width: 100%;
-    }
-
     .wrapper {
         min-height: 100vh;
         display: flex;
@@ -78,7 +70,6 @@
         background-color: #F9F6F2;
         overflow: hidden;
     }
-
 
     .container {
         background-color: #fff;
@@ -201,3 +192,37 @@
     .container.rightPanelActive .overlayright {
         transform: translateX(20%);
     }
+
+.inputGroup {
+  position: relative;
+  width: 100%;
+  margin: 8px 0;
+}
+
+.inputIcon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #8B1E3F;
+  font-size: 18px;
+}
+
+.inputGroup input {
+    width: 100%;
+    padding: 12px 15px 12px 40px;
+    border: none;
+    background-color: #eee;
+    border-radius: 5px;
+    margin: 8px 0;
+}
+
+.eyeIcon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #8B1E3F;
+  font-size: 16px;
+}
