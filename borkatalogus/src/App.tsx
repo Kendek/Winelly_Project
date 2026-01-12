@@ -1,11 +1,11 @@
 import React from 'react'
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom"
-import Home from './Home'
-import Map from './Map'
-import Webshop from './Webshop'
-import Navbar from './Navbar'
-import Login from './Login'
-import Cart from './Cart'
+import Home from './pages/Home'
+import Map from './pages/Map'
+import Webshop from './pages/Webshop'
+import Navbar from './pages/Navbar'
+import Login from './pages/Login'
+import Cart from './pages/Cart'
 
 const App = () => {
 
