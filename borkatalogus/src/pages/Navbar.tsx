@@ -4,10 +4,13 @@ import styles from "../Navbar.module.css"
 
 const Navbar = () => {
 
+    //UseStates
     const location = useLocation();
-
     const [currentPage, setCurrentPage] = useState<"home" | "map" | "webshop" | "login" | "cart">("home");
+    const[clicked, setClikced] = useState(false)
+    /*----------*/
 
+    //Save/Set Current Page Location
     useEffect(() => {
     switch(location.pathname) 
     {
@@ -30,19 +33,18 @@ const Navbar = () => {
         setCurrentPage("home");
         }
     }, [location.pathname])
+    /*----------*/
 
-    const[clicked, setClikced] = useState(false)
-
+    //Navbar responsivity
     useEffect(() => {
     const handleResize = () => {
         if (window.innerWidth > 768) {
         setClikced(false);
-        }
-    };
-
+        }};
         window.addEventListener("resize", handleResize);
         return () => window.removeEventListener("resize", handleResize);
     }, []);
+    /*----------*/
 
 
   return (
