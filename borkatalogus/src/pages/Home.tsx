@@ -1,5 +1,5 @@
 import styles from "../Home.module.css"
-
+import HomeSecondPart from "./HomeSecondPart"
 const Home = () => {
   return (
     <div className={styles.HomeMain}>
@@ -14,9 +14,9 @@ const Home = () => {
           <h2>Order Now 🛒</h2>
         </div>  
       </div>
-      <div className={styles.HomeSecond}>
+      <HomeSecondPart>
         
-      </div>
+      </HomeSecondPart>
 
     </div>
   )
