@@ -13,18 +13,6 @@ namespace WinellyApi.Mappers
                 Id = grapeModel.Id,
                 Name = grapeModel.Name,
                 Color = grapeModel.Color,
-                Taste = grapeModel.Taste,
-                Wines = grapeModel.Wine_GrapeConnections
-                    .Select(x => new WineDto
-                    {
-                        Id = x.Wine.Id,
-                        Name = x.Wine.Name,
-                        Type = x.Wine.Type,
-                        Year = x.Wine.Year,
-                        Price = x.Wine.Price,
-                        AlcoholContent = x.Wine.AlcoholContent,
-                    })
-                    .ToList()
             };
         }
 
@@ -34,7 +22,6 @@ namespace WinellyApi.Mappers
             {
                 Name = grapeDto.Name,
                 Color = grapeDto.Color,
-                Taste = grapeDto.Taste
             };
         }
     }

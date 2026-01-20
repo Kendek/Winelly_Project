@@ -13,6 +13,8 @@ namespace WinellyApi.Mappers
                 Id = wineModel.Id,
                 Name = wineModel.Name,
                 Type = wineModel.Type,
+                Description = wineModel.Description,
+                Taste = wineModel.Taste,
                 Year = wineModel.Year,
                 Price = wineModel.Price,
                 AlcoholContent = wineModel.AlcoholContent,
@@ -23,7 +25,6 @@ namespace WinellyApi.Mappers
                         Id = x.Grape.Id,
                         Name = x.Grape.Name,
                         Color = x.Grape.Color,
-                        Taste = x.Grape.Taste,
                     })
                     .ToList()
             };
@@ -35,6 +36,8 @@ namespace WinellyApi.Mappers
                 Id = wineModel.Id,
                 Name = wineModel.Name,
                 Type = wineModel.Type,
+                Description = wineModel.Description,
+                Taste = wineModel.Taste,
                 Year = wineModel.Year,
                 Price = wineModel.Price,
                 AlcoholContent = wineModel.AlcoholContent,
@@ -42,16 +45,18 @@ namespace WinellyApi.Mappers
             };
         }
 
-        public static Wine ToWineFromCreateDTO(this CreateWineRequestDto wineDto, int wineryId)
+        public static Wine ToWineFromCreateDTO(this CreateWineRequestDto wineDto)
         {
             var wine = new Wine
             {
                 Name = wineDto.Name,
                 Type = wineDto.Type,
+                Description = wineDto.Description,
+                Taste = wineDto.Taste,
                 Year = wineDto.Year,
                 Price = wineDto.Price,
                 AlcoholContent = wineDto.AlcoholContent,
-                WineryId = wineryId,
+                WineryId = wineDto.WineryId,
             };
 
             foreach(var grapeId in wineDto.GrapeIds)

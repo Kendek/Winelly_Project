@@ -8,7 +8,5 @@ namespace WinellyApi.DTOs.Grape
         public int Id { get; set; }
         public string Name { get; set; }
         public string Color { get; set; }
-        public string Taste { get; set; }
-        public List<WineDto> Wines { get; set; } = new();
     }
 }

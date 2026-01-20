@@ -45,5 +45,22 @@ namespace WinellyApi.Controllers
 
             return CreatedAtAction(nameof(GetGrapeById), new { id = grapeModel.Id }, grapeModel.ToGrapeDto());
         }
+
+        //[HttpPut]
+
+
+        [HttpDelete]
+        [Route("{id}")]
+        public async Task<IActionResult> DeleteGrapeById([FromRoute]int id)
+        {
+            var grape = await _context.Grapes.Include(x => x.Wine_GrapeConnections).FirstOrDefaultAsync(x => x.Id == id);
+            if(grape == null)
+            {
+                return NotFound("Grape doesn't exist");
+            }
+            _context.Grapes.Remove(grape);
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
     }
 }

@@ -38,15 +38,15 @@ namespace WinellyApi.Controllers
             return Ok(wine.ToWineDto());
         }
 
-        [HttpPost("{wineryId}")]
-        public async Task<IActionResult> CreateWine([FromRoute] int wineryId, CreateWineRequestDto wineDto)
+        [HttpPost]
+        public async Task<IActionResult> CreateWine(CreateWineRequestDto wineDto)
         {
-            if (await _context.Wineries.FirstOrDefaultAsync(x => x.Id == wineryId) == null)
+            if (await _context.Wineries.FirstOrDefaultAsync(x => x.Id == wineDto.WineryId) == null)
             {
                 return BadRequest("Invalid WineryId.");
             }
 
-            var wineModel = wineDto.ToWineFromCreateDTO(wineryId);
+            var wineModel = wineDto.ToWineFromCreateDTO();
             await _context.Wines.AddAsync(wineModel);
             await _context.SaveChangesAsync();
 
@@ -67,6 +67,8 @@ namespace WinellyApi.Controllers
 
             wineModel.Name = updateDto.Name;
             wineModel.Type = updateDto.Type;
+            wineModel.Description = updateDto.Description;
+            wineModel.Taste = updateDto.Taste;
             wineModel.Year = updateDto.Year;
             wineModel.Price = updateDto.Price;
             wineModel.AlcoholContent = updateDto.AlcoholContent;
@@ -94,7 +96,7 @@ namespace WinellyApi.Controllers
             var wineModel = await _context.Wines.FirstOrDefaultAsync(x => x.Id == id);
             if(wineModel == null)
             {
-                return NotFound("Comment doesn't exist");
+                return NotFound("Wine doesn't exist");
             }
 
             _context.Wines.Remove(wineModel);
