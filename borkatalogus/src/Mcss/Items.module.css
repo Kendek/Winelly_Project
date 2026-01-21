@@ -1,80 +1,76 @@
 .singleItem {
-    flex: 1 1 300px;
+    flex: 1 1 250px;
     max-width: 400px;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     gap: 30px;
-    padding: 10px;
-    border: 3px solid #ccc;
+    border: 3px solid rgba(215, 215, 215, 0.682);
     border-radius: 5px;
     cursor: pointer;
 }
 
-.imageWrapper
-{
-    flex: 0 0 35%;
-    display: flex;
+.imageWrapper {
+    position: relative;
+    width: 100%;
     height: 100%;
+    background-color: #F9F6F2;
 }
 
 .imageWrapper img {
     width: 100%;
-    height: 100%;   
+    height: auto;
     object-fit: cover;
+    display: block;
 }
 
-.itemTexts
-{
-    margin: 20px;
+.overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    background: linear-gradient(to top, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.2));
+    backdrop-filter: blur(2px); 
+    border-top: 3px solid rgba(215, 215, 215, 0.682);
+}
+
+.itemTexts {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px;
     color: #8B1E3F;
 }
 
-.itemTitle
-{
-    margin-bottom: 5vh;
-}
-.itemTitle > span{
-    font-size: 35px;
+.itemTitle {
+    margin-bottom: 2vh;
+    font-size: 20px;
 }
 
-.itemRating
-{
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    align-items: center;
-    gap: 10px;
-    margin-top: 10px;
-}
-.itemRating span, .itemRating p
-{
-    font-size: clamp(14px, 1.2vw, 18px);
-}
-
-
-.itemInfos {
+.itemPrice {
     display: flex;
     flex-direction: column;
     font-size: 20px;
-    margin-bottom: 3vh;
+    margin-bottom: 1vh;
     gap: 20px;
     font-weight: 600;
 }
 
-.itemBtn
-{
+.itemBtn {
     width: 100%;
     background: linear-gradient(135deg, #d03262, #8B1E3F);
     color: white;
     border: none;
-    padding: 10px;
+    padding: 15px;
     border-radius: 12px;
-    font-size: 15px ;
+    font-size: 15px;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
 }
+
 .itemBtn:hover {
     transform: translateY(-2px);
     box-shadow: 0 12px 35px #8e183b39;
@@ -85,24 +81,11 @@
 }
 
 /* Mobile */
-@media (max-width: 768px) 
-{
-    .singleItem
-    {
+@media (max-width: 768px) {
+    .singleItem {
         min-width: 250px;
         gap: 15px;
     }
-    .itemRating p
-    {
-        font-size: 12px;
-    }
-    .itemRating span
-    {
-        font-size: 16px;
-    }
-    .itemBtn
-    {
-        width: 90%;
-    }
 }
+
 /* ------------ */
