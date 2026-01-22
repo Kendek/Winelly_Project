@@ -1,7 +1,7 @@
 .mainDiv {
     margin: 0;
     padding: 0;
-    background-color: #F9F6F2;
+    background-color: var(--secondary-colour);
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -13,7 +13,7 @@
     width: 90%;
     background-color: white;
     box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
-    border-radius: 20px;
+    border-radius: var(--container-radius);
 }
 
 .contentArea {
@@ -29,7 +29,7 @@
     display: flex;
     flex-direction: column;
     gap: 30px;
-    border-radius: 6px;
+    border-radius: var(--smalldiv-radius);
     margin: 30px;
     position: sticky;
     top: 120px;
@@ -46,10 +46,10 @@
 .filterBlock {
     background-color: #fff;
     padding: 16px;
-    border-radius: 4px;
-    border: 2px solid #8b1e3f91;
+    border-radius: var(--smalldiv-radius);
+    border: 2px solid var(--primary-colour);
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
-    color: #8B1E3F;
+    color: var(--primary-colour);
     position: relative;
 }
 
@@ -58,33 +58,33 @@
     left: 10px;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 18px;
-    color: #8B1E3F;
+    font-size: var(--label-font);
+    color: var(--primary-colour);
     pointer-events: none;
 }
 
 .filterBlock input {
     width: 100%;
     padding: 10px 10px 10px 35px;
-    color: #8B1E3F;
-    border-radius: 12px;
-    border: 2px solid #b62752;
-    font-size: 16px;
+    color: var(--primary-colour);
+    border-radius: var(--smalldiv-radius);
+    border: 2px solid var(--primary-colour);
+    font-size: var(--label-font);
     background: rgba(255, 255, 255, 0.8);
     transition: all 0.3s ease;
     outline: none;
 }
 
 .filterBlock input:focus {
-    border-color: #da4f79;
-    box-shadow: 0 8px 25px #8e183b45;
+    border-color: var(--primary-light-colour);
+    box-shadow: 0 8px 25px #8e183b39;
 }
 
 .filterTitle {
     padding: 10px;
-    font-size: 22px;
+    font-size: var(--title-font);
     margin-bottom: 30px;
-    border-bottom: 3px solid #8B1E3F;
+    border-bottom: 3px solid var(--primary-colour);
     padding-bottom: 8px;
     font-weight: 700;
 }
@@ -101,7 +101,7 @@
 .filterTypes span {
     border-bottom: 2px solid rgba(139, 30, 63, 0.2);
     font-weight: bold;
-    font-size: 16px;
+    font-size: var(--label-font);
     padding-bottom: 6px;
 }
 
@@ -119,17 +119,18 @@
 }
 
 .filterBtn {
-    background-color: #8B1E3F;
+    background-color: var(--primary-colour);
     color: white;
     border: none;
     padding: 10px 16px;
-    border-radius: 6px;
+    border-radius: var(--inputs-radius);
+    font-size: var(--label-font);
     cursor: pointer;
     transition: 0.3s ease;
 }
 
 .filterBtn:hover {
-    background-color: #d63867;
+    background-color: var(--primary-light-colour);
 }
 
 .filterToggle {
@@ -157,12 +158,12 @@
 
     .filterToggle {
         display: block;
-        background-color: #8B1E3F;
+        background-color: var(--primary-colour);
         color: white;
         border: none;
         padding: 12px 18px;
-        border-radius: 6px;
-        font-size: 18px;
+        border-radius: var(--smalldiv-radius);
+        font-size: var(--label-font);
         cursor: pointer;
         margin: 10px auto;
         z-index: 20;
@@ -175,7 +176,7 @@
         width: calc(100% - 40px);
         background-color: white;
         padding: 20px;
-        border-radius: 10px;
+        border-radius: var(--smalldiv-radius);
         box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
         opacity: 0;
         transform: translateY(-20px);

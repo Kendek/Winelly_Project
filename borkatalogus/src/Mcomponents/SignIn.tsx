@@ -34,7 +34,7 @@ const SignIn = ({ flipForm }: Props) => {
   return (
     <div className={`${style.formSide} ${style.loginForm}`}>
       <div className={style.formHeader}>
-        <h1 className={style.formTitle}>Welcome to Winelly</h1>
+        <p className={style.formTitle}>Welcome to Winelly</p>
       </div>
 
     <div className={style.formLabelsInputs}>

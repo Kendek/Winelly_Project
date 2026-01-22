@@ -2,10 +2,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #F9F6F2;
+  background-color: var(--secondary-colour);
   color: #fff;
   padding: 1rem;
-  border-bottom: solid 4px #8B1E3F;
+  border-bottom: solid 4px var(--primary-colour);
   top: 0;
   position: sticky;
   overflow: hidden;
@@ -35,7 +35,7 @@
 }
 
 .pageLink {
-  color: #8B1E3F;
+  color: var(--primary-colour);
   font-size: 20px;
   font-weight: 600;
   text-decoration: none;  
@@ -44,7 +44,7 @@
 
 .carticon, .usericon
 {
-    color: #8B1E3F;
+    color: var(--primary-colour);
     font-size: 20px;
     font-weight: 600;
     text-decoration: none; 
@@ -55,7 +55,7 @@
 .usericonlogin, .carticonactive
 {
     color: white;
-    background-color: #8B1E3F;
+    background-color: var(--primary-colour);
     font-size: 20px;
     text-decoration: none; 
     transition: 1s;
@@ -69,7 +69,7 @@
   color: #ffffff;
   font-size: 20px;
   text-decoration: none;   
-  background-color: #8B1E3F;
+  background-color: var(--primary-colour);
   font-weight: 600;
   padding: 1rem;
   border-radius: 30px;
@@ -85,7 +85,7 @@
 
 .mobile i
 {
-  color: #8B1E3F;
+  color: var(--primary-colour);
 }
 /* -------- */
 
@@ -104,7 +104,7 @@
     right: -310px;
     width: 300px;
     height: 100vh;
-    background-color: #8B1E3F;
+    background-color: var(--primary-colour);
     padding: 40px 0 0 10px;
     gap: 50px;
     transition: 0.3s ease-in-out;
@@ -124,7 +124,7 @@
     width: 300px;
     height: 100vh;
     gap: 50px;
-    background-color: #8B1E3F;
+    background-color: var(--primary-colour);
     padding: 40px 0 0 10px;
     transition: 0.3s ease-in-out;
     z-index: 1000;

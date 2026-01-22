@@ -1,10 +1,27 @@
 body
 {
-    background-color: #F9F6F2;
+    background-color: var(--secondary-colour)
 }
 *
 {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+:root{
+    --primary-colour: #8B1E3F;
+    --primary-light-colour: #b62752;
+    --secondary-colour : #F9F6F2;
+
+    --large-title-font : 30px;
+    --title-font: 24px;
+    --small-item-font : 22px;
+    --description-font: 20px;
+    --label-font : 17px;
+
+    --container-radius : 18px;
+    --inputs-radius : 12px;
+    --image-radius : 10px;
+    --smalldiv-radius : 4px;
 }

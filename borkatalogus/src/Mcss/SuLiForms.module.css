@@ -5,11 +5,11 @@
     height: auto;
     min-height: 580px;
     backface-visibility: hidden;
-    background: rgba(255, 255, 255, 0.95);
+    background: white;
     backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 24px;
-    padding: 32px;
+    border-radius: var(--container-radius);
+    padding: 30px;
     box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
     display: flex;
     flex-direction: column;
@@ -29,15 +29,15 @@
 /* Form Elements */
 .formHeader {
     text-align: center;
-    margin-bottom: 24px;
+    margin-bottom: 22px;
 }
 
 .formTitle {
-    font-size: 28px;
+    font-size: var(--large-title-font);
     font-weight: 700;
-    color: #8B1E3F;
+    color: var(--primary-colour);
     margin: 0 0 8px 0;
-    background: linear-gradient(135deg, #8B1E3F, #dc3164);
+    background: linear-gradient(135deg, var(--primary-colour), var(--primary-light-colour));
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -58,8 +58,8 @@
 
 .formLabel {
     display: block;
-    color: #8B1E3F;
-    font-size: 14px;
+    color: var(--primary-colour);
+    font-size: var(--label-font);
     font-weight: 600;
     margin-bottom: 6px;
 }
@@ -68,22 +68,18 @@
     width: 100%;
     padding: 14px 18px;
     border: 2px solid #e2e8f0;
-    border-radius: 12px;
-    font-size: 16px;
-    background: rgba(255, 255, 255, 0.8);
+    border-radius: var(--inputs-radius);
+    font-size: var(--label-font);
+    background: white;
     transition: all 0.3s ease;
     outline: none;
 }
 
 .formInput:focus {
-    border-color: #da4f79;
-    background: rgba(255, 255, 255, 1);
+    border-color: var(--primary-light-colour);
+    background: white;
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px #8e183b1e;
-}
-
-.formInput::placeholder {
-    color: #a0aec0;
+    box-shadow: 0 8px 25px #8e183b39;
 }
 
 .formLabelsInputs
@@ -112,19 +108,19 @@
 }
 
 .passwordToggle:hover {
-    color: #8B1E3F;
+    color: var(--primary-colour)
 }
 /*---------------*/
 
 /* Buttons + Switch elements */
 .submitBtn {
     width: 100%;
-    background: linear-gradient(135deg, #d03262, #8B1E3F);
+    background: linear-gradient(135deg, var(--primary-light-colour), var(--primary-colour));
     color: white;
     border: none;
     padding: 16px;
-    border-radius: 12px;
-    font-size: 16px;
+    border-radius: var(--inputs-radius);
+    font-size: var(--label-font);
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -154,13 +150,13 @@
 }
 
 .switchText {
-    color: #8e5162;
-    font-size: 14px;
+    color: var(--primary-colour);
+    font-size: var(--label-font);
     margin: 0;
 }
 
 .switchLink {
-    color: #a82a4f;
+    color: var(--primary-colour);
     font-weight: 600;
     cursor: pointer;
     transition: color 0.2s;
@@ -168,7 +164,7 @@
 }
 
 .switchLink:hover {
-    color: #ea4979;
+    color: var(--primary-light-colour);
 }
 /*---------------*/
 
