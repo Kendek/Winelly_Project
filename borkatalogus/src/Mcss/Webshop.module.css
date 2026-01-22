@@ -1,7 +1,6 @@
 .mainDiv {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
     background-color: #F9F6F2;
     min-height: 100vh;
     display: flex;
@@ -12,9 +11,6 @@
 
 .container {
     width: 90%;
-    height: auto;
-    margin-top: 8vh;
-    min-height: 680px;
     background-color: white;
     box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
     border-radius: 20px;
@@ -22,11 +18,12 @@
 
 .contentArea {
     display: flex;
-    gap: 10px;
+    gap: 100px;
     padding: 30px;
     align-items: flex-start;
 }
 
+/* Filter */
 .filterPanel {
     width: 250px;
     display: flex;
@@ -34,6 +31,16 @@
     gap: 30px;
     border-radius: 6px;
     margin: 30px;
+    position: sticky;
+    top: 120px;
+}
+
+.filterPanel > .filterBlock:first-child
+{
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    
 }
 
 .filterBlock {
@@ -43,12 +50,40 @@
     border: 2px solid #8b1e3f91;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
     color: #8B1E3F;
+    position: relative;
+}
+
+.filterBlock i {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: #8B1E3F;
+    pointer-events: none;
+}
+
+.filterBlock input {
+    width: 100%;
+    padding: 10px 10px 10px 35px;
+    color: #8B1E3F;
+    border-radius: 12px;
+    border: 2px solid #b62752;
+    font-size: 16px;
+    background: rgba(255, 255, 255, 0.8);
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.filterBlock input:focus {
+    border-color: #da4f79;
+    box-shadow: 0 8px 25px #8e183b45;
 }
 
 .filterTitle {
     padding: 10px;
     font-size: 22px;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     border-bottom: 3px solid #8B1E3F;
     padding-bottom: 8px;
     font-weight: 700;
@@ -60,6 +95,7 @@
     margin-top: 20px;
     margin-left: 10px;
     gap: 16px;
+    cursor: pointer;
 }
 
 .filterTypes span {
@@ -73,10 +109,13 @@
     display: flex;
     flex-direction: column;
     gap: 14px;
-    margin-top: 20px;
-    margin-left: 10px;
+    justify-content: flex-start;
     font-size: 16px;
     font-weight: 600;
+}
+
+.filterPrice p {
+    text-align: center;
 }
 
 .filterBtn {
@@ -84,7 +123,6 @@
     color: white;
     border: none;
     padding: 10px 16px;
-    font-weight: 600;
     border-radius: 6px;
     cursor: pointer;
     transition: 0.3s ease;
@@ -94,6 +132,11 @@
     background-color: #d63867;
 }
 
+.filterToggle {
+    display: none;
+}
+/* -------- */
+
 .itemsGrid {
     display: flex;
     flex: 1;
@@ -102,10 +145,56 @@
     padding: 10px;
     gap: 30px;
     margin: 20px;
-    justify-content: flex-start;
 }
 
 /* Mobile */
-@media (max-width: 768px) {}
+@media (max-width: 768px) {
+    .contentArea {
+        position: relative;
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    .filterToggle {
+        display: block;
+        background-color: #8B1E3F;
+        color: white;
+        border: none;
+        padding: 12px 18px;
+        border-radius: 6px;
+        font-size: 18px;
+        cursor: pointer;
+        margin: 10px auto;
+        z-index: 20;
+    }
+
+    .filterPanel {
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: calc(100% - 40px);
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        opacity: 0;
+        transform: translateY(-20px);
+        pointer-events: none;
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        z-index: 15;
+        margin: 30px 20px;
+    }
+
+    .filterPanel.open {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+    }
+
+    .itemsGrid {
+        margin: 0;
+        justify-content: center;
+    }
+}
 
 /* --------- */

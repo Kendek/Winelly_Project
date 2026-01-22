@@ -4,35 +4,9 @@ import styles from "../Navbar.module.css"
 
 const Navbar = () => {
 
-    //UseStates
+    //UseState + Location
     const location = useLocation();
-    const [currentPage, setCurrentPage] = useState<"home" | "map" | "webshop" | "login" | "cart">("home");
     const[clicked, setClikced] = useState(false)
-    /*----------*/
-
-    //Save/Set Current Page Location
-    useEffect(() => {
-    switch(location.pathname) 
-    {
-        case "/home":
-        setCurrentPage("home");
-        break;
-        case "/map":
-        setCurrentPage("map");
-        break;
-        case "/webshop":
-        setCurrentPage("webshop");
-        break;
-        case "/login":
-        setCurrentPage("login");
-        break;
-        case "/cart":
-        setCurrentPage("cart");
-        break;
-        default:
-        setCurrentPage("home");
-        }
-    }, [location.pathname])
     /*----------*/
 
     //Navbar responsivity
@@ -55,24 +29,24 @@ const Navbar = () => {
   return (
     <nav className={styles.navbar} >
         <div className={styles.navbarleft}>
-            <Link to="/home" onClick={()=> setCurrentPage("home")}><img src="./logo.png" alt="" className={styles.logo} /></Link>
+            <Link to="/home"><img src="./logo.png" alt="" className={styles.logo} /></Link>
         </div>
         <div className={styles.navbarcenter}>
             <ul className={clicked ? styles.navlinksActive : styles.navlinks}>
             <li>
-                 <Link to="/home" className={currentPage=="home" ? styles.pageLinkactive : styles.pageLink} onClick={()=> {setCurrentPage("home"); setClikced(false)}}>Home</Link>
+                 <Link to="/home" className={location.pathname === "/home" ? styles.pageLinkactive : styles.pageLink} onClick={()=> {setClikced(false)}}>Home</Link>
             </li>
             <li>
-                <Link to="/map" className={currentPage=="map" ? styles.pageLinkactive : styles.pageLink} onClick={()=> {setCurrentPage("map"); setClikced(false)}}>Map</Link>
+                <Link to="/map" className={location.pathname === "/map" ? styles.pageLinkactive : styles.pageLink} onClick={()=> {setClikced(false)}}>Map</Link>
             </li>
             <li>
-                <Link to="/webshop" className={currentPage=="webshop" ? styles.pageLinkactive : styles.pageLink} onClick={()=> {setCurrentPage("webshop"); setClikced(false)}}>Webshop</Link>
+                <Link to="/webshop" className={ location.pathname === "/webshop" || location.pathname.startsWith("/currentWine") ? styles.pageLinkactive : styles.pageLink } onClick={()=> {setClikced(false)}}>Webshop</Link>
             </li>
             </ul>
         </div>
          <div className={styles.navbarright}>
-            <Link to="/login" className={currentPage=="login" ? styles.usericonlogin : styles.usericon} onClick={()=> {setCurrentPage("login"); setClikced(false)}}>Login</Link>
-            <Link to="/cart" className={currentPage=="cart" ? styles.carticonactive : styles.carticon} onClick={()=> {setCurrentPage("cart"); setClikced(false)}}><i className="fa-solid fa-cart-shopping"></i></Link>
+            <Link to="/login" className={location.pathname === "/login" ? styles.usericonlogin : styles.usericon} onClick={()=> {setClikced(false)}}>Login</Link>
+            <Link to="/cart" className={location.pathname === "/cart" ? styles.carticonactive : styles.carticon} onClick={()=> {setClikced(false)}}><i className="fa-solid fa-cart-shopping"></i></Link>
             <div className={styles.mobile}>
                 <i className={clicked ? "fas fa-times" : "fas fa-bars"} onClick={() => setClikced(!clicked)}></i>
             </div>
