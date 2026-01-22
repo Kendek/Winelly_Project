@@ -28,12 +28,18 @@ const SignUp = ({ flipForm }: Props) => {
 
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z]+\.[a-zA-Z]{2,3}$/;
 
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+
     if (firstName && lastName && signupEmail && signupPassword != "") {
       if (emailRegex.test(signupEmail))
       {
-        ResetFields()
-        flipForm()
-        console.log("good")
+        if(passwordRegex.test(signupPassword))
+        {
+          ResetFields()
+          flipForm()
+          console.log("good")
+        }
       }
     }
   }

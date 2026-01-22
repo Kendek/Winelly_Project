@@ -44,6 +44,11 @@ const Navbar = () => {
         window.addEventListener("resize", handleResize);
         return () => window.removeEventListener("resize", handleResize);
     }, []);
+    
+
+    useEffect(() => {
+    window.scrollTo({ top: 0, });
+  }, [location.pathname]);
     /*----------*/
 
 
