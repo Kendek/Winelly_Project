@@ -3,6 +3,7 @@ import FavCard from "./FavCard"
 const HomeSecondPart = () => {
   return (
         <div className={styles.HomeSecond}>
+          
           <div className={styles.FlexBox}>
             <div className={styles.LineDecor}></div>
             <span className={styles.Title}>Our best rated Wines!</span>
@@ -15,7 +16,6 @@ const HomeSecondPart = () => {
           <FavCard classname="FavCardUp"></FavCard>
           <FavCard classname="FavCardDown"></FavCard>
           <FavCard classname="FavCardUp"></FavCard>
-          <FavCard classname="FavCardDown"></FavCard>
 
         </div>
 
