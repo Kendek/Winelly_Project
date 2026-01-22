@@ -54,17 +54,22 @@
  .Stars{
     font-size: 150%;
  }
+ .FavCardContainer{
+    flex-direction: column;
+ }
 }
 .HomeSecond{
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    z-index: -10;
     background-color: white;
+    background-image: url("../public/OilCrownBg2.png");
     width: 100%;
-    height: 100vh;
+    height: 90vh;
     display: flex;
     align-items: center;
     flex-direction: column;
 }
+
+
 .FlexBox{
     display: flex;
     flex-direction: row;
@@ -90,8 +95,10 @@
     text-shadow: 1px 1px black;
 }
 .FavCardContainer{
+    z-index: 1;
     display: flex;
     width: 90%;
+    flex-direction: row;
     gap: 5%;
     height: 80%;
     justify-content: center;
@@ -129,14 +136,16 @@
     width: 80%;
     background-image: url("../public/GrapePlant.jpg");
     background-position: 70%;
-    background-size: 200%;
+    background-size: 210%;
     border-radius: 50%;
+    transition: 1s;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
     img{
 
         transform: scale(130%);
     }
 }
+
 .CardTitle{
     text-shadow: 0px 1px 0px black (255, 255, 255, 0.397);
     text-align: left;

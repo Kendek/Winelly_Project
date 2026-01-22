@@ -14,7 +14,7 @@ const FavCard = (props: { classname: string }) => {
                   <span className={styles.Discount}>200 $</span>
                   
                   <span className={styles.CardRating}><Rating value={4} readOnly cancel={false}></Rating></span>
-                  <button className={styles.OrderButton}>Order!</button>
+                  <button type="button" className={styles.OrderButton}>Order!</button>
                 </div>
             </div>
   )
