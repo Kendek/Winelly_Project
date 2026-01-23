@@ -34,7 +34,7 @@ const Navbar = () => {
         <div className={styles.navbarcenter}>
             <ul className={clicked ? styles.navlinksActive : styles.navlinks}>
             <li>
-                 <Link to="/home" className={location.pathname === "/home" ? styles.pageLinkactive : styles.pageLink} onClick={()=> {setClikced(false)}}>Home</Link>
+                 <Link to="/home" className={location.pathname === "/home" || location.pathname === "/" ? styles.pageLinkactive : styles.pageLink} onClick={()=> {setClikced(false)}}>Home</Link>
             </li>
             <li>
                 <Link to="/map" className={location.pathname === "/map" ? styles.pageLinkactive : styles.pageLink} onClick={()=> {setClikced(false)}}>Map</Link>

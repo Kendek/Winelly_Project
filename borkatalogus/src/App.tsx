@@ -7,22 +7,25 @@ import Navbar from './pages/Navbar'
 import Login from './pages/Login'
 import Cart from './pages/Cart'
 import CurrentWine from './Mcomponents/CurrentWine'
+import WineContextProvider from './Mcontext/WineContextProvider'
 
 const App = () => {
 
   return (
-    <BrowserRouter>
-    <Navbar/>
-      <Routes>
-        <Route index element={<Home />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/map" element={<Map />} />
-        <Route path="/webshop" element={<Webshop />} />
-        <Route path="/currentWine" element={<CurrentWine/>} />
-        <Route path="/login" element={<Login/>} />
-        <Route path="/cart" element={<Cart/>} />
-      </Routes>
-    </BrowserRouter>
+    <WineContextProvider>
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route index element={<Home />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/map" element={<Map />} />
+          <Route path="/webshop" element={<Webshop />} />
+          <Route path="/currentWine" element={<CurrentWine />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/cart" element={<Cart />} />
+        </Routes>
+      </BrowserRouter>
+    </WineContextProvider>
   )
 }
 

@@ -1,6 +1,5 @@
 import React from 'react'
 import style from '../Mcss/Items.module.css'
-import CurrentWine from './CurrentWine'
 import { Link } from 'react-router-dom'
 
 const WebshopItem = () => {
@@ -9,7 +8,7 @@ const WebshopItem = () => {
     { 
         e.stopPropagation(); 
         e.preventDefault(); 
-    };
+    };  
 
     return (
         <Link to="/currentWine">
@@ -20,10 +19,10 @@ const WebshopItem = () => {
                         <div className={style.itemTexts}>
                             <div>
                                 <div className={style.itemTitle}>
-                                    <span>Chardonnay</span>
+                                    <span>Title</span>
                                 </div>
                                 <div className={style.itemPrice}>
-                                    <p>4 500 Ft</p>
+                                    <p>4500 Ft</p>
                                 </div>
                             </div>
                             <div>

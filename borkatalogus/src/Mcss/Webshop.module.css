@@ -35,12 +35,11 @@
     top: 120px;
 }
 
-.filterPanel > .filterBlock:first-child
-{
+.filterPanel>.filterBlock:first-child {
     border: none;
     box-shadow: none;
     padding: 0;
-    
+
 }
 
 .filterBlock {
@@ -51,6 +50,8 @@
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
     color: var(--primary-colour);
     position: relative;
+    animation: slideDown 0.5s ease forwards;
+    opacity: 0;
 }
 
 .filterBlock i {
@@ -136,6 +137,7 @@
 .filterToggle {
     display: none;
 }
+
 /* -------- */
 
 .itemsGrid {
@@ -199,3 +201,30 @@
 }
 
 /* --------- */
+
+/* Animation */
+@keyframes slideDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-100px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.filterBlock:nth-child(3) {
+    animation-delay: 0.0s;
+}
+
+.filterBlock:nth-child(2) {
+    animation-delay: 0.15s;
+}
+
+.filterBlock:nth-child(1) {
+    animation-delay: 0.30s;
+}
+
+/* ---------- */

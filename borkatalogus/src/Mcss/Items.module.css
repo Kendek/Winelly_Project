@@ -8,6 +8,9 @@
     border: 3px solid rgba(215, 215, 215, 0.682);
     border-radius: var(--smalldiv-radius);
     cursor: pointer;
+    animation: slideLeft 0.5s ease forwards;
+    animation-delay: calc(var(--i) * 0.1s);
+    opacity: 0;
 }
 
 .imageWrapper {
@@ -86,4 +89,18 @@
     }
 }
 
+/* ------------ */
+
+/* Animation */
+@keyframes slideLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(+100px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
 /* ------------ */

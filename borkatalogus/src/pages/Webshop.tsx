@@ -1,12 +1,14 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import style from '../Mcss/Webshop.module.css'
 import WebshopItem from '../Mcomponents/Items'
 import Slider from '@mui/material/Slider';
+
 
 const Webshop = () => {
 
   const [value, setValue] = useState<number[]>([0, 100000]);
   const [openFilter, setOpenFilter] = useState(false);
+
 
   return (
     <div className={style.mainDiv}>
@@ -24,7 +26,7 @@ const Webshop = () => {
               </div>
               <div className={style.filterTypes}>
                 <span>Sweet</span>
-                <span>Semi-Sweet</span> 
+                <span>Semi-Sweet</span>
                 <span>Dry</span>
                 <span>Semi-Dry</span>
               </div>
@@ -53,20 +55,6 @@ const Webshop = () => {
             </div>
           </div>
           <div className={style.itemsGrid}>
-            <WebshopItem></WebshopItem>
-            <WebshopItem></WebshopItem>
-            <WebshopItem></WebshopItem>
-            <WebshopItem></WebshopItem>
-            <WebshopItem></WebshopItem>
-            <WebshopItem></WebshopItem>
-            <WebshopItem></WebshopItem>
-            <WebshopItem></WebshopItem>
-            <WebshopItem></WebshopItem>
-            <WebshopItem></WebshopItem>
-            <WebshopItem></WebshopItem>
-            <WebshopItem></WebshopItem>
-            <WebshopItem></WebshopItem>
-            <WebshopItem></WebshopItem>
             <WebshopItem></WebshopItem>
           </div>
         </div>
