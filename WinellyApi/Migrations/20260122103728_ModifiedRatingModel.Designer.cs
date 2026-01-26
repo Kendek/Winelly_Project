@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WinellyApi.Data;
 
@@ -10,9 +11,11 @@ using WinellyApi.Data;
 namespace WinellyApi.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260122103728_ModifiedRatingModel")]
+    partial class ModifiedRatingModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "10.0.2");
@@ -270,7 +273,10 @@ namespace WinellyApi.Migrations
                     b.Property<decimal>("Score")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("WineId")
+                    b.Property<int?>("WineId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("WineryId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
@@ -278,6 +284,8 @@ namespace WinellyApi.Migrations
                     b.HasIndex("AppUserId");
 
                     b.HasIndex("WineId");
+
+                    b.HasIndex("WineryId");
 
                     b.ToTable("Ratings");
                 });
@@ -418,20 +426,24 @@ namespace WinellyApi.Migrations
             modelBuilder.Entity("WinellyApi.Models.Rating", b =>
                 {
                     b.HasOne("WinellyApi.Models.AppUser", "AppUser")
-                        .WithMany("Ratings")
+                        .WithMany()
                         .HasForeignKey("AppUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("WinellyApi.Models.Wine", "Wine")
+                    b.HasOne("WinellyApi.Models.Wine", null)
                         .WithMany("Ratings")
-                        .HasForeignKey("WineId")
+                        .HasForeignKey("WineId");
+
+                    b.HasOne("WinellyApi.Models.Winery", "Winery")
+                        .WithMany()
+                        .HasForeignKey("WineryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("AppUser");
 
-                    b.Navigation("Wine");
+                    b.Navigation("Winery");
                 });
 
             modelBuilder.Entity("WinellyApi.Models.Wine", b =>
@@ -462,11 +474,6 @@ namespace WinellyApi.Migrations
                     b.Navigation("Grape");
 
                     b.Navigation("Wine");
-                });
-
-            modelBuilder.Entity("WinellyApi.Models.AppUser", b =>
-                {
-                    b.Navigation("Ratings");
                 });
 
             modelBuilder.Entity("WinellyApi.Models.Grape", b =>

@@ -6,5 +6,6 @@ namespace WinellyApi.Models
     {
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
+        public List<Rating> Ratings { get; set; } = new List<Rating>();
     }
 }

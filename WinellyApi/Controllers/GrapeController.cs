@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WinellyApi.Data;
 using WinellyApi.DTOs.Grape;
@@ -15,7 +16,7 @@ namespace WinellyApi.Controllers
         {
             _context = context;
         }
-
+        
         [HttpGet]
         public async Task<IActionResult> GetGrapes()
         {
@@ -37,7 +38,7 @@ namespace WinellyApi.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateGrape(CreateGrapeRequestDto grapeDto)
+        public async Task<IActionResult> CreateGrape([FromBody] CreateGrapeRequestDto grapeDto)
         {
             var grapeModel = grapeDto.ToGrapeFromCreateDto();
             await _context.AddAsync(grapeModel);

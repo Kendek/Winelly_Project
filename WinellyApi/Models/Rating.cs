@@ -6,9 +6,12 @@ namespace WinellyApi.Models
     public class Rating
     {
         public int Id { get; set; }
-        public int Score { get; set; }
-        public DateTime ReviewDate { get; set; }
-        public int WineryId { get; set; }
-        public Winery Winery { get; set; }
+        public decimal Score { get; set; }
+        public string Content { get; set; }
+        public DateTime CreatedOn { get; set; }
+        public int WineId { get; set; }
+        public Wine Wine { get; set; }
+        public string AppUserId { get; set; }
+        public AppUser AppUser { get; set; }
     }
 }

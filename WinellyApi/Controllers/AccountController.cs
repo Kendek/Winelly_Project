@@ -29,8 +29,7 @@ namespace WinellyApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            var user = await _userManager.Users.FirstOrDefaultAsync(x => x.UserName == loginDto.Email.ToLower());
-
+            var user = await _userManager.FindByEmailAsync(loginDto.Email);
             if (user == null) return Unauthorized("Invalid Email");
 
             var result = await _signinManager.CheckPasswordSignInAsync(user, loginDto.Password, false);
