@@ -73,7 +73,7 @@ namespace WinellyApi.Controllers
             wineModel.Price = updateDto.Price;
             wineModel.AlcoholContent = updateDto.AlcoholContent;
             
-            wineModel.Wine_GrapeConnections.Clear();    //Ki kellen iktatni és egy külön function-ben megoldani
+            wineModel.Wine_GrapeConnections.Clear();
             foreach (var grapeId in updateDto.GrapeIds)
             {
                 wineModel.Wine_GrapeConnections.Add(

@@ -1,6 +1,7 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 using WinellyApi.Interfaces;
 using WinellyApi.Models;
@@ -32,17 +33,34 @@ namespace WinellyApi.Services
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.Now.AddDays(7),
+                Expires = DateTime.UtcNow.AddMinutes(3),
                 SigningCredentials = creds,
                 Issuer = _config["JWT:Issuer"],
                 Audience = _config["JWT:Audience"]
             };
 
             var tokenHandler = new JwtSecurityTokenHandler();
-
             var token = tokenHandler.CreateToken(tokenDescriptor);
-
             return tokenHandler.WriteToken(token);
+        }
+
+        public string CreateRefreshToken()
+        {
+            var randomBytes = RandomNumberGenerator.GetBytes(64);
+            return Convert.ToBase64String(randomBytes);
+        }
+
+        public string HashToken(string token)
+        {
+            using var sha = SHA256.Create();
+            var bytes = Encoding.UTF8.GetBytes(token);
+            var hash = sha.ComputeHash(bytes);
+            var sb = new StringBuilder(hash.Length * 2);
+            foreach (var b in hash)
+            {
+                sb.AppendFormat("{0:x2}", b);
+            }
+            return sb.ToString();
         }
     }
 }

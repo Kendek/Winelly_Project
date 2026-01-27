@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
 
 namespace WinellyApi.Models
 {
@@ -7,5 +8,6 @@ namespace WinellyApi.Models
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
         public List<Rating> Ratings { get; set; } = new List<Rating>();
+        public List<RefreshToken> RefreshTokens { get; set; } = new List<RefreshToken>();
     }
 }

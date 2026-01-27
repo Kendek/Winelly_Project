@@ -65,7 +65,7 @@ namespace WinellyApi
             })
             .AddJwtBearer(options =>
             {
-                options.RequireHttpsMetadata = false; // dev only
+                options.RequireHttpsMetadata = true;
                 options.SaveToken = true;
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
