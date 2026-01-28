@@ -12,6 +12,9 @@ using WinellyApi.Data;
 using WinellyApi.Interfaces;
 using WinellyApi.Models;
 using WinellyApi.Services;
+using Microsoft.Extensions.Logging;
+using System.Linq;
+
 namespace WinellyApi
 {
     public class Program
@@ -107,6 +110,21 @@ namespace WinellyApi
 
             var app = builder.Build();
 
+            // Def admin user
+            using (var scope = app.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                try
+                {
+                    SeedRolesAndAdminAsync(services, app.Configuration).GetAwaiter().GetResult();
+                }
+                catch (Exception ex)
+                {
+                    var logger = services.GetRequiredService<ILogger<Program>>();
+                    logger.LogError(ex, "An error occurred while seeding roles or the admin user.");
+                }
+            }
+
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
@@ -123,6 +141,56 @@ namespace WinellyApi
             app.MapControllers();
 
             app.Run();
+        }
+
+        private static async Task SeedRolesAndAdminAsync(IServiceProvider services, IConfiguration configuration)
+        {
+            var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+            var userManager = services.GetRequiredService<UserManager<AppUser>>();
+            var logger = services.GetService<ILogger<Program>>();
+
+            string[] roles = new[] { "Admin", "User" };
+            foreach (var roleName in roles)
+            {
+                if (!await roleManager.RoleExistsAsync(roleName))
+                {
+                    var roleResult = await roleManager.CreateAsync(new IdentityRole(roleName));
+                    if (!roleResult.Succeeded)
+                    {
+                        logger?.LogWarning("Failed to create role {Role}: {Errors}", roleName, string.Join(", ", roleResult.Errors.Select(e => e.Description)));
+                    }
+                }
+            }
+
+            var adminEmail = configuration["AdminUser:Email"] ?? "admin@admin.com";
+            var adminPassword = configuration["AdminUser:Password"] ?? "Admin123!";
+
+            var admin = await userManager.FindByEmailAsync(adminEmail);
+            if (admin == null)
+            {
+                admin = new AppUser
+                {
+                    UserName = adminEmail,
+                    Email = adminEmail,
+                    EmailConfirmed = true
+                };
+
+                var createAdminResult = await userManager.CreateAsync(admin, adminPassword);
+                if (!createAdminResult.Succeeded)
+                {
+                    logger?.LogError("Failed to create admin user: {Errors}", string.Join(", ", createAdminResult.Errors.Select(e => e.Description)));
+                    return;
+                }
+            }
+
+            if (!await userManager.IsInRoleAsync(admin, "Admin"))
+            {
+                var addToRoleResult = await userManager.AddToRoleAsync(admin, "Admin");
+                if (!addToRoleResult.Succeeded)
+                {
+                    logger?.LogError("Failed to add admin user to role Admin: {Errors}", string.Join(", ", addToRoleResult.Errors.Select(e => e.Description)));
+                }
+            }
         }
     }
 }

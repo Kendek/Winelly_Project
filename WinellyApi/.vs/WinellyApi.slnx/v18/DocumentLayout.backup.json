@@ -3,16 +3,12 @@
   "WorkspaceRootPath": "C:\\Programozas\\2025-26 susu\\Vizsgaremek\\Vizsgaremek-MKK\\WinellyApi\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F37E82F3-31A3-9184-F91F-8CA05216D8D3}|WinellyApi.csproj|c:\\programozas\\2025-26 susu\\vizsgaremek\\vizsgaremek-mkk\\winellyapi\\services\\tokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F37E82F3-31A3-9184-F91F-8CA05216D8D3}|WinellyApi.csproj|solutionrelative:services\\tokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F37E82F3-31A3-9184-F91F-8CA05216D8D3}|WinellyApi.csproj|c:\\programozas\\2025-26 susu\\vizsgaremek\\vizsgaremek-mkk\\winellyapi\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F37E82F3-31A3-9184-F91F-8CA05216D8D3}|WinellyApi.csproj|solutionrelative:data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F37E82F3-31A3-9184-F91F-8CA05216D8D3}|WinellyApi.csproj|c:\\programozas\\2025-26 susu\\vizsgaremek\\vizsgaremek-mkk\\winellyapi\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F37E82F3-31A3-9184-F91F-8CA05216D8D3}|WinellyApi.csproj|solutionrelative:controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F37E82F3-31A3-9184-F91F-8CA05216D8D3}|WinellyApi.csproj|c:\\programozas\\2025-26 susu\\vizsgaremek\\vizsgaremek-mkk\\winellyapi\\controllers\\ratingcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F37E82F3-31A3-9184-F91F-8CA05216D8D3}|WinellyApi.csproj|solutionrelative:controllers\\ratingcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F37E82F3-31A3-9184-F91F-8CA05216D8D3}|WinellyApi.csproj|c:\\programozas\\2025-26 susu\\vizsgaremek\\vizsgaremek-mkk\\winellyapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -26,17 +22,17 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 12,
+          "SelectedChildIndex": 10,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Programozas\\2025-26 susu\\Vizsgaremek\\Vizsgaremek-MKK\\WinellyApi\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "C:\\Programozas\\2025-26 susu\\Vizsgaremek\\Vizsgaremek-MKK\\WinellyApi\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAGUAAAAAAAAAAAAUwFYAAAAVAAAAAAAAAA==",
+              "ViewState": "AgIAAF8AAAAAAAAAAAAUwFYAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-12-17T07:14:19.972Z",
               "IsPinned": true,
@@ -80,15 +76,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "RatingController.cs",
-              "DocumentMoniker": "C:\\Programozas\\2025-26 susu\\Vizsgaremek\\Vizsgaremek-MKK\\WinellyApi\\Controllers\\RatingController.cs",
-              "RelativeDocumentMoniker": "Controllers\\RatingController.cs",
-              "ToolTip": "C:\\Programozas\\2025-26 susu\\Vizsgaremek\\Vizsgaremek-MKK\\WinellyApi\\Controllers\\RatingController.cs",
-              "RelativeToolTip": "Controllers\\RatingController.cs",
-              "ViewState": "AgIAACYAAAAAAAAAAAA3wAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "C:\\Programozas\\2025-26 susu\\Vizsgaremek\\Vizsgaremek-MKK\\WinellyApi\\Data\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "Data\\ApplicationDbContext.cs",
+              "ToolTip": "C:\\Programozas\\2025-26 susu\\Vizsgaremek\\Vizsgaremek-MKK\\WinellyApi\\Data\\ApplicationDbContext.cs",
+              "RelativeToolTip": "Data\\ApplicationDbContext.cs",
+              "ViewState": "AgIAABwAAAAAAAAAAAAwwDYAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-27T07:37:30.025Z",
+              "WhenOpened": "2026-01-27T11:49:09.921Z",
               "EditorCaption": ""
             },
             {
@@ -99,22 +95,9 @@
               "RelativeDocumentMoniker": "Controllers\\AccountController.cs",
               "ToolTip": "C:\\Programozas\\2025-26 susu\\Vizsgaremek\\Vizsgaremek-MKK\\WinellyApi\\Controllers\\AccountController.cs",
               "RelativeToolTip": "Controllers\\AccountController.cs",
-              "ViewState": "AgIAACMAAAAAAAAAAAAAACAAAAAtAAAAAAAAAA==",
+              "ViewState": "AgIAAH4AAAAAAAAAAAAUwGQAAABIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-27T07:33:58.238Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "TokenService.cs",
-              "DocumentMoniker": "C:\\Programozas\\2025-26 susu\\Vizsgaremek\\Vizsgaremek-MKK\\WinellyApi\\Services\\TokenService.cs",
-              "RelativeDocumentMoniker": "Services\\TokenService.cs",
-              "ToolTip": "C:\\Programozas\\2025-26 susu\\Vizsgaremek\\Vizsgaremek-MKK\\WinellyApi\\Services\\TokenService.cs",
-              "RelativeToolTip": "Services\\TokenService.cs",
-              "ViewState": "AgIAABMAAAAAAAAAAAAQwCMAAAA2AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-27T11:25:40.529Z",
               "EditorCaption": ""
             }
           ]

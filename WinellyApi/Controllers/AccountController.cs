@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using WinellyApi.DTOs.Account;
 using WinellyApi.Interfaces;
 using WinellyApi.Models;
-using Microsoft.AspNetCore.Http; // for CookieOptions
+using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
 
 namespace WinellyApi.Controllers
