@@ -7,4 +7,6 @@
 }
 .ChartDiv{
     border:  black 2px solid;
+    width: 100vw;
+    height: 80vh; 
 }
