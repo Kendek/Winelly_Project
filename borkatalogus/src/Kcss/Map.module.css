@@ -10,3 +10,10 @@
     width: 100vw;
     height: 80vh; 
 }
+.Search{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 6px;
+
+}

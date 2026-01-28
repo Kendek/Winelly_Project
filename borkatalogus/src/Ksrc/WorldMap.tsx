@@ -4,64 +4,56 @@ import * as am5map from "@amcharts/amcharts5/map";
 import am5geodata_worldLow from "@amcharts/amcharts5-geodata/worldLow";
 import styles from "../Kcss/Map.module.css"
 
-type Marker ={
+export type Marker ={
     id : number,
     longitude : number,
     latitude :  number
 }
 
-//const [Markers, SetMarkers] = useState([]<Marker>([]))
-
 const Chart = () => {
-  useLayoutEffect(() => {
-    let root = am5.Root.new("chartdiv");
+    const [Markers, SetMarkers] = useState<Marker[]>([])
 
-    let chart = root.container.children.push(
-        am5map.MapChart.new(root, {})
-    );
+    useLayoutEffect(() => { 
+        let root = am5.Root.new("chartdiv");
 
-    let PolygonSeries  = chart.series.push(
-        am5map.MapPolygonSeries.new(root,{
-            geoJSON: am5geodata_worldLow,
-            fill: am5.color("#8B1E3F"),
-            stroke : am5.color("#ffffff")
+        let chart = root.container.children.push(
+            am5map.MapChart.new(root, {})
+        );
+
+        let PolygonSeries  = chart.series.push(
+            am5map.MapPolygonSeries.new(root,{
+                geoJSON: am5geodata_worldLow,
+                fill: am5.color("#8B1E3F"),
+                stroke : am5.color("#ffffff")
+            })
+        );
+
+        PolygonSeries.mapPolygons.template.setAll({
+            tooltipText : "{name}"
         })
-    );
 
-    let MarkerSeries = chart.series.push(
-    am5map.MapPolygonSeries.new(root, {
-        fill: am5.color("#000000"),
-        interactive: true
-    })
-    );
-    MarkerSeries.mapPolygons.template.setAll({
+        let MarkerSeries = chart.series.push(
+            am5map.MapPolygonSeries.new(root, {       
+            }));
+        
+        MarkerSeries.mapPolygons.template.setAll({
+            fill: am5.color("#000000"),
+            interactive: true
+        })
 
-    })
+        MarkerSeries.data.push({
+        geometry: am5map.getGeoCircle({ latitude: 48.86, longitude: 2.35 }, 0.2)
+        });
 
-   
-    MarkerSeries.data.push({
-    geometry: am5map.getGeoCircle({ latitude: 48.86, longitude: 2.35 }, 0.2)
-});
-    PolygonSeries.mapPolygons.template.setAll({
-        tooltipText : "{name}"
-    })
+    
+        return () => {
+        root.dispose();
+        };
+    }, []);
 
-
-
-    PolygonSeries.data.setAll([{
-        id: "US",
-        polygonSettings: {
-        fill: am5.color(0xFF3C38)
-  }
-    }])
- 
-    return () => {
-      root.dispose();
-    };
-  }, []);
 
   return (
-    <div >
+    <div >  
         <div className={styles.Search}>
             <input type="text" />
             <button>Search</button>
