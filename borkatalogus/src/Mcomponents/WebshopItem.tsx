@@ -2,23 +2,29 @@ import React, { useContext, useState } from 'react'
 import style from '../Mcss/WebshopItem.module.css'
 import { Link } from 'react-router-dom'
 import { WineContext, type Wine } from '../Mcontext/WineContextProvider';
-import { useNavigate } from "react-router-dom";
+import { pre } from 'motion/react-client';
 
 const WebshopItem = ({filteredWines} : {filteredWines : Wine[]}) => {
 
     const { setCurrentWineId, setCartItems} = useContext(WineContext);
-    const navigate = useNavigate();
 
     const handleAddToCart = (e: React.MouseEvent, wineToCart: Wine) => {
         e.stopPropagation();
 
-        setCartItems(prev => [...prev, wineToCart]);
+        setCartItems(prev => {
+            const existing = prev.find(item=> item.wine.id === wineToCart.id);
+
+            if(existing)
+            {
+                return prev.map(item=>item.wine.id == wineToCart.id ? {...item, quantity: item.quantity + 1} : item);
+            }
+            return [...prev, {wine: wineToCart, quantity: 1}]
+        });
     };
 
     const handleClick = (wine: Wine) => 
     { 
         setCurrentWineId(wine.id);
-        navigate("/currentWine");
     }
         
 

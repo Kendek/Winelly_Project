@@ -3,13 +3,16 @@ import style from '../Mcss/Webshop.module.css'
 import WebshopItem from '../Mcomponents/WebshopItem'
 import Slider from '@mui/material/Slider';
 import { WineContext, type Wine } from '../Mcontext/WineContextProvider';
+import CurrentWine from '../Mcomponents/CurrentWine';
 
 
 const Webshop = () => {
 
-  const {wines} = useContext(WineContext)
+  const { wines, currentWineId } = useContext(WineContext)
 
-  const [priceValue, setPriceValue] = useState<number[]>([0, 50000]);
+  const maxPrice = Math.max(...wines.map(w => w.price));
+
+  const [priceValue, setPriceValue] = useState<number[]>([0, maxPrice]);
   const [openFilter, setOpenFilter] = useState(false);
   const [inputValue, setInputValue] = useState("");
 
@@ -21,34 +24,47 @@ const Webshop = () => {
   const dryCount = wines.filter(w => w.taste.toLowerCase() === "dry").length;
   const semiDryCount = wines.filter(w => w.taste.toLowerCase() === "semi-dry").length;
 
-  const tasteFilter = (taste : any) => {
-    setFilteredWines(wines.filter(x=>x.taste.toLowerCase() === taste))
+  const tasteFilter = (taste: any) => {
+    setFilteredWines(wines.filter(x => x.taste.toLowerCase() === taste))
   }
 
-  useEffect(() =>{
-     setFilteredWines(wines.filter(x=> x.name.toLowerCase().startsWith(inputValue.toLowerCase())))
+  useEffect(() => {
+    setFilteredWines(wines.filter(x => x.name.toLowerCase().startsWith(inputValue.toLowerCase())))
   }, [inputValue, wines])
 
   useEffect(() => {
-    setFilteredWines(wines.filter(x=> priceValue[0] <= x.price && priceValue[1] >= x.price))
+    setFilteredWines(wines.filter(x => priceValue[0] <= x.price && priceValue[1] >= x.price))
   }, [priceValue])
 
   const Reset = () => {
     setFilteredWines(wines)
-    setPriceValue([0,50000]);
+    setPriceValue([0, maxPrice]);
   }
   /*---------*/
+
+  useEffect(() => {
+  if (currentWineId) {
+    document.body.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "auto";
+  }
+
+  return () => {
+    document.body.style.overflow = "auto";
+  };
+}, [currentWineId]);
+
 
 
   return (
     <div className={style.mainDiv}>
-      <div className={style.container}>
+      <div className={`${style.container} ${currentWineId ? style.blurred : ""}`}>
         <div className={style.contentArea}>
           <button className={style.filterToggle} onClick={() => setOpenFilter(!openFilter)}><i className={openFilter ? "fas fa-times" : "fas fa-bars"} onClick={() => setOpenFilter(!openFilter)}></i></button>
           <div className={`${style.filterPanel} ${openFilter ? style.open : ""}`}>
             <div className={style.filterBlock}>
               <i className="fa-solid fa-magnifying-glass"></i>
-              <input type="text" placeholder='Search...' onChange={(e) => {setInputValue(e.target.value)}} value={inputValue}/>
+              <input type="text" placeholder='Search...' onChange={(e) => { setInputValue(e.target.value) }} value={inputValue} />
             </div>
             <div className={style.filterBlock}>
               <div className={style.filterTitle}>
@@ -67,7 +83,7 @@ const Webshop = () => {
               </div>
               <div className={style.filterPrice}>
                 <p>Price: <span>{priceValue[0]}</span> Ft — <span >{priceValue[1]}</span> Ft</p>
-                <Slider value={priceValue} onChange={(e, newValue) => setPriceValue(newValue)} min={0} max={50000} step={1000} sx={{
+                <Slider value={priceValue} onChange={(e, newValue) => setPriceValue(newValue)} min={0} max={maxPrice} step={1000} sx={{
                   color: '#8B1E3F',
                   '& .MuiSlider-thumb': {
                     backgroundColor: '#8B1E3F',
@@ -88,6 +104,11 @@ const Webshop = () => {
           </div>
         </div>
       </div>
+      {currentWineId && (
+        <div className={style.overlay}>
+          <CurrentWine />
+        </div>
+      )}
     </div>
   )
 }

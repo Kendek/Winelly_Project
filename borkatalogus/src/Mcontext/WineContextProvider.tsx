@@ -14,6 +14,11 @@ const dataWine = [
     "wineryId": 1,
     "grapes": [
       { "id": 1, "name": "Cabernet Sauvignon", "color": "red" }
+    ],
+    "reviews": [
+      { "id": 1, "name": "John", "rating": 5, "comment": "Rich and smooth, great structure." },
+      { "id": 2, "name": "Anna", "rating": 4, "comment": "A bit sweet for me, but excellent quality." },
+      { "id": 3, "name": "Mark", "rating": 5, "comment": "Perfect with steak, highly recommended." }
     ]
   },
   {
@@ -28,6 +33,10 @@ const dataWine = [
     "wineryId": 2,
     "grapes": [
       { "id": 2, "name": "Cabernet Franc", "color": "red" }
+    ],
+    "reviews": [
+      { "id": 1, "name": "Peter", "rating": 5, "comment": "Villány at its best." },
+      { "id": 2, "name": "Laura", "rating": 4, "comment": "Spicy and elegant, long finish." }
     ]
   },
   {
@@ -43,6 +52,11 @@ const dataWine = [
     "grapes": [
       { "id": 2, "name": "Cabernet Franc", "color": "red" },
       { "id": 1, "name": "Cabernet Sauvignon", "color": "red" }
+    ],
+    "reviews": [
+      { "id": 1, "name": "David", "rating": 5, "comment": "Deep, complex, premium quality." },
+      { "id": 2, "name": "Sara", "rating": 5, "comment": "One of the best blends I've tasted." },
+      { "id": 3, "name": "Tom", "rating": 4, "comment": "Strong tannins, but excellent." }
     ]
   },
   {
@@ -57,6 +71,10 @@ const dataWine = [
     "wineryId": 4,
     "grapes": [
       { "id": 3, "name": "Furmint", "color": "white" }
+    ],
+    "reviews": [
+      { "id": 1, "name": "Emily", "rating": 5, "comment": "Heavenly sweetness and balance." },
+      { "id": 2, "name": "Robert", "rating": 4, "comment": "Classic Aszú, rich and elegant." }
     ]
   },
   {
@@ -71,6 +89,10 @@ const dataWine = [
     "wineryId": 4,
     "grapes": [
       { "id": 3, "name": "Furmint", "color": "white" }
+    ],
+    "reviews": [
+      { "id": 1, "name": "Julia", "rating": 5, "comment": "Crisp and mineral, very refreshing." },
+      { "id": 2, "name": "Adam", "rating": 4, "comment": "Great acidity, perfect with fish." }
     ]
   },
   {
@@ -85,6 +107,10 @@ const dataWine = [
     "wineryId": 5,
     "grapes": [
       { "id": 4, "name": "Chardonnay", "color": "white" }
+    ],
+    "reviews": [
+      { "id": 1, "name": "Chris", "rating": 5, "comment": "Elegant bubbles, great value." },
+      { "id": 2, "name": "Nora", "rating": 4, "comment": "Refreshing and clean taste." }
     ]
   },
   {
@@ -99,6 +125,10 @@ const dataWine = [
     "wineryId": 6,
     "grapes": [
       { "id": 5, "name": "Olaszrizling", "color": "white" }
+    ],
+    "reviews": [
+      { "id": 1, "name": "Daniel", "rating": 4, "comment": "Light and refreshing." },
+      { "id": 2, "name": "Eva", "rating": 5, "comment": "Perfect summer wine." }
     ]
   },
   {
@@ -114,6 +144,11 @@ const dataWine = [
     "grapes": [
       { "id": 6, "name": "Kékfrankos", "color": "red" },
       { "id": 7, "name": "Merlot", "color": "red" }
+    ],
+    "reviews": [
+      { "id": 1, "name": "Alex", "rating": 5, "comment": "Rich and layered Bikavér." },
+      { "id": 2, "name": "Mia", "rating": 4, "comment": "Dark fruit, long finish." },
+      { "id": 3, "name": "Sam", "rating": 5, "comment": "One of my favorites." }
     ]
   },
   {
@@ -128,6 +163,10 @@ const dataWine = [
     "wineryId": 8,
     "grapes": [
       { "id": 7, "name": "Merlot", "color": "red" }
+    ],
+    "reviews": [
+      { "id": 1, "name": "Bella", "rating": 4, "comment": "Fruity and refreshing." },
+      { "id": 2, "name": "Oliver", "rating": 5, "comment": "Perfect chilled on a hot day." }
     ]
   },
   {
@@ -142,6 +181,10 @@ const dataWine = [
     "wineryId": 9,
     "grapes": [
       { "id": 8, "name": "Kéknyelű", "color": "white" }
+    ],
+    "reviews": [
+      { "id": 1, "name": "Tina", "rating": 5, "comment": "Unique and elegant." },
+      { "id": 2, "name": "Greg", "rating": 4, "comment": "Mineral and clean taste." }
     ]
   }
 ]
@@ -162,33 +205,45 @@ export type Wine = {
     name: string,
     color: string,
   }[],
+  reviews: {
+    id: number;
+    name: string;
+    rating: number;
+    comment: string;
+  }[],
 };
 
 export type WineContextType = {
   wines: Wine[];
-  currentWineId: number | null; 
+  currentWineId: number | null;
   setCurrentWineId: (id: number | null) => void;
-  cart: Wine[];
-  setCartItems: React.Dispatch<React.SetStateAction<Wine[]>>;
+  cart: CartItem[];
+  setCartItems: React.Dispatch<React.SetStateAction<CartItem[]>>;
 };
 
-export const WineContext = createContext<WineContextType>({ wines: [], currentWineId: null, setCurrentWineId: () => {}, cart: [], setCartItems: () => {} });
+export type CartItem = {
+  wine: Wine;
+  quantity: number;
+};
+
+
+export const WineContext = createContext<WineContextType>({ wines: [], currentWineId: null, setCurrentWineId: () => { }, cart: [], setCartItems: () => { } });
 
 export function WineContextProvider({ children }: { children: React.ReactNode }) {
   const [datas, setDatas] = useState([]);
   const [currentWineId, setCurrentWineId] = useState<number | null>(null);
-  const [cartItems, setCartItems] = useState<Wine[]>([])
+  const [cartItems, setCartItems] = useState<CartItem[]>([])
 
-  useEffect(() => { 
-    async function fetchData() { 
-      const response = await axios.get("IDE_JÖN_A_API_URL"); 
-      setDatas(response.data); 
-    } 
-    fetchData(); 
+  useEffect(() => {
+    async function fetchData() {
+      const response = await axios.get("IDE_JÖN_A_API_URL");
+      setDatas(response.data);
+    }
+    fetchData();
   }, []);
 
   return (
-    <WineContext.Provider value={{ wines: dataWine, currentWineId, setCurrentWineId, cart: cartItems, setCartItems}}>
+    <WineContext.Provider value={{ wines: dataWine, currentWineId, setCurrentWineId, cart: cartItems, setCartItems }}>
       {children}
     </WineContext.Provider>
   )

@@ -8,6 +8,29 @@
     justify-content: center;
     padding: 20px;
 }
+.blurred {
+  filter: blur(8px);
+  opacity: 0.4;
+  transition: all 0.3s ease;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+
+  backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.15);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 999;
+  animation: fadeIn 0.3s ease forwards;
+}
 
 .container {
     width: 90%;
@@ -210,6 +233,12 @@
         transform: translateX(-40px);
     }
 }
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
 
 .filterBlock:nth-child(3) {
     animation-delay: 0.30s;

@@ -1,58 +1,59 @@
 .mainDiv {
-    margin: 0;
-    padding: 0px;
-    background-color: var(--secondary-colour);
-    min-height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
     display: flex;
-    align-items: flex-start;
     justify-content: center;
-    overflow: hidden;
+    align-items: center;
+    z-index: 999;
+    margin-top: 5vh;
+}
+
+.overlay {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
 }
 
 .container {
-    width: 90%;
-    background-color: white;
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
-    border-radius: var(--container-radius);
-    display: flex;
-    flex-direction: row;
-    gap: 50px;
-    margin-top: 5vh;
-    opacity: 0;
-    transform: translateX(40px);
-    animation: slideInRight 0.5s ease forwards;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 20px;
+    padding: 40px;
+    width: 70%;
+    max-height: 85vh;
+    overflow-y: auto;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+    animation: slideUp 0.3s ease-out forwards;
     position: relative;
 }
 
-.backRow {
-    display: flex;
-    justify-content: flex-start;
+.closing {
+    animation: slideDown 0.3s ease-in forwards;
 }
 
-.backBtn {
+.closeBtn {
     position: absolute;
     top: 20px;
     left: 20px;
-    padding: 8px 14px;
     background: var(--primary-colour);
-    color: white;
     border: none;
-    border-radius: var(--inputs-radius);
     font-size: var(--label-font);
+    font-weight: bold;
+    color: var(--secondary-colour);
     cursor: pointer;
-    z-index: 999;
+    border-radius: 8px;
+    padding: 6px 12px;
     transition: 0.2s ease;
+    z-index: 1000;
 }
 
-.backBtn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 35px #8e183b39;
+.closeBtn:hover {
+    background: var(--primary-light-colour);
 }
-.backBtn:active
-{
-    transform: translateY(0);
-}
-
 
 /* Left side */
 .wineLeftSide {
@@ -64,7 +65,7 @@
 
 .wineLeftSide img {
     width: 100%;
-    max-height: 70vh;
+    height: 100%;
     object-fit: contain;
     box-shadow: 0 12px 35px #8e183b39;
     border-radius: var(--image-radius);
@@ -89,20 +90,29 @@
     margin-top: 2vh;
 }
 
+.wineRating b,
+.wineRating i {
+    margin-left: 2vw;
+}
+
+.wineRating p {
+    margin-left: 1vw;
+}
+
 .wineRating span {
     display: flex;
     flex-direction: row;
-    gap: 15px;
-    font-size: var(--label-font);
+    font-size: var(--description-font);
 }
 
 .wineRating b {
     color: var(--primary-colour);
     text-decoration: underline var(--primary-colour);
+    cursor: pointer;
 }
 
 .winePrice {
-    margin-top: 7vh;
+    margin-top: 5vh;
     font-size: var(--large-title-font);
     font-weight: bold;
 }
@@ -116,7 +126,7 @@
     display: flex;
     flex: 1;
     flex-wrap: wrap;
-    margin-top: 5vh;
+    margin-top: 4vh;
     gap: 5px;
     width: 70%;
     max-height: 15vh;
@@ -138,7 +148,7 @@
 
 .wineBtn {
     width: 60%;
-    margin-top: 5vh;
+    margin-top: 2vh;
 }
 
 .wineBtn button {
@@ -149,6 +159,7 @@
     padding: 15px;
     border-radius: var(--inputs-radius);
     font-size: var(--label-font);
+    margin-top: 5vh;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -165,11 +176,29 @@
 
 /* ---------- */
 
+
 /* Mobile */
 @media (max-width: 768px) {
-    .container {
+    .overlay {
         flex-direction: column;
         gap: 0;
+    }
+
+    .container {
+        padding: 20px;
+    }
+
+    .wineTitle {
+        font-size: var(--title-font);
+    }
+
+    .wineRating span {
+        font-size: var(--label-font);
+    }
+
+    .wineRating i,
+    .wineRating b {
+        display: none;
     }
 
     .wineLeftSide {
@@ -180,6 +209,10 @@
         margin-left: 8vw;
     }
 
+    .winePrice {
+        font-size: var(--title-font);
+    }
+
     .wineDescription {
         font-size: var(--label-font);
     }
@@ -187,20 +220,29 @@
     .wineDetails {
         width: 100%;
         margin-top: 3vh;
+        display: flex;
+        flex-direction: row;
     }
 
     .wineDetails div {
         font-size: var(--label-font);
+        max-width: 75%;
+        padding: 3px;
+    }
+
+    .wineDetails div span {
+        font-size: var(--label-font);
     }
 
     .wineBtn {
-        margin-bottom: 2vh;
+        margin-bottom: 1vh;
+        width: 100%;
     }
 
     .wineBtn button {
         padding: 8px;
         font-weight: 400;
-        margin-left: 12vw;
+        font-size: var(--label-font);
     }
 }
 
@@ -211,6 +253,30 @@
     to {
         opacity: 1;
         transform: translateX(0);
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(30px);
     }
 }
 

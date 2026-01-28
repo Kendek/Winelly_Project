@@ -12,6 +12,20 @@
   z-index: 5000;
 }
 
+.showStep
+{
+  display: block;
+}
+.hideStep
+{
+  display: none;
+}
+
+.navbarcenter.hide , .navbarright.hide
+{
+  display: none;
+}
+
 .logo {
   max-width: 160px;
   width: 100%;

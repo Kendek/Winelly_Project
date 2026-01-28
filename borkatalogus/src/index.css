@@ -26,3 +26,6 @@ body
     --smalldiv-radius : 4px;
 }
 
+.MuiRating-iconFilled {
+  color: var(--primary-colour);
+}
