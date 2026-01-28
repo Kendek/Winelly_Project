@@ -1,17 +1,34 @@
-import { useLayoutEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import * as am5 from "@amcharts/amcharts5";
 import * as am5map from "@amcharts/amcharts5/map";
 import am5geodata_worldLow from "@amcharts/amcharts5-geodata/worldLow";
 import styles from "../Kcss/Map.module.css"
+import { GetData } from './FetchMap';
 
 export type Marker ={
-    id : number,
     longitude : number,
     latitude :  number
 }
 
 const Chart = () => {
     const [Markers, SetMarkers] = useState<Marker[]>([])
+    useEffect(() => {
+        GetData("Debrecen").then(data => {
+            if (data?.longitude !== undefined && data?.latitude !== undefined) {
+                SetMarkers([
+                    ...Markers,
+                    {
+                        longitude : data.longitude,
+                        latitude : data.latitude
+                    }
+                ])
+            }
+        })
+    },[])
+    useEffect(() => {
+             console.log(Markers)
+    },[Markers])
+
 
     useLayoutEffect(() => { 
         let root = am5.Root.new("chartdiv");

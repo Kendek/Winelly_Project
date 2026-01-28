@@ -1,3 +1,4 @@
+import type { Marker } from "./WorldMap";
 
 export async function GetData(city:string) {
     const ApiKey = "73b7d62e46364bad80482a9b4e8747f8";
@@ -8,7 +9,10 @@ export async function GetData(city:string) {
              throw new Error(`Response status: ${response.status}`);
         }
         const result = await response.json();
-        console.log(result); 
+        return {
+            latitude:result.results[0].lat,
+            longitude:result.results[0].lon
+        } as Marker
     }
     catch (error:any) {
     console.error(error.message);
