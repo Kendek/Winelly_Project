@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState, useRef } from 'react';
 import * as am5 from "@amcharts/amcharts5";
 import * as am5map from "@amcharts/amcharts5/map";
 import am5geodata_worldLow from "@amcharts/amcharts5-geodata/worldLow";
@@ -9,26 +9,10 @@ export type Marker ={
     longitude : number,
     latitude :  number
 }
-
 const Chart = () => {
     const [Markers, SetMarkers] = useState<Marker[]>([])
-    useEffect(() => {
-        GetData("Debrecen").then(data => {
-            if (data?.longitude !== undefined && data?.latitude !== undefined) {
-                SetMarkers([
-                    ...Markers,
-                    {
-                        longitude : data.longitude,
-                        latitude : data.latitude
-                    }
-                ])
-            }
-        })
-    },[])
-    useEffect(() => {
-             console.log(Markers)
-    },[Markers])
-
+    const Varosok = ["Debrecen", "Budapest" , "London", "Paris"]
+    const markerSeriesRef = useRef<any>(null);
 
     useLayoutEffect(() => { 
         let root = am5.Root.new("chartdiv");
@@ -57,16 +41,42 @@ const Chart = () => {
             fill: am5.color("#000000"),
             interactive: true
         })
-
-        MarkerSeries.data.push({
-        geometry: am5map.getGeoCircle({ latitude: 48.86, longitude: 2.35 }, 0.2)
-        });
+        
+        markerSeriesRef.current = MarkerSeries;
+        GenerateMarkers();
 
     
         return () => {
         root.dispose();
         };
     }, []);
+
+    useEffect(() => {
+        if (markerSeriesRef.current && Markers.length > 0) {
+            Markers.forEach(marker => {
+                markerSeriesRef.current.data.push({
+                    geometry: am5map.getGeoCircle({ latitude: marker.latitude, longitude: marker.longitude }, 0.2)
+                });
+            });
+        }
+    }, [Markers]);
+
+    const GenerateMarkers = async () => {
+        const markerPromises = Varosok.map(varos => 
+            GetData(varos).then(data => {
+                if (data?.longitude !== undefined && data?.latitude !== undefined) {
+                    return {
+                        longitude: data.longitude,
+                        latitude: data.latitude
+                    };
+                }
+                return null;
+            })
+        );
+        
+        const results = await Promise.all(markerPromises);
+        SetMarkers(results.filter(m => m !== null));
+    }
 
 
   return (
