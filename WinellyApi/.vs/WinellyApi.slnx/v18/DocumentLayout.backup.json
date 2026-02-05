@@ -3,28 +3,12 @@
   "WorkspaceRootPath": "C:\\Programozas\\2025-26 susu\\Vizsgaremek\\Vizsgaremek-MKK\\WinellyApi\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F37E82F3-31A3-9184-F91F-8CA05216D8D3}|WinellyApi.csproj|c:\\programozas\\2025-26 susu\\vizsgaremek\\vizsgaremek-mkk\\winellyapi\\controllers\\winecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F37E82F3-31A3-9184-F91F-8CA05216D8D3}|WinellyApi.csproj|solutionrelative:controllers\\winecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F37E82F3-31A3-9184-F91F-8CA05216D8D3}|WinellyApi.csproj|c:\\programozas\\2025-26 susu\\vizsgaremek\\vizsgaremek-mkk\\winellyapi\\services\\imagekitservices\\imagekitservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F37E82F3-31A3-9184-F91F-8CA05216D8D3}|WinellyApi.csproj|solutionrelative:services\\imagekitservices\\imagekitservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F37E82F3-31A3-9184-F91F-8CA05216D8D3}|WinellyApi.csproj|c:\\programozas\\2025-26 susu\\vizsgaremek\\vizsgaremek-mkk\\winellyapi\\interfaces\\iimagekitservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F37E82F3-31A3-9184-F91F-8CA05216D8D3}|WinellyApi.csproj|solutionrelative:interfaces\\iimagekitservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F37E82F3-31A3-9184-F91F-8CA05216D8D3}|WinellyApi.csproj|c:\\programozas\\2025-26 susu\\vizsgaremek\\vizsgaremek-mkk\\winellyapi\\dtos\\wine\\createwinerequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F37E82F3-31A3-9184-F91F-8CA05216D8D3}|WinellyApi.csproj|solutionrelative:dtos\\wine\\createwinerequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F37E82F3-31A3-9184-F91F-8CA05216D8D3}|WinellyApi.csproj|c:\\programozas\\2025-26 susu\\vizsgaremek\\vizsgaremek-mkk\\winellyapi\\models\\wine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F37E82F3-31A3-9184-F91F-8CA05216D8D3}|WinellyApi.csproj|solutionrelative:models\\wine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{F37E82F3-31A3-9184-F91F-8CA05216D8D3}|WinellyApi.csproj|c:\\programozas\\2025-26 susu\\vizsgaremek\\vizsgaremek-mkk\\winellyapi\\mappers\\winemapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F37E82F3-31A3-9184-F91F-8CA05216D8D3}|WinellyApi.csproj|solutionrelative:mappers\\winemapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F37E82F3-31A3-9184-F91F-8CA05216D8D3}|WinellyApi.csproj|c:\\programozas\\2025-26 susu\\vizsgaremek\\vizsgaremek-mkk\\winellyapi\\controllers\\winecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F37E82F3-31A3-9184-F91F-8CA05216D8D3}|WinellyApi.csproj|solutionrelative:controllers\\winecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F37E82F3-31A3-9184-F91F-8CA05216D8D3}|WinellyApi.csproj|c:\\programozas\\2025-26 susu\\vizsgaremek\\vizsgaremek-mkk\\winellyapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -38,61 +22,19 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 11,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 2,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Programozas\\2025-26 susu\\Vizsgaremek\\Vizsgaremek-MKK\\WinellyApi\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "C:\\Programozas\\2025-26 susu\\Vizsgaremek\\Vizsgaremek-MKK\\WinellyApi\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAGQAAAAAAAAAAAAAAGsAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAGEAAAAAAAAAAAAAAGYAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-12-17T07:14:19.972Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ImageKitService.cs",
-              "DocumentMoniker": "C:\\Programozas\\2025-26 susu\\Vizsgaremek\\Vizsgaremek-MKK\\WinellyApi\\Services\\ImageKitServices\\ImageKitService.cs",
-              "RelativeDocumentMoniker": "Services\\ImageKitServices\\ImageKitService.cs",
-              "ToolTip": "C:\\Programozas\\2025-26 susu\\Vizsgaremek\\Vizsgaremek-MKK\\WinellyApi\\Services\\ImageKitServices\\ImageKitService.cs",
-              "RelativeToolTip": "Services\\ImageKitServices\\ImageKitService.cs",
-              "ViewState": "AgIAAAoAAAAAAAAAAAAkwBkAAAAkAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-03T07:10:16.638Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "IImageKitService.cs",
-              "DocumentMoniker": "C:\\Programozas\\2025-26 susu\\Vizsgaremek\\Vizsgaremek-MKK\\WinellyApi\\Interfaces\\IImageKitService.cs",
-              "RelativeDocumentMoniker": "Interfaces\\IImageKitService.cs",
-              "ToolTip": "C:\\Programozas\\2025-26 susu\\Vizsgaremek\\Vizsgaremek-MKK\\WinellyApi\\Interfaces\\IImageKitService.cs",
-              "RelativeToolTip": "Interfaces\\IImageKitService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAlAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-03T07:23:17.45Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "WineController.cs",
-              "DocumentMoniker": "C:\\Programozas\\2025-26 susu\\Vizsgaremek\\Vizsgaremek-MKK\\WinellyApi\\Controllers\\WineController.cs",
-              "RelativeDocumentMoniker": "Controllers\\WineController.cs",
-              "ToolTip": "C:\\Programozas\\2025-26 susu\\Vizsgaremek\\Vizsgaremek-MKK\\WinellyApi\\Controllers\\WineController.cs",
-              "RelativeToolTip": "Controllers\\WineController.cs",
-              "ViewState": "AgIAABoAAAAAAAAAAAAQwBoAAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-03T07:26:51.55Z",
               "IsPinned": true,
               "EditorCaption": ""
             },
@@ -134,41 +76,28 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Wine.cs",
-              "DocumentMoniker": "C:\\Programozas\\2025-26 susu\\Vizsgaremek\\Vizsgaremek-MKK\\WinellyApi\\Models\\Wine.cs",
-              "RelativeDocumentMoniker": "Models\\Wine.cs",
-              "ToolTip": "C:\\Programozas\\2025-26 susu\\Vizsgaremek\\Vizsgaremek-MKK\\WinellyApi\\Models\\Wine.cs",
-              "RelativeToolTip": "Models\\Wine.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAArAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "WineController.cs",
+              "DocumentMoniker": "C:\\Programozas\\2025-26 susu\\Vizsgaremek\\Vizsgaremek-MKK\\WinellyApi\\Controllers\\WineController.cs",
+              "RelativeDocumentMoniker": "Controllers\\WineController.cs",
+              "ToolTip": "C:\\Programozas\\2025-26 susu\\Vizsgaremek\\Vizsgaremek-MKK\\WinellyApi\\Controllers\\WineController.cs",
+              "RelativeToolTip": "Controllers\\WineController.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAAqwCIAAAChAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-03T07:27:14.895Z",
+              "WhenOpened": "2026-02-04T07:53:45.452Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "CreateWineRequestDto.cs",
-              "DocumentMoniker": "C:\\Programozas\\2025-26 susu\\Vizsgaremek\\Vizsgaremek-MKK\\WinellyApi\\DTOs\\Wine\\CreateWineRequestDto.cs",
-              "RelativeDocumentMoniker": "DTOs\\Wine\\CreateWineRequestDto.cs",
-              "ToolTip": "C:\\Programozas\\2025-26 susu\\Vizsgaremek\\Vizsgaremek-MKK\\WinellyApi\\DTOs\\Wine\\CreateWineRequestDto.cs",
-              "RelativeToolTip": "DTOs\\Wine\\CreateWineRequestDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAZAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-03T07:28:39.664Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 0,
               "Title": "WineMapper.cs",
               "DocumentMoniker": "C:\\Programozas\\2025-26 susu\\Vizsgaremek\\Vizsgaremek-MKK\\WinellyApi\\Mappers\\WineMapper.cs",
               "RelativeDocumentMoniker": "Mappers\\WineMapper.cs",
               "ToolTip": "C:\\Programozas\\2025-26 susu\\Vizsgaremek\\Vizsgaremek-MKK\\WinellyApi\\Mappers\\WineMapper.cs",
               "RelativeToolTip": "Mappers\\WineMapper.cs",
-              "ViewState": "AgIAADAAAAAAAAAAAAAYwD0AAAA4AAAAAAAAAA==",
+              "ViewState": "AgIAABUAAAAAAAAAAAAAACgAAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-03T07:29:00.941Z",
+              "WhenOpened": "2026-02-04T07:54:29.971Z",
               "EditorCaption": ""
             }
           ]

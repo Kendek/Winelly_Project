@@ -1,4 +1,5 @@
 ﻿using WinellyApi.DTOs.Grape;
+using WinellyApi.DTOs.Rating;
 using WinellyApi.DTOs.Wine;
 using WinellyApi.Models;
 
@@ -27,6 +28,17 @@ namespace WinellyApi.Mappers
                         Id = x.Grape.Id,
                         Name = x.Grape.Name,
                         Color = x.Grape.Color,
+                    })
+                    .ToList(),
+                Ratings = wineModel.Ratings
+                    .Select(x => new RatingDto
+                    {
+                        Id = x.Id,
+                        Score = x.Score,
+                        Content = x.Content,
+                        CreatedOn = x.CreatedOn,
+                        CreatedBy = x.AppUser.FirstName,
+                        WineId = x.WineId,
                     })
                     .ToList()
             };

@@ -1,11 +1,12 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 using WinellyApi.DTOs.Account;
 using WinellyApi.Interfaces;
 using WinellyApi.Models;
-using Microsoft.AspNetCore.Http;
-using System.Security.Claims;
 
 namespace WinellyApi.Controllers
 {
@@ -74,7 +75,8 @@ namespace WinellyApi.Controllers
             return Ok(
                 new NewUserDto
                 {
-                    UserName = user.UserName,
+                    FristName = user.FirstName,
+                    LastName = user.LastName,
                     Email = user.Email,
                     Token = jwt
                 }
@@ -128,8 +130,12 @@ namespace WinellyApi.Controllers
         }
 
         [HttpPost("revoke")]
+        [Authorize]
         public async Task<IActionResult> Revoke() //Log Out
         {
+            var activeUser = await _userManager.GetUserAsync(User);
+            if (activeUser == null) return Unauthorized();
+
             if (!Request.Cookies.TryGetValue("refreshToken", out var rawToken) || string.IsNullOrWhiteSpace(rawToken))
                 return BadRequest("No token provided.");
 
@@ -196,6 +202,24 @@ namespace WinellyApi.Controllers
             {
                 return StatusCode(500, ex);
             }
+        }
+
+        [HttpGet("me")]
+        [Authorize]
+        public async Task<IActionResult> GetActiveUser()
+        {
+            var activeUser = await _userManager.GetUserAsync(User);
+            if (activeUser == null) return Unauthorized();
+
+            return Ok(
+                new ActiveUserDto
+                {
+                    FirstName = activeUser.FirstName,
+                    LastName = activeUser.LastName,
+                    Email = activeUser.Email
+                }
+            );
+                
         }
     }
 }

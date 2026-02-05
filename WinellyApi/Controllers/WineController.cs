@@ -24,7 +24,7 @@ namespace WinellyApi.Controllers
         [HttpGet]
         public async Task<IActionResult> GetWines()
         {
-            var wines = await _context.Wines.Include(w => w.Wine_GrapeConnections).ThenInclude(wg => wg.Grape).ToListAsync();
+            var wines = await _context.Wines.Include(w => w.Wine_GrapeConnections).ThenInclude(wg => wg.Grape).Include(x => x.Ratings).ThenInclude(x => x.AppUser).ToListAsync();
             var winesDto = wines.Select(wine => wine.ToWineDto());
             return Ok(winesDto);
         }
@@ -32,7 +32,7 @@ namespace WinellyApi.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetWineById(int id)
         {
-            var wine = await _context.Wines.Include(w => w.Wine_GrapeConnections).ThenInclude(wg => wg.Grape).FirstOrDefaultAsync(x => x.Id == id);
+            var wine = await _context.Wines.Include(w => w.Wine_GrapeConnections).ThenInclude(wg => wg.Grape).Include(x => x.Ratings).ThenInclude(x => x.AppUser).FirstOrDefaultAsync(x => x.Id == id);
             if (wine == null)
             {
                 return NotFound("Invalid WineId.");
