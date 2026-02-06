@@ -10,7 +10,7 @@ namespace WinellyApi.Controllers
 {
     [Route("api/admin")]
     [ApiController]
-    //[Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     public class AdminController : ControllerBase
     {
         private readonly UserManager<AppUser> _userManager;
@@ -21,28 +21,44 @@ namespace WinellyApi.Controllers
             _context = context;
         }
 
-        [HttpGet]
+        [HttpGet("users")]
         public async Task<IActionResult> GetUsers()
         {
-            var users = await _userManager.GetUsersInRoleAsync("User");
-            if (users == null) return NotFound();
-            var usersDto = users.Select(user => user.ToGetUsersDto());
+            var usersInRole = await _userManager.GetUsersInRoleAsync("User");
+            if (usersInRole == null) return NotFound();
+
+            var usersDto = usersInRole
+                .Where(u => !u.IsDeleted)
+                .Select(user => user.ToGetUsersDto());
+
             return Ok(usersDto);
         }
-        /*
+
         [HttpDelete]
-        [Route("{userId}")]
+        [Route("deleteUser/{userId}")]
         public async Task<IActionResult> DeleteUser([FromRoute] string userId)
         {
-            //var isAdmin = await _userManager.GetUserAsync(User);
             var user = await _userManager.FindByIdAsync(userId);
             if (user == null) return NotFound("Invalid userId");
 
-            await _userManager.DeleteAsync(user);
+            if (user.IsDeleted) return NoContent();
+
+            user.IsDeleted = true;
+            user.DeletedOn = DateTime.UtcNow;
+
+            user.LockoutEnabled = true;
+            user.LockoutEnd = DateTimeOffset.MaxValue;
+
+            var updateResult = await _userManager.UpdateAsync(user);
+            if (!updateResult.Succeeded)
+            {
+                var errors = string.Join("; ", updateResult.Errors.Select(e => e.Description));
+                return StatusCode(500, $"Failed to soft-delete user: {errors}");
+            }
+
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
-        */
     }
 }
