@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WinellyApi.Data;
 using WinellyApi.DTOs.Wine;
+using WinellyApi.DTOs.Winery;
 using WinellyApi.Interfaces;
 using WinellyApi.Mappers;
 using WinellyApi.Models;
@@ -70,38 +71,72 @@ namespace WinellyApi.Controllers
             return CreatedAtAction(nameof(GetWineById), new { id = wineModel.Id },  wineModel.ToWineDtoWithoutGrapes());
         }
 
-        [HttpPut]
+        [HttpPatch]
         [Route("{id}")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateWine([FromRoute] int id, UpdateWineRequestDto updateDto)
         {
             var wineModel = await _context.Wines.Include(x => x.Wine_GrapeConnections).ThenInclude(x => x.Grape).FirstOrDefaultAsync(x => x.Id == id);
-            if(wineModel == null)
+            if (wineModel == null)
             {
                 return NotFound();
             }
+            if (updateDto.Name != null) wineModel.Name = updateDto.Name;
+            if (updateDto.Type != null) wineModel.Type = updateDto.Type;
+            if (updateDto.Description != null) wineModel.Description = updateDto.Description;
+            if (updateDto.Taste != null) wineModel.Taste = updateDto.Taste;
+            if (updateDto.Year != 0) wineModel.Year = updateDto.Year;
+            if (updateDto.Price != 0) wineModel.Price = updateDto.Price;
+            if (updateDto.AlcoholContent != 0) wineModel.AlcoholContent = updateDto.AlcoholContent;
 
-            wineModel.Name = updateDto.Name;
-            wineModel.Type = updateDto.Type;
-            wineModel.Description = updateDto.Description;
-            wineModel.Taste = updateDto.Taste;
-            wineModel.Year = updateDto.Year;
-            wineModel.Price = updateDto.Price;
-            wineModel.AlcoholContent = updateDto.AlcoholContent;
-            
-            wineModel.Wine_GrapeConnections.Clear();
-            foreach (var grapeId in updateDto.GrapeIds)
+            if (updateDto.GrapeIds != null)
             {
-                wineModel.Wine_GrapeConnections.Add(
-                    new Wine_GrapeConnection
-                    {
-                        WineId = id,
-                        GrapeId = grapeId
-                    });
+                wineModel.Wine_GrapeConnections.Clear();
+                foreach (var grapeId in updateDto.GrapeIds)
+                {
+                    wineModel.Wine_GrapeConnections.Add(
+                        new Wine_GrapeConnection
+                        {
+                            WineId = id,
+                            GrapeId = grapeId
+                        });
+                }
             }
 
             await _context.SaveChangesAsync();
 
+            return Ok(wineModel.ToWineDto());
+        }
+
+        [HttpPatch("api/wine/UpdtImg")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> UpdateWinePic([FromForm] int id, IFormFile image)
+        {
+            var wineModel = await _context.Wines.Include(x => x.Wine_GrapeConnections).ThenInclude(x => x.Grape).FirstOrDefaultAsync(x => x.Id == id);
+
+            if (wineModel == null) return NotFound("Invalid wineId");
+            if (image == null) return NotFound("Image is null");
+
+            if (wineModel.FileId != null)
+            {
+                var imgRes = await _imageKit.DeleteImage(wineModel.FileId);
+                if (imgRes == false)
+                {
+                    return BadRequest("Error with the image delete service");
+                }
+            }
+
+            var fileData = await _imageKit.UploadImage(image);
+
+            if (fileData == null || string.IsNullOrEmpty(fileData.Url))
+            {
+                return StatusCode(500, "Image upload failed.");
+            }
+
+            wineModel.Url = fileData.Url;
+            wineModel.FileId = fileData.FileId;
+
+            await _context.SaveChangesAsync();
             return Ok(wineModel.ToWineDto());
         }
 
@@ -120,7 +155,7 @@ namespace WinellyApi.Controllers
 
             if (imgRes == false)
             {
-                return BadRequest("Error with the image delet service");
+                return BadRequest("Error with the image delete service");
             }
 
             _context.Wines.Remove(wineModel);

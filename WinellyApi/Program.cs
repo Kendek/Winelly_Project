@@ -179,6 +179,8 @@ namespace WinellyApi
             {
                 admin = new AppUser
                 {
+                    FirstName = "Admin",
+                    LastName = "Admin",
                     UserName = adminEmail,
                     Email = adminEmail,
                     EmailConfirmed = true

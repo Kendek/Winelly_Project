@@ -52,7 +52,7 @@ namespace WinellyApi.Controllers
             return CreatedAtAction(nameof(GetWineryById), new { id = wineryModel.Id }, wineryModel.ToWineryDto());
         }
 
-        [HttpPut]
+        [HttpPatch]
         [Route("{id}")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateWinery([FromRoute] int id, UpdateWineryRequestDto updateDto)
@@ -63,14 +63,16 @@ namespace WinellyApi.Controllers
                 return NotFound();
             }
 
-            var geoRes = await _geoService.GetCoordinatesAsync(updateDto.Region);
-
-            wineryModel.Name = updateDto.Name;
-            wineryModel.Region = updateDto.Region;
-            wineryModel.Country = updateDto.Country;
-            wineryModel.Lat = geoRes.Lat;
-            wineryModel.Lon = geoRes.Lon;
-            wineryModel.EstablishedYear = updateDto.EstablishedYear;
+            if (updateDto.Name != null)  wineryModel.Name = updateDto.Name;
+            if (updateDto.Region != null)
+            {
+                wineryModel.Region = updateDto.Region;
+                var geoRes = await _geoService.GetCoordinatesAsync(updateDto.Region);
+                wineryModel.Lat = geoRes.Lat;
+                wineryModel.Lon = geoRes.Lon;
+            }
+            if (updateDto.Country != null) wineryModel.Country = updateDto.Country;
+            if (updateDto.EstablishedYear != 0)  wineryModel.EstablishedYear = updateDto.EstablishedYear;
 
             await _context.SaveChangesAsync();
             return Ok(wineryModel.ToWineryDto());
