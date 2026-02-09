@@ -11,8 +11,8 @@ using WinellyApi.Data;
 namespace WinellyApi.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260206114357_UserSoftDelete")]
-    partial class UserSoftDelete
+    [Migration("20260209064307_ClearedDatabase")]
+    partial class ClearedDatabase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

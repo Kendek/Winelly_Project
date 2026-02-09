@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace WinellyApi.Migrations
 {
     /// <inheritdoc />
-    public partial class GeoService : Migration
+    public partial class ClearedDatabase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -34,6 +34,8 @@ namespace WinellyApi.Migrations
                     Id = table.Column<string>(type: "TEXT", nullable: false),
                     FirstName = table.Column<string>(type: "TEXT", nullable: true),
                     LastName = table.Column<string>(type: "TEXT", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "INTEGER", nullable: false),
+                    DeletedOn = table.Column<DateTime>(type: "TEXT", nullable: true),
                     UserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
@@ -230,6 +232,8 @@ namespace WinellyApi.Migrations
                     Year = table.Column<int>(type: "INTEGER", nullable: false),
                     Price = table.Column<decimal>(type: "TEXT", nullable: false),
                     AlcoholContent = table.Column<double>(type: "REAL", nullable: false),
+                    Url = table.Column<string>(type: "TEXT", nullable: true),
+                    FileId = table.Column<string>(type: "TEXT", nullable: true),
                     WineryId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
