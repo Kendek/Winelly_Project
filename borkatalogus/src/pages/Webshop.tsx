@@ -5,8 +5,12 @@ import Slider from '@mui/material/Slider';
 import { WineContext, type Wine } from '../Mcontext/WineContextProvider';
 import CurrentWine from '../Mcomponents/CurrentWine';
 
+type WebshopProps = {
+  cartIconRef: React.RefObject<HTMLDivElement | null>
+};
 
-const Webshop = () => {
+
+const Webshop = ({ cartIconRef } : WebshopProps) => {
 
   const { wines, currentWineId } = useContext(WineContext)
 
@@ -100,13 +104,13 @@ const Webshop = () => {
             </div>
           </div>
           <div className={style.itemsGrid}>
-            <WebshopItem filteredWines={filteredWines}></WebshopItem>
+            <WebshopItem filteredWines={filteredWines} cartIconRef={cartIconRef}></WebshopItem>
           </div>
         </div>
       </div>
       {currentWineId && (
         <div className={style.overlay}>
-          <CurrentWine />
+          <CurrentWine cartIconRef={cartIconRef}/>
         </div>
       )}
     </div>

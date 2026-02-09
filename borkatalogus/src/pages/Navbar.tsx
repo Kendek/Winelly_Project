@@ -1,10 +1,16 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import styles from "../Navbar.module.css"
 import { WineContext } from '../Mcontext/WineContextProvider';
 import MiniNavbarStepper from '../Stepper/MiniNavbarStepper';
 
-const Navbar = () => {
+
+type NavbarProps = {
+ cartIconRef: React.RefObject<HTMLDivElement | null>
+};
+
+
+const Navbar = ({ cartIconRef } : NavbarProps) => {
 
     //UseState + Location
     const location = useLocation();
@@ -32,7 +38,7 @@ const Navbar = () => {
     useEffect(() => {
         setCurrentWineId(null);
     }, [location]);
-
+ 
     const getCurrentStep = () => {
         if (location.pathname === "/cart") return 1;
         if (location.pathname === "/checkout") return 2;
@@ -42,17 +48,15 @@ const Navbar = () => {
 
     const currentStep = getCurrentStep();
 
-
-
     return (
         <nav className={styles.navbar} >
             <div className={styles.navbarleft}>
-                <Link to="/home"><img src="./logo.png" alt="" className={styles.logo} /></Link>
+                <Link to="/home"><img src="./logo.png" alt="" className={`${location.pathname === "/cart" || location.pathname == "/checkout" || location.pathname === "/done"  ? styles.hideLogo : ""} ${styles.logo}`} /></Link>
             </div>
             <div className={currentStep ? styles.showStep : styles.hideStep}>
                 <MiniNavbarStepper currentStep={currentStep} />
             </div>
-            <div className={`${styles.navbarcenter} ${location.pathname == "/cart" ? styles.hide : ""}`}>
+            <div className={`${styles.navbarcenter} ${location.pathname == "/cart" || location.pathname == "/checkout" || location.pathname == "/done" ? styles.hide : ""}`}>
                 <ul className={clicked ? styles.navlinksActive : styles.navlinks}>
                     <li>
                         <Link to="/home" className={location.pathname === "/home" || location.pathname === "/" ? styles.pageLinkactive : styles.pageLink} onClick={() => { setClikced(false) }}>Home</Link>
@@ -61,13 +65,17 @@ const Navbar = () => {
                         <Link to="/map" className={location.pathname === "/map" ? styles.pageLinkactive : styles.pageLink} onClick={() => { setClikced(false) }}>Map</Link>
                     </li>
                     <li>
-                        <Link to="/webshop" className={location.pathname === "/webshop" || location.pathname.startsWith("/currentWine") ? styles.pageLinkactive : styles.pageLink} onClick={() => { setClikced(false) }}>Webshop</Link>
+                        <Link to="/webshop" className={location.pathname === "/webshop" || location.pathname.startsWith("/currentWine") || location.pathname === "/review" ? styles.pageLinkactive : styles.pageLink} onClick={() => { setClikced(false) }}>Webshop</Link>
                     </li>
                 </ul>
             </div>
             <div className={styles.navbarright}>
                 <Link to="/login" className={location.pathname === "/login" ? styles.usericonlogin : styles.usericon} onClick={() => { setClikced(false) }}>Login</Link>
-                <Link to="/cart" className={location.pathname === "/cart" ? styles.carticonactive : styles.carticon} onClick={() => { setClikced(false) }}><i className="fa-solid fa-cart-shopping"></i></Link>
+                <div ref={cartIconRef} className={styles.cartIconWrapper}>
+                    <Link to="/cart" className={location.pathname === "/cart" || location.pathname === "/checkout" || location.pathname === "/done" ? styles.carticonactive : styles.carticon}  onClick={() => { setClikced(false) }}>
+                        <i className="fa-solid fa-cart-shopping"></i>
+                    </Link>
+                </div>
                 <div className={styles.mobile}>
                     <i className={clicked ? "fas fa-times" : "fas fa-bars"} onClick={() => setClikced(!clicked)}></i>
                 </div>

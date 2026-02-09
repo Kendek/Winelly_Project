@@ -232,7 +232,15 @@ export const WineContext = createContext<WineContextType>({ wines: [], currentWi
 export function WineContextProvider({ children }: { children: React.ReactNode }) {
   const [datas, setDatas] = useState([]);
   const [currentWineId, setCurrentWineId] = useState<number | null>(null);
-  const [cartItems, setCartItems] = useState<CartItem[]>([])
+  const [cartItems, setCartItems] = useState<CartItem[]>(() => {
+    const saved = localStorage.getItem("cart");
+    return saved ? JSON.parse(saved) : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cartItems));
+  }, [cartItems]);
+
 
   useEffect(() => {
     async function fetchData() {

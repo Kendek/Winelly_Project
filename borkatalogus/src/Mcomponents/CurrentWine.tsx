@@ -1,52 +1,103 @@
-  import React, { useContext, useEffect, useState } from 'react'
-  import style from '../Mcss/CurrentWine.module.css'
-  import { WineContext, type Wine } from '../Mcontext/WineContextProvider';
-  import { Rating } from '@mui/material';
-  import { Link, useNavigate } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react'
+import style from '../Mcss/CurrentWine.module.css'
+import { WineContext, type Wine } from '../Mcontext/WineContextProvider';
+import { Rating } from '@mui/material';
+import { Link, useNavigate } from 'react-router-dom';
 
-  const CurrentWine = () => {
+type CurrentWineProps = {
+  cartIconRef: React.RefObject<HTMLDivElement | null>;
+};
 
-    const { wines, currentWineId, setCartItems } = useContext(WineContext);
-    const wine = wines.find(w => w.id === currentWineId);
 
-    const handleAddToCart = (addWineToCart: Wine) => {
-      setCartItems(prev => [...prev, addWineToCart])
-    }
+const CurrentWine = ({ cartIconRef }: CurrentWineProps) => {
 
-    const[closing, setClosing] =useState(false);
+  /* Add to cart Animation*/
+  const startFlyAnimation = (imgElement: HTMLImageElement) => {
+    const cartIcon = cartIconRef.current;
+    if (!cartIcon) return;
 
-    if (!wine) {
-      return undefined;
-    }
+    const imgRect = imgElement.getBoundingClientRect();
+    const cartRect = cartIcon.getBoundingClientRect();
 
-    const navigate = useNavigate(); 
-    
-    const close = () => {
-      setClosing(true)
-      setTimeout(() => navigate("/webshop"), 300);
-    }
+    const flyingImg = imgElement.cloneNode(true) as HTMLImageElement;
+    flyingImg.classList.add(style.flyingImage);
 
-    const avgRating = wine.reviews.reduce((sum, r) => sum + r.rating, 0) / wine.reviews.length;
+    flyingImg.style.left = imgRect.left + "px";
+    flyingImg.style.top = imgRect.top + "px";
 
-    return (
-      <div className={style.mainDiv}>
-        <div className={`${style.container} ${closing ? style.closing : ""}`}>
-          <button onClick={close} className={style.closeBtn}>X</button>
-          <div className={style.overlay}>
-            <div className={style.wineLeftSide}>
-              <img src="wineTest.png" alt="" />
+    document.body.appendChild(flyingImg);
+
+    requestAnimationFrame(() => {
+      flyingImg.style.left = cartRect.left + "px";
+      flyingImg.style.top = cartRect.top + "px";
+      flyingImg.style.transform = "scale(0.2)";
+      flyingImg.style.opacity = "0";
+    });
+
+    flyingImg.addEventListener("transitionend", () => {
+      flyingImg.remove();
+    });
+  };
+  /*-------------------*/
+
+  const { wines, currentWineId, setCartItems, setCurrentWineId } = useContext(WineContext);
+  const wine = wines.find(w => w.id === currentWineId);
+  const [detailsOpen, setDetailsOpen] = useState(false);
+
+
+  const handleAddToCart = (addWineToCart: Wine) => {
+    setCartItems(prev => {
+      const existing = prev.find(item => item.wine.id === addWineToCart.id);
+      if (existing) {
+        return prev.map(item =>
+          item.wine.id === addWineToCart.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        );
+      }
+      return [...prev, { wine: addWineToCart, quantity: 1 }];
+    });
+  };
+
+
+  const [closing, setClosing] = useState(false);
+
+  if (!wine) {
+    return undefined;
+  }
+
+  const navigate = useNavigate();
+
+  const close = () => {
+    setClosing(true)
+    setTimeout(() => navigate("/webshop"), 300);
+  }
+
+  const handleClick = (wine: Wine) => {
+    setCurrentWineId(wine.id);
+  }
+
+  const avgRating = wine.reviews.reduce((sum, r) => sum + r.rating, 0) / wine.reviews.length;
+
+  return (
+    <div className={style.mainDiv} onClick={(e) => { if (e.target === e.currentTarget) { close() } }}>
+      <div className={`${style.container} ${closing ? style.closing : ""}`} onClick={(e) => e.stopPropagation()}>
+        <button onClick={close} className={style.closeBtn}>X</button>
+        <div className={style.overlay}>
+          <div className={style.wineLeftSide}>
+            <img src="wineTest.png" alt="" className={style.currentWineImage} />
+          </div>
+          <div className={style.wineRightSide}>
+            <div className={style.wineTitle}>
+              <span>{wine?.name}</span>
             </div>
-            <div className={style.wineRightSide}>
-              <div className={style.wineTitle}>
-                <span>{wine?.name}</span>
-              </div>
-              <div className={style.wineRating}>
-                <span>
-                  <Rating value={avgRating} readOnly/>
-                  <p>{wine.reviews.length}</p>
-                  <i className="fa-solid fa-grip-lines-vertical"></i>
-                  <b>View All Reviews</b>
-                </span>
+            <div className={style.wineRating}>
+              <span>
+                <Rating value={avgRating} precision={0.5} readOnly />
+                <p>({wine.reviews.length})</p>
+                <i className="fa-solid fa-grip-lines-vertical"></i>
+                <b onClick={() => navigate("/review", { state: { wineId: wine.id } })}>View All Reviews</b>
+              </span>
             </div>
             <div className={style.winePrice}>
               <span>{wine?.price} Ft</span>
@@ -56,7 +107,11 @@
                 {wine?.description}
               </p>
             </div>
-            <div className={style.wineDetails}>
+            <div className={style.detailsToggle} onClick={() => setDetailsOpen(!detailsOpen)}>
+              Wine Details
+              <i className={`fa-solid fa-chevron-${detailsOpen ? "up" : "down"}`}></i>
+            </div>
+            <div className={`${style.wineDetails} ${detailsOpen ? style.open : ""}`}>
               <div>
                 <i className="fa-solid fa-wine-glass"></i>
                 <span>{wine?.type}</span>
@@ -75,13 +130,20 @@
               </div>
             </div>
             <div className={style.wineBtn}>
-              <button onClick={() => handleAddToCart(wine)}>Add to Cart</button>
+              <button
+                onClick={() => {
+                  handleAddToCart(wine);
+
+                  const img = document.querySelector(`.${style.currentWineImage}`) as HTMLImageElement;
+                  if (img) startFlyAnimation(img);
+                }}>Add to cart
+              </button>
             </div>
           </div>
         </div>
       </div>
-      </div >
-    )
-  }
+    </div >
+  )
+}
 
-  export default CurrentWine
+export default CurrentWine

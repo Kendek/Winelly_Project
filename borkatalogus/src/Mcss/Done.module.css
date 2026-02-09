@@ -1,0 +1,121 @@
+.mainDiv {
+    margin: 0;
+    padding: 0;
+    background-color: var(--secondary-colour);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hide
+{
+    display: none;
+}
+
+.containerDone {
+    background: white;
+    border-radius: 14px;
+    padding: 30px 40px;
+    border: 3px solid var(--primary-colour);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+}
+
+.containerDone>span {
+    margin: 0;
+    font-size: var(--large-title-font);
+    color: var(--primary-colour);
+}
+
+.containerDone p {
+    margin: 0;
+    font-size: var(--label-font);
+    color: var(--primary-colour);
+}
+
+.orderBox {
+    background-color: var(--secondary-colour);
+    padding: 10px;
+    border-radius: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.orderItem {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.itemImg {
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    background: rgba(149, 149, 149, 0.226);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.itemImg img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.itemName {
+    flex: 1;
+    font-weight: 500;
+    font-size: var(--description-font);
+    color: var(--primary-colour);
+}
+
+.itemQty {
+    font-weight: 500;
+    font-size: var(--description-font);
+    color: var(--primary-colour);
+}
+
+.backButton {
+    margin-top: 10px;
+    padding: 12px 20px;
+    background-color: var(--primary-colour);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.backButton:hover {
+    background-color: #5a0f0f;
+    transform: translateY(-2px);
+}
+
+.slideInRight {
+    animation: doneSlideInRight 0.4s ease forwards;
+}
+
+@keyframes doneSlideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
