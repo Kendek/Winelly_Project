@@ -75,7 +75,7 @@ namespace WinellyApi.Controllers
             return Ok(
                 new NewUserDto
                 {
-                    FristName = user.FirstName,
+                    FirstName = user.FirstName,
                     LastName = user.LastName,
                     Email = user.Email,
                     Token = jwt

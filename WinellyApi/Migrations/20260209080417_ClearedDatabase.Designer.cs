@@ -11,7 +11,7 @@ using WinellyApi.Data;
 namespace WinellyApi.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260209064307_ClearedDatabase")]
+    [Migration("20260209080417_ClearedDatabase")]
     partial class ClearedDatabase
     {
         /// <inheritdoc />

@@ -117,6 +117,18 @@ namespace WinellyApi
 
             builder.Services.AddHttpClient<IGeoService, GeoService>();
 
+            var allowedOrigins = new[] { "http://localhost:5173", "https://localhost:5173" };
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("Localhost5173Policy", policy =>
+                {
+                    policy.WithOrigins(allowedOrigins)
+                          .AllowAnyHeader()
+                          .AllowAnyMethod()
+                          .AllowCredentials();
+                });
+            });
+
             var app = builder.Build();
 
             // Def admin user
@@ -142,6 +154,8 @@ namespace WinellyApi
             }
 
             app.UseHttpsRedirection();
+
+            app.UseCors("Localhost5173Policy");
 
             app.UseAuthentication();
             app.UseAuthorization();
