@@ -6,7 +6,9 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import styles from './Admin.module.css'
 import AdminNav from './AdminNav'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { GetDbData } from './AdminFetch';
+
 const AdminGrape = () => {
 
   type Grape = {
@@ -15,10 +17,26 @@ const AdminGrape = () => {
     color: string
   }
 
+  useEffect(()=>{
+    const fetchGrapes = async () => {
+      try {
+        const data = await GetDbData("https://48ph6jzb-7072.euw.devtunnels.ms/api/grape")
+        if (Array.isArray(data)) {
+          setGrapes(data as Grape[])
+        } else if (data && Array.isArray((data as any).result)) {
+          setGrapes((data as any).result as Grape[])
+        } else {
+          console.warn('Unexpected grape data format:', data)
+        }
+      } catch (err) {
+        console.error('Failed to fetch grapes', err)
+      }
+    }
+
+    fetchGrapes()
+
+  },[])
   const [grapes, setGrapes] = useState<Grape[]>([
-    { id: 1, name: 'Cabernet Sauvignon', color: 'Red' },
-    { id: 2, name: 'Chardonnay', color: 'White' },
-    { id: 3, name: 'Pinot Noir', color: 'Red' }
   ])
 
   return (
