@@ -7,8 +7,9 @@
 }
 .ChartDiv{
     border:  black 2px solid;
-    width: 100vw;
+    width: 40vw;
     height: 80vh; 
+    
 }
 .Search{
     display: flex;
@@ -16,4 +17,19 @@
     gap: 20px;
     padding: 6px;
 
+}
+.MapCardVisible{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 25%;
+    height: 70%;
+    background-color: white;
+    border-radius: 1%;
+    border: --primary-colour solid 2px;
+    top: 55%;
+    left: 82%;
+    transform: translate(-50%,-50%);
+    position: absolute;
+    z-index: 1;
 }
