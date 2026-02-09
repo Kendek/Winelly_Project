@@ -9,15 +9,10 @@ import Cart from './pages/Cart'
 import WineContextProvider from './Mcontext/WineContextProvider'
 import Checkout from './pages/Checkout'
 import Done from './pages/Done'
-<<<<<<< HEAD
-import Review from './pages/Review'
 import AdminAccounts from './Ksrc/AdminPages/AdminAccounts'
 import AdminGrape from './Ksrc/AdminPages/AdminGrape'
 import AdminWine from './Ksrc/AdminPages/AdminWine'
 import AdminWinery from './Ksrc/AdminPages/AdminWinery'
-=======
-
->>>>>>> d2a9abb2026cdcae024c0069c2f51da7ef207d6a
 const App = () => {
 
   const cartIconRef = useRef<HTMLDivElement>(null);
@@ -49,15 +44,11 @@ const App = () => {
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/done" element={<Done />} />
-<<<<<<< HEAD
-          <Route path="/review" element={<Review />} />
           <Route path="/adminaccounts" element={<AdminAccounts/>} />
           <Route path="/adminGrape" element={<AdminGrape/>} />
           <Route path="/adminWine" element={<AdminWine/>} />
           <Route path="/adminWinery" element={<AdminWinery/>} />
 
-=======
->>>>>>> d2a9abb2026cdcae024c0069c2f51da7ef207d6a
         </Routes>
       </BrowserRouter>
     </WineContextProvider>
