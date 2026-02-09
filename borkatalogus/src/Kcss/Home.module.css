@@ -56,13 +56,14 @@
     margin-left: 0%;
     font-size: large;
  }
- .Stars{
-    color: gold;
-    background-color: gold;
-    font-size: 150%;
- }
  .FavCardContainer{
     flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: left;
+    align-items: normal;
+ }
+ .HomeSecond{
+    background-image: none;
  }
 }
 .HomeSecond{
@@ -76,7 +77,10 @@
     flex-direction: column;
 }
 
-
+ .Stars{
+    color: gold;
+    font-size: 150%;
+ }
 .FlexBox{
     display: flex;
     flex-direction: row;

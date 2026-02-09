@@ -19,7 +19,15 @@ const Chart = () => {
         let root = am5.Root.new("chartdiv");
 
         let chart = root.container.children.push(
-            am5map.MapChart.new(root, {})
+            am5map.MapChart.new(root, {
+                panX: "rotateX",
+                panY: "rotateY",
+                projection: am5map.geoOrthographic(),
+                paddingBottom: 20,
+                paddingTop: 20,
+                paddingLeft: 20,
+                paddingRight: 20
+            })
         );
 
         let PolygonSeries  = chart.series.push(
@@ -33,16 +41,36 @@ const Chart = () => {
         PolygonSeries.mapPolygons.template.setAll({
             tooltipText : "{name}"
         })
+        let backgroundSeries = chart.series.unshift(
+             am5map.MapPolygonSeries.new(root, {})
+        );
+        backgroundSeries.mapPolygons.template.setAll({
+            fill: am5.color("#2ea2d3"),
+        });
 
-        let MarkerSeries = chart.series.push(
-            am5map.MapPolygonSeries.new(root, {       
-            }));
-        
-        MarkerSeries.mapPolygons.template.setAll({
-            fill: am5.color("#000000"),
-            interactive: true,
-            tooltipText : "asd"
+        backgroundSeries.data.push({
+        geometry: am5map.getGeoRectangle(90, 180, -90, -180)
+        });
+
+        let MarkerSeries = chart.series.push(am5map.MapPointSeries.new(root, {}));
+
+        MarkerSeries.bullets.push(function(){
+            let circle = am5.Circle.new(root,{
+                radius: 5,
+                fill: am5.color("#000000"),
+                tooltipText: "{title}"
+            })
+
+            circle.events.on("click", (e) => {
+                console.log("asd")
+                });
+
+
+            return am5.Bullet.new(root, {
+                sprite: circle
+            })
         })
+        
         
         markerSeriesRef.current = MarkerSeries;
         GenerateMarkers();
@@ -54,14 +82,12 @@ const Chart = () => {
     }, []);
 
     useEffect(() => {
-        console.log(Markers)
         if (markerSeriesRef.current && Markers.length > 0) {
+            console.log(Markers)
             Markers.forEach(marker => {
                 markerSeriesRef.current.data.push({
                     geometry: { type:"Point",  coordinates: [marker.longitude, marker.latitude]},
-                    interactive: true,
-                    name : "asd"
-                
+                    title: marker.name,
                 });
             });
         }
@@ -74,7 +100,8 @@ const Chart = () => {
                     return {
                         longitude: data.longitude,
                         latitude: data.latitude,
-                        name : varos
+                        name : varos,
+                        url: "http://localhost:5173/webshop"
                     };
                 }
                 return null;
@@ -87,7 +114,10 @@ const Chart = () => {
 
 
   return (
-    <div >  
+    <div >
+        <div className={styles.MapCardVisible}>
+            <h1>Loremsasldlasdas,d</h1>
+        </div>  
         <div className={styles.Search}>
             <input type="text" />
             <button>Search</button>
