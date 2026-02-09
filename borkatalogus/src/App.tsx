@@ -48,7 +48,6 @@ const App = () => {
           <Route path="/adminGrape" element={<AdminGrape/>} />
           <Route path="/adminWine" element={<AdminWine/>} />
           <Route path="/adminWinery" element={<AdminWinery/>} />
-
         </Routes>
       </BrowserRouter>
     </WineContextProvider>
