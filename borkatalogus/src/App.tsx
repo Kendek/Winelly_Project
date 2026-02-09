@@ -11,7 +11,10 @@ import WineContextProvider from './Mcontext/WineContextProvider'
 import Checkout from './pages/Checkout'
 import Done from './pages/Done'
 import Review from './pages/Review'
-
+import AdminAccounts from './Ksrc/AdminPages/AdminAccounts'
+import AdminGrape from './Ksrc/AdminPages/AdminGrape'
+import AdminWine from './Ksrc/AdminPages/AdminWine'
+import AdminWinery from './Ksrc/AdminPages/AdminWinery'
 const App = () => {
 
   const cartIconRef = useRef<HTMLDivElement>(null);
@@ -44,6 +47,11 @@ const App = () => {
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/done" element={<Done />} />
           <Route path="/review" element={<Review />} />
+          <Route path="/adminaccounts" element={<AdminAccounts/>} />
+          <Route path="/adminGrape" element={<AdminGrape/>} />
+          <Route path="/adminWine" element={<AdminWine/>} />
+          <Route path="/adminWinery" element={<AdminWinery/>} />
+
         </Routes>
       </BrowserRouter>
     </WineContextProvider>

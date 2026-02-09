@@ -115,9 +115,6 @@ const Chart = () => {
 
   return (
     <div >
-        <div className={styles.MapCardVisible}>
-            <h1>Loremsasldlasdas,d</h1>
-        </div>  
         <div className={styles.Search}>
             <input type="text" />
             <button>Search</button>

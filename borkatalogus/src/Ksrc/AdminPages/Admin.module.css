@@ -1,0 +1,12 @@
+.Options{
+    width: 100vw;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 10px;
+    button{
+        font-size: larger;
+        padding: 3px;
+        background-color: white;
+        border-radius: 3px;
+    }
+}
