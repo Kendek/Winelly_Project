@@ -143,8 +143,21 @@
     background-color: white;
     border: black solid 3px;
     width: 15vw;
-    height: 10vh;
-    button{
-        margin: auto;
+    height: 13vh;
+    min-width: 240px;
+    min-height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    div{
+        display: flex;
+        gap: 30px;
+        button{
+            padding: 3px;
+        }
     }
+
+}
+.p-dialog-header{
+    visibility: hidden;
 }

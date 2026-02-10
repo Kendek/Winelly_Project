@@ -9,6 +9,7 @@ import styles from './Admin.module.css'
 import AdminGrape from './AdminGrape';
 import AdminWine from './AdminWine';
 import { ConfirmDialog } from 'primereact/confirmdialog'; 
+import { confirmDialog } from 'primereact/confirmdialog';
 
 
 
@@ -29,7 +30,7 @@ const AdminAccounts = () => {
         console.log("Declined")
     }
   const [openDelete, setDelete] = useState(false);
-   const [visible, setVisible] = useState(false);
+
 
   const [accounts, setAccounts] = useState<Account[]>([
     { id : "asd-01", firstName: "John", lastName: "Doe", email: "john@example.com"},
@@ -45,6 +46,20 @@ const AdminAccounts = () => {
     { id : "asd-01", firstName: "John", lastName: "Doe", email: "john@example.com"},
     { id : "asd-02", firstName: "Jane", lastName: "Smith", email: "jane@example.com"}
   ]);
+      const showTemplate = () => {
+
+        confirmDialog({
+            group: 'Template',
+            message: (
+                <div className="flex flex-column align-items-center w-full gap-3 border-bottom-1 surface-border">
+                    <i className="pi pi-exclamation-circle text-6xl text-primary-500"></i>
+                    <span>Please confirm to proceed moving forward.</span>
+                </div>
+            ),
+            accept,
+            reject
+        });
+    };
 
   return (
 
@@ -75,19 +90,16 @@ const AdminAccounts = () => {
                   <TableCell>{row.lastName}</TableCell>
                   <TableCell>{row.email}</TableCell>
                   <TableCell>
-
-                     <ConfirmDialog className={styles.ConfirmBox}  visible={visible} onHide={() => setVisible(false)} message="Are you sure you want to proceed?" 
-                       accept={accept} reject={reject} />
-                  <div className="card flex justify-content-center">
-                      <button onClick={() => setVisible(true)} className={styles.DeleteDbBtn}>Delete</button>
-                  </div>
+                         <button onClick={() => showTemplate()} className={styles.DeleteDbBtn}>Delete</button>
                   </TableCell>
                 </TableRow>
               ))}
           </TableBody>
         </Table>
       </TableContainer>
-            </div>}  
+              </div>}
+
+              <ConfirmDialog group='Template' className={styles.ConfirmBox}  />
             
       <AdminGrape></AdminGrape>
       <AdminWine></AdminWine>
