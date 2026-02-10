@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import style from '../Mcss/CurrentWine.module.css'
-import { WineContext, type Wine } from '../Mcontext/WineContextProvider';
+import { formatPrice, WineContext, type Wine } from '../Mcontext/WineContextProvider';
 import { Rating } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -78,8 +78,8 @@ const CurrentWine = ({ cartIconRef, setShowReview }: CurrentWineProps) => {
     setCurrentWineId(wine.id);
   }
 
-  const avgRating = Array.isArray(wine.reviews) && wine.reviews.length > 0
-    ? wine.reviews.reduce((sum, r) => sum + r.rating, 0) / wine.reviews.length
+  const avgRating = Array.isArray(wine.ratings) && wine.ratings.length > 0
+    ? wine.ratings.reduce((sum, r) => sum + r.score, 0) / wine.ratings.length
     : 0;
 
 
@@ -93,22 +93,22 @@ const CurrentWine = ({ cartIconRef, setShowReview }: CurrentWineProps) => {
           </div>
           <div className={style.wineRightSide}>
             <div className={style.wineTitle}>
-              <span>{wine?.name}</span>
+              <span>{wine.name}</span>
             </div>
             <div className={style.wineRating}>
               <span>
                 <Rating value={avgRating} precision={0.5} readOnly />
-                <p>({"wine.reviews.length"})</p>
+                <p>({wine.ratings.length})</p>
                 <i className="fa-solid fa-grip-lines-vertical"></i>
-                <b onClick={() => { handleClick(wine); setShowReview(true) }}>View All Reviews</b>
+                <b onClick={() => { handleClick(wine); setShowReview(true) }}>View All ratings</b>
               </span>
             </div>
             <div className={style.winePrice}>
-              <span>{wine?.price} Ft</span>
+              <span>{formatPrice(wine.price)}</span>
             </div>
             <div className={style.wineDescription}>
               <p>
-                {wine?.description}
+                {wine.description}
               </p>
             </div>
             <div className={style.detailsToggle} onClick={() => setDetailsOpen(!detailsOpen)}>
@@ -118,19 +118,19 @@ const CurrentWine = ({ cartIconRef, setShowReview }: CurrentWineProps) => {
               <div className={`${style.wineDetails} ${detailsOpen ? style.open : ""}`}>
                 <div>
                   <i className="fa-solid fa-wine-glass"></i>
-                  <span>{wine?.type}</span>
+                  <span>{wine.type}</span>
                 </div>
                 <div>
                   <i className="fa-solid fa-wine-bottle"></i>
-                  <span>{wine?.alcoholContent} %</span>
+                  <span>{wine.alcoholContent} %</span>
                 </div>
                 <div>
                   <i className="fa-brands fa-pagelines"></i>
-                  <span>{wine?.grapes.map(g => g.name).join(", ")}</span>
+                  <span>{wine.grapes.map(g => g.name).join(", ")}</span>
                 </div>
                 <div>
                   <i className="fa-solid fa-calendar"></i>
-                  <span>{wine?.year}</span>
+                  <span>{wine.year}</span>
                 </div>
               </div>
             <div className={style.wineBtn}>

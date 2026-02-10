@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import style from "../Mcss/Cart.module.css"
-import { WineContext } from '../Mcontext/WineContextProvider'
+import { formatPrice, WineContext } from '../Mcontext/WineContextProvider'
 import { Link, useNavigate } from 'react-router-dom'
 
 const Cart = () => {
@@ -43,7 +43,7 @@ const Cart = () => {
   const CheckDiscountCode = () => {
     if (codeValue.trim().toUpperCase() === "WINELLY25") {
       const discountAmount = Math.floor(itemsTotalPrice * 0.25);
-      localStorage.setItem("discount", discountAmount.toString());
+      localStorage.setItem("discount", formatPrice(discountAmount).toString());
       localStorage.setItem("discountCode", "WINELLY25");
       setDiscount(discountAmount);
       setShowCodeInput(false)
@@ -85,7 +85,7 @@ const Cart = () => {
               </div>
               <div className={style.itemControls}>
                 <span><button className={style.quantityBtn} onClick={() => ControllQuantity(item.wine.id, "minus")}>-</button> {item.quantity} <button className={style.quantityBtn} onClick={() => ControllQuantity(item.wine.id, "plus")}>+</button></span>
-                <span>{(item.wine.price) * item.quantity} Ft</span>
+                <span>{formatPrice((item.wine.price) * item.quantity)}</span>
                 <button className={style.removeBtn} onClick={() => DeleteCartItem(item.wine.id)}>✕</button>
               </div>
             </div>
@@ -99,7 +99,7 @@ const Cart = () => {
 
           <div className={style.summaryRow}>
             <span>{`ITEMS (${cart.reduce((sum, i) => sum = sum + i.quantity, 0)})`}</span>
-            <span>{itemsTotalPrice} Ft</span>
+            <span>{formatPrice(itemsTotalPrice)}</span>
           </div>
 
           <div className={style.summaryRow}>
@@ -127,7 +127,7 @@ const Cart = () => {
 
           <div className={style.summaryTotal}>
             <strong>TOTAL PRICE</strong>
-            <strong>{fullPrice} Ft</strong>
+            <strong>{formatPrice(fullPrice)}</strong>
           </div>
 
           <button className={style.checkoutBtn} onClick={() => {

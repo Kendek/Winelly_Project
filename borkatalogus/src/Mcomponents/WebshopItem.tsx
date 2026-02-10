@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
 import style from '../Mcss/WebshopItem.module.css'
 import { Link } from 'react-router-dom'
-import { WineContext, type Wine } from '../Mcontext/WineContextProvider';
+import { formatPrice, WineContext, type Wine } from '../Mcontext/WineContextProvider';
 
 type WebshopItemProps = {
     filteredWines: Wine[];
@@ -58,7 +58,7 @@ const WebshopItem = ({ filteredWines, cartIconRef }: WebshopItemProps) => {
 
     return (
         filteredWines.map((wine, index) => (
-            <div className={style.singleItem} style={{ "--i": index } as any} onClick={() => handleClick(wine)}>
+            <div key={index} className={style.singleItem} style={{ "--i": index } as any} onClick={() => handleClick(wine)}>
                 <div className={style.imageWrapper}>
                     <img src={wine.url ? wine.url : "wineTest.png"} alt="" />
                     <div className={style.overlay}>
@@ -68,7 +68,7 @@ const WebshopItem = ({ filteredWines, cartIconRef }: WebshopItemProps) => {
                                     <span>{wine.name}</span>
                                 </div>
                                 <div className={style.itemPrice}>
-                                    <p>{wine.price} Ft</p>
+                                    <p>{formatPrice(wine.price)}</p>
                                 </div>
                             </div>
                             <div>

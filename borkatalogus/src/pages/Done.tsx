@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import style from "../Mcss/Done.module.css"
-import { WineContext } from '../Mcontext/WineContextProvider';
+import { formatPrice, WineContext } from '../Mcontext/WineContextProvider';
 import { useNavigate } from 'react-router-dom';
 import emailjs from "emailjs-com";
 
@@ -14,12 +14,15 @@ const Done = () => {
 
     const email = localStorage.getItem("email") || "test@example.com";
 
-    const orderItems = cart.map(item => ({
-      name: item.wine.name,
-      units: item.quantity,
-      price: item.wine.price * item.quantity,
-      image: "item.wine.image"
-    }));
+    const orderHTML = cart.map(item => `
+  <div style="margin-bottom: 15px;">
+    <img src="${item.wine.url}" width="120" style="border-radius: 8px;" />
+    <p><strong>${item.wine.name}</strong></p>
+    <p>Amount: ${item.quantity}</p>
+    <p>Price: ${formatPrice(item.wine.price * item.quantity)}</p>
+  </div>
+`).join("");
+
 
     const shipping = 2500;
     const discount = localStorage.getItem("discount");
@@ -31,8 +34,8 @@ const Done = () => {
       {
         email,
         order_id: Math.floor(Math.random() * 1000000),
-        logo_url: "logo.png",
-        orders: orderItems,
+        logo_url: "https://ik.imagekit.io/svighwdffc/Winelly/logo.png",
+        orders: orderHTML,
         cost: {
           shipping,
           discount,
@@ -71,7 +74,7 @@ const Done = () => {
           {cart.map((item, index) => (
             <div key={index} className={style.orderItem}>
               <div className={style.itemImg}>
-                <img src="wineTest.png" alt={item.wine.name} />
+                <img src={item.wine.url ? item.wine.url : "wineTest.png"} alt={item.wine.name} />
               </div>
               <span className={style.itemName}>{item.wine.name}</span>
               <span className={style.itemQty}>Amount: {item.quantity}</span>

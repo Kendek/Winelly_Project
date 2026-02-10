@@ -1,9 +1,11 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import styles from "./Navbar.module.css"
 import { WineContext } from './Mcontext/WineContextProvider';
 import MiniNavbarStepper from './Stepper/MiniNavbarStepper';
 import { LogoutUser } from './MServices/AccountService';
+import type { style } from 'motion/react-client';
+import { jwtDecode } from "jwt-decode";
 
 
 type NavbarProps = {
@@ -17,8 +19,26 @@ const Navbar = ({ cartIconRef }: NavbarProps) => {
     const location = useLocation();
     const [clicked, setClikced] = useState(false)
     const { setCurrentWineId } = useContext(WineContext)
+    const navigate = useNavigate();
 
     const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token"));
+    const [role, setRole] = useState<string | null>(null);
+
+
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+
+        if (token) {
+            try {
+                const decoded: any = jwtDecode(token);
+                setRole(decoded.role);
+            } catch {
+                setRole(null);
+            }
+        } else {
+            setRole(null);
+        }
+    }, [isLoggedIn]);
 
 
     useEffect(() => {
@@ -29,7 +49,6 @@ const Navbar = ({ cartIconRef }: NavbarProps) => {
         window.addEventListener("storage", checkTokenAndName);
         return () => window.removeEventListener("storage", checkTokenAndName);
     }, []);
-
 
     /*----------*/
 
@@ -88,9 +107,21 @@ const Navbar = ({ cartIconRef }: NavbarProps) => {
                 </ul>
             </div>
             <div className={styles.navbarright}>
-                <Link to="/login" className={location.pathname === "/login" ? styles.usericonlogin : styles.usericon} onClick={() => { setClikced(false) }} style={isLoggedIn ? { display: "none" } : { display: "block" }}>Login</Link>
-                <p style={isLoggedIn ? { display: "block" } : { display: "none" }}><b>Dear</b> {localStorage.getItem("firstName") ? localStorage.getItem("firstName") : "Guest"}!</p>
-                <button className={styles.userLogout} style={isLoggedIn ? { display: "block" } : { display: "none" }} onClick={async () => { await LogoutUser(); setIsLoggedIn(false); }}>Logout</button>
+                <Link
+                    to="/login"
+                    className={location.pathname === "/login" ? styles.usericonlogin : styles.usericon}
+                    onClick={() => setClikced(false)}
+                    style={{
+                        display:
+                            isLoggedIn || role === "Admin"
+                                ? "none"
+                                : "block"
+                    }}
+                >Login
+                </Link>
+                {role === "Admin" && (<Link to={"/adminaccounts"} className={styles.adminBtn}>Admin</Link>)}
+                {isLoggedIn &&(<p><b>Dear</b> {localStorage.getItem("firstName") ? localStorage.getItem("firstName") : "Guest"}!</p>)}
+                {isLoggedIn && (<button className={styles.userLogout} onClick={async () => { await LogoutUser(); setIsLoggedIn(false); navigate("/home")}}>Logout</button>)}
                 <div ref={cartIconRef} className={styles.cartIconWrapper}>
                     <Link to="/cart" className={location.pathname === "/cart" || location.pathname === "/checkout" || location.pathname === "/done" ? styles.carticonactive : styles.carticon} onClick={() => { setClikced(false) }}>
                         <i className="fa-solid fa-cart-shopping"></i>

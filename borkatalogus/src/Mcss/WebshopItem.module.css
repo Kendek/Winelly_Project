@@ -14,13 +14,13 @@
 }
 
 .flyingImage {
-  position: fixed;
-  width: 80px;   
-  height: auto;
-  z-index: 9999;
-  pointer-events: none; 
-  transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
-  border-radius: 8px; 
+    position: fixed;
+    width: 80px;
+    height: auto;
+    z-index: 9999;
+    pointer-events: none;
+    transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 8px;
 }
 
 
@@ -33,7 +33,7 @@
 
 .imageWrapper img {
     width: 100%;
-    height: auto;
+    height: 100%;
     object-fit: cover;
     display: block;
 }
@@ -45,7 +45,7 @@
     width: 100%;
     padding: 10px;
     background: linear-gradient(to top, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.2));
-    backdrop-filter: blur(2px); 
+    backdrop-filter: blur(2px);
     border-top: 3px solid rgba(215, 215, 215, 0.682);
 }
 
@@ -55,7 +55,7 @@
     justify-content: space-between;
     align-items: center;
     gap: 5px;
-    color: var(--primary-colour);
+    color: var(--primary-light-colour);
 }
 
 .itemTitle {
@@ -114,4 +114,5 @@
         transform: translateX(0);
     }
 }
+
 /* ------------ */

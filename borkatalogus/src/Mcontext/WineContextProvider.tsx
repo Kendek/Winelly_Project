@@ -1,6 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react'
-import axios from 'axios'
-import { data } from 'react-router-dom';
+import { BaseUrl, protectedAPI } from '../MServices/AccountService';
 
 
 export type Wine = {
@@ -20,16 +19,18 @@ export type Wine = {
     name: string,
     color: string,
   }[],
-  reviews: {
+  ratings: {
     id: number;
-    name: string;
-    rating: number;
-    comment: string;
+    score: number;
+    createdOn: Date;
+    content: string;
+    createdBy: string;
   }[],
 };
 
 export type WineContextType = {
   wines: Wine[];
+  setWines: React.Dispatch<React.SetStateAction<Wine[]>>;
   currentWineId: number | null;
   setCurrentWineId: (id: number | null) => void;
   cart: CartItem[];
@@ -41,9 +42,18 @@ export type CartItem = {
   quantity: number;
 };
 
-export const BaseUrl = "https://48ph6jzb-7072.euw.devtunnels.ms"
+export type NewRatingType = {
+  score: number;
+  content: string;
+  currentWineId: number | null;
+}
 
-export const WineContext = createContext<WineContextType>({ wines: [], currentWineId: null, setCurrentWineId: () => { }, cart: [], setCartItems: () => { } });
+
+export function formatPrice(price: number) {
+  return price.toLocaleString("hu-HU") + " Ft";
+}
+
+export const WineContext = createContext<WineContextType>({ wines: [], setWines: () => {}, currentWineId: null, setCurrentWineId: () => { }, cart: [], setCartItems: () => { } });
 
 export function WineContextProvider({ children }: { children: React.ReactNode }) {
 
@@ -68,7 +78,7 @@ export function WineContextProvider({ children }: { children: React.ReactNode })
 
   async function fetchData() {
     try {
-      const response = await axios.get(`${BaseUrl}/api/wine`);
+      const response = await protectedAPI.get(`${BaseUrl}/api/wine`);
       setDatas(response.data);
     } catch (error) {
       console.log(error);
@@ -80,7 +90,7 @@ export function WineContextProvider({ children }: { children: React.ReactNode })
   }, []);
 
   return (
-    <WineContext.Provider value={{ wines: datas, currentWineId, setCurrentWineId, cart: cartItems, setCartItems }}>
+    <WineContext.Provider value={{ wines: datas, setWines: setDatas, currentWineId, setCurrentWineId, cart: cartItems, setCartItems }}>
       {children}
     </WineContext.Provider>
   )

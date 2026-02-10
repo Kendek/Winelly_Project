@@ -1,44 +1,73 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import style from "../Mcss/Review.module.css"
 import { WineContext } from '../Mcontext/WineContextProvider'
 import { Rating } from '@mui/material';
-import { useLocation } from 'react-router-dom';
+import { AddRatings } from '../MServices/AccountService';
+
 
 type ReviewProps = { setShowReview: (value: boolean) => void; };
 
 const Review = ({ setShowReview }: ReviewProps) => {
 
-    const { wines, currentWineId } = useContext(WineContext)
+    const { wines, currentWineId, setWines } = useContext(WineContext)
     const wine = wines.find(w => w.id === currentWineId);
+    const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token"));
 
-    const [star,setStar] = useState(3);
+    useEffect(() => {
+        const checkTokenAndName = () => {
+            setIsLoggedIn(!!localStorage.getItem("token"));
+        };
+
+        window.addEventListener("storage", checkTokenAndName);
+        return () => window.removeEventListener("storage", checkTokenAndName);
+    }, []);
+
+    const [star, setStar] = useState(3);
     const [reviewText, setReviewText] = useState("");
-    const [reviewName, setReviewName] = useState("");
+    const [reviewName, setReviewName] = useState(localStorage.getItem("firstName") || "");
 
-    const total = wine?.reviews.length || 0;
+    const total = wine?.ratings.length || 0;
 
     const ratingCounts: Record<number, number> = {
-        5: wine?.reviews.filter(r => r.rating === 5).length || 0,
-        4: wine?.reviews.filter(r => r.rating === 4).length || 0,
-        3: wine?.reviews.filter(r => r.rating === 3).length || 0,
-        2: wine?.reviews.filter(r => r.rating === 2).length || 0,
-        1: wine?.reviews.filter(r => r.rating === 1).length || 0,
+        5: wine?.ratings.filter(r => r.score === 5).length || 0,
+        4: wine?.ratings.filter(r => r.score === 4).length || 0,
+        3: wine?.ratings.filter(r => r.score === 3).length || 0,
+        2: wine?.ratings.filter(r => r.score === 2).length || 0,
+        1: wine?.ratings.filter(r => r.score === 1).length || 0,
     };
 
-    const avgRating = wine?.reviews && wine.reviews.length > 0 ? wine.reviews.reduce((sum, r) => sum + r.rating, 0) / total : 0;
+    const avgRating = wine?.ratings && wine.ratings.length > 0 ? wine.ratings.reduce((sum, r) => sum + r.score, 0) / total : 0;
 
-    const [closing, setClosing] = useState(false);  
+    const [closing, setClosing] = useState(false);
 
     const handleClose = () => {
         setClosing(true);
         setTimeout(() => setShowReview(false), 300);
     };
 
-    const handleReviewSubmit = () => {
-        if(reviewText == "" || reviewName == "")
-            return;
-        //set new review
-    }
+    const handleratingsubmit = async () => {
+        if (reviewText !== "" && reviewName !== "" && isLoggedIn) {
+
+            const response = await AddRatings({
+                score: star,
+                content: reviewText,
+                currentWineId
+            });
+
+            if (response?.data) {
+                setWines(prev =>
+                    prev.map(w =>
+                        w.id === currentWineId
+                            ? { ...w, ratings: [...w.ratings, response.data] }
+                            : w
+                    )
+                );
+
+                setReviewText("");
+                setStar(3);
+            }
+        }
+    };
 
     return (
         <div className={`${style.overlay} ${closing ? style.overlayClosing : ""}`} onClick={handleClose}>
@@ -80,16 +109,16 @@ const Review = ({ setShowReview }: ReviewProps) => {
                     <div className={style.leftCol}>
 
                         <div className={style.reviewList}>
-                            {wine?.reviews.map(r =>
+                            {wine?.ratings.map(r =>
                                 <div key={r.id} className={style.reviewItem}>
                                     <img src="profile.png" className={style.avatar} />
                                     <div className={style.reviewContent}>
                                         <div className={style.headerRow}>
-                                            <span className={style.name}>{r.name}</span>
-                                            <span className={style.rating}>{r.rating} <Rating value={r.rating} readOnly /></span>
+                                            <span className={style.name}>{r.createdBy}</span>
+                                            <span className={style.rating}>{r.score} <Rating value={r.score} readOnly /></span>
                                         </div>
 
-                                        <p className={style.text}>{r.comment}</p>
+                                        <p className={style.text}>{r.content}</p>
                                     </div>
                                 </div>
                             )}
@@ -103,8 +132,8 @@ const Review = ({ setShowReview }: ReviewProps) => {
                             type="text"
                             placeholder="Your name"
                             className={style.input}
-                            onChange={(e) => setReviewName(e.target.value)}
-                            readOnly/>
+                            value={reviewName}
+                            readOnly />
                         <Rating
                             value={star}
                             max={5}
@@ -114,8 +143,8 @@ const Review = ({ setShowReview }: ReviewProps) => {
                             placeholder="Your review..."
                             className={style.textarea}
                             onChange={(e) => setReviewText(e.target.value)}
-                            value={reviewText}/>
-                        <button className={style.submitBtn} onClick={() => handleReviewSubmit()}>Submit</button>
+                            value={reviewText} />
+                        <button className={style.submitBtn} onClick={() => handleratingsubmit()}>Submit</button>
                     </div>
                 </div>
             </div>

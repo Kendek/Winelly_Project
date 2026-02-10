@@ -1,6 +1,6 @@
 import React, { use, useContext, useEffect, useState } from 'react'
 import style from "../Mcss/Checkout.module.css";
-import { WineContext } from '../Mcontext/WineContextProvider';
+import { formatPrice, WineContext } from '../Mcontext/WineContextProvider';
 import { Link, useNavigate } from 'react-router-dom'
 
 const Checkout = () => {
@@ -197,7 +197,7 @@ const Checkout = () => {
     }
     setLeaving(true);
     setTimeout(() => {
-      localStorage.setItem("finalPrice", finalPrice.toString());
+      localStorage.setItem("finalPrice", formatPrice(finalPrice).toString());
       localStorage.setItem("email", email);
       navigate("/done");
     }, 400);
@@ -304,10 +304,10 @@ const Checkout = () => {
             </div>
             {cart.map((item, index) => (
               <div key={index} className={style.summaryItemRow}>
-                <div className={style.summaryImg}><img src="wineTest.png" alt="" /></div>
+                <div className={style.summaryImg}><img src={item.wine.url ? item.wine.url : "wineTest.png"} alt="" /></div>
                 <span>{item.wine.name}</span>
                 <span>{item.quantity}</span>
-                <span>{item.wine.price} Ft</span>
+                <span>{formatPrice(item.wine.price)}</span>
                 <span className={style.trash} onClick={() => RemoveFromCart(item.wine.id)}><i className="fas fa-trash"></i></span>
               </div>
             ))}
@@ -324,7 +324,7 @@ const Checkout = () => {
             </div>
             <div className={style.summaryRowTotal}>
               <span>Final price</span>
-              <span>{finalPrice} Ft</span>
+              <span>{formatPrice(finalPrice)}</span>
             </div>
           </div>
         </div>
