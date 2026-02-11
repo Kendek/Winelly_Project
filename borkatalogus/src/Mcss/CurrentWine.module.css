@@ -73,6 +73,7 @@
 .wineLeftSide {
     flex: 50%;
     width: 100%;
+    height: 600px;
     padding: 30px;
     margin-left: 1vw;
 }
@@ -80,7 +81,7 @@
 .wineLeftSide img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: contain; 
     box-shadow: 0 12px 35px #8e183b39;
     border-radius: var(--image-radius);
 }

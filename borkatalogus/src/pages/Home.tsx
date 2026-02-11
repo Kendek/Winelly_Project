@@ -3,7 +3,6 @@ import HomeSecondPart from "../Ksrc/HomeSecondPart"
 import {Rating} from "primereact/rating"
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import { Link } from 'react-router-dom'
 
 
 const Home = () => {
@@ -22,7 +21,6 @@ const Home = () => {
           <h3>Worldwide shipping in everyday of the year for affordable price.</h3>
           <div className={`${styles.LineDecor} ${styles.White}` }></div>
           <h2>Order Now 🛒</h2>
-          <Link to="/AdminAccounts" >Admin</Link>
 
           
         </div>  

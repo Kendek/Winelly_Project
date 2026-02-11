@@ -11,7 +11,14 @@ const Review = ({ setShowReview }: ReviewProps) => {
 
     const { wines, currentWineId, setWines } = useContext(WineContext)
     const wine = wines.find(w => w.id === currentWineId);
+    const [currentWine, setCurrentWine] = useState(wine);
     const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token"));
+    const userRole = localStorage.getItem("role");
+
+    useEffect(() => {
+        setCurrentWine(wines.find(w => w.id === currentWineId));
+    }, [wines, currentWineId]);
+
 
     useEffect(() => {
         const checkTokenAndName = () => {
@@ -26,17 +33,17 @@ const Review = ({ setShowReview }: ReviewProps) => {
     const [reviewText, setReviewText] = useState("");
     const [reviewName, setReviewName] = useState(localStorage.getItem("firstName") || "");
 
-    const total = wine?.ratings.length || 0;
+    const total = currentWine?.ratings.length || 0;
 
     const ratingCounts: Record<number, number> = {
-        5: wine?.ratings.filter(r => r.score === 5).length || 0,
-        4: wine?.ratings.filter(r => r.score === 4).length || 0,
-        3: wine?.ratings.filter(r => r.score === 3).length || 0,
-        2: wine?.ratings.filter(r => r.score === 2).length || 0,
-        1: wine?.ratings.filter(r => r.score === 1).length || 0,
+        5: currentWine?.ratings.filter(r => r.score === 5).length || 0,
+        4: currentWine?.ratings.filter(r => r.score === 4).length || 0,
+        3: currentWine?.ratings.filter(r => r.score === 3).length || 0,
+        2: currentWine?.ratings.filter(r => r.score === 2).length || 0,
+        1: currentWine?.ratings.filter(r => r.score === 1).length || 0,
     };
 
-    const avgRating = wine?.ratings && wine.ratings.length > 0 ? wine.ratings.reduce((sum, r) => sum + r.score, 0) / total : 0;
+    const avgRating = currentWine?.ratings && currentWine.ratings.length > 0 ? currentWine.ratings.reduce((sum, r) => sum + r.score, 0) / total : 0;
 
     const [closing, setClosing] = useState(false);
 
@@ -68,6 +75,21 @@ const Review = ({ setShowReview }: ReviewProps) => {
             }
         }
     };
+
+    const handleDelete = async (ratingId: number) => {
+        const response = await DeleteRatings(ratingId);
+
+        if (response?.status === 204) {
+            setWines(prev =>
+                prev.map(w =>
+                    w.id === currentWineId
+                        ? { ...w, ratings: w.ratings.filter(r => r.id !== ratingId) }
+                        : w
+                )
+            );
+        }
+    };
+
 
     const userEmail = localStorage.getItem("email");
 
@@ -111,7 +133,7 @@ const Review = ({ setShowReview }: ReviewProps) => {
                     <div className={style.leftCol}>
 
                         <div className={style.reviewList}>
-                            {wine?.ratings.map(r =>
+                            {currentWine?.ratings.map(r =>
                                 <div key={r.id} className={style.reviewItem}>
                                     <img src="profile.png" className={style.avatar} />
                                     <div className={style.reviewContent}>
@@ -120,9 +142,9 @@ const Review = ({ setShowReview }: ReviewProps) => {
                                             <span className={style.rating}>{r.score} <Rating value={r.score} readOnly /></span>
                                         </div>
 
-                                        <p className={style.text}>{r.content}</p>   
-                                        {r.createdByEmail === userEmail &&  (
-                                            <button className={style.deleteReviewBtn} onClick={() => DeleteRatings(r.id)}>X</button>
+                                        <p className={style.text}>{r.content}</p>
+                                        {(r.createdByEmail === userEmail || userRole === "Admin") && (
+                                            <button className={style.deleteReviewBtn} onClick={() => handleDelete(r.id)}>X</button>
                                         )}
                                     </div>
                                 </div>
