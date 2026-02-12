@@ -161,3 +161,22 @@
 .p-dialog-header{
     visibility: hidden;
 }
+
+.WinePostContainer{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    width: 80%;
+
+}
+.WinePost1, .WinePost2, .WinePost3{
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-content: space-evenly;
+}
+
+.WinePost2{
+    width: 60vw;
+}

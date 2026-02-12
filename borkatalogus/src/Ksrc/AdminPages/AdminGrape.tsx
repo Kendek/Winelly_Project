@@ -5,7 +5,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import styles from './Admin.module.css'
-import { useEffect, useState } from 'react'
+import { use, useEffect, useState } from 'react'
 import { GetDbData } from './AdminFetch';
 import { PostGrape } from './AdminFetch';
 import type { GrapPostType } from './AdminFetch';
@@ -21,14 +21,19 @@ const AdminGrape = () => {
     color: string
   }
 
+  const [UpdateDb, setUptadeDb]= useState(false)
+
    function accept(path:string, id:number){
        console.log("Accepted!")
        AdminDelete(path, id)
+       setUptadeDb(!UpdateDb)
     }
 
     const reject = () => {
         console.log("Declined")
     }
+
+
 
     const showTemplate = (Ipath:string, Iid:number) => {
 
@@ -63,7 +68,7 @@ const AdminGrape = () => {
 
     fetchGrapes()
 
-  },[])
+  },[UpdateDb])
   const [grapes, setGrapes] = useState<Grape[]>([
   ])
 
@@ -79,6 +84,7 @@ const AdminGrape = () => {
     // Or you can work with it as a plain object:
     const formJson = Object.fromEntries(formData.entries());
     PostGrape(formJson as GrapPostType)
+    setUptadeDb(!UpdateDb)
   }
 
   const [openDelete, setDelete] = useState(false);
