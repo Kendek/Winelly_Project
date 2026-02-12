@@ -6,29 +6,69 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import styles from './Admin.module.css'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { GetDbData } from './AdminFetch';
+import { b, option } from 'motion/react-client';
+import type { WinePostType, WineGetType, WineryGetType, WineryPostType,GrapeGet } from './AdminFetch';
+import Select from 'react-select'
+import { map } from '@amcharts/amcharts5/.internal/core/util/Array';
 
 const AdminWine = () => {
+
+  type GrapeOptionsType = {
+    value:number
+    label :string
+  }
 
   const [openDelete, setDelete] = useState(false);
   const [openPatch, setPatch] = useState(false);
   const [openPost, setPost] = useState(false);
 
-  const Toggle = (type:string) =>{
-    switch (type) {
-      case "Delete":
-        setDelete(!openDelete)    
-        break;
-      case "Post":
-        setPost(!openPost)
-        break;
-      case "Patch":
-        setPatch(!openPatch)
-        break;
-      default:
-        break;
+  const [Winerys, setWinerys] = useState<WineryGetType[]>([])
+  const [Wines, setWines] = useState<WineGetType[]>([])
+  const [Grapes, setGrapes] = useState<GrapeGet[]>([])
+
+  function PostWine(e:any) {
+       // Prevent the browser from reloading the page
+      e.preventDefault();
+    
+      // Read the form data
+      const form = e.target;
+      const formData = new FormData(form);
+  
+  
+      // Or you can work with it as a plain object:
+      const formJson = Object.fromEntries(formData.entries());
+      console.log(formJson)
     }
-  }
+
+    useEffect(() => {
+      const FetchWinesAndWinerys = async () =>{
+        try {
+          const WineData = await GetDbData("/api/wine")
+          const WineryData = await GetDbData("/api/winery")
+          const GrapeData = await GetDbData("/api/grape")
+          setWines(WineData)
+          setWinerys(WineryData)
+          setGrapes(GrapeData)
+        } catch (error) {
+          console.error("Error fetching data:", error)
+        }
+      }
+      FetchWinesAndWinerys()
+    }, [])
+
+    const [GrapeOptions, setGrapesOptions] = useState<GrapeOptionsType[]>([])
+
+    useEffect(() => {
+      if (Grapes.length > 0) {
+        const options = Grapes.map((row) => ({
+          value: row.id,
+          label: row.name
+        }))
+        setGrapesOptions(options)
+      }
+    }, [Grapes])
 
 
   return (
@@ -36,48 +76,47 @@ const AdminWine = () => {
       <div  className={styles.WineMain}>
     <h1 className={styles.AdminTitles}>Wines</h1>
         <div className={`${styles.ButtonHeader} ${styles.PostHeader}`}>
-        <button className={`${styles.ToggleButton}`} onClick={() => {Toggle("Post")}}>Post ⤵️</button>
+        <button className={`${styles.ToggleButton}`} onClick={() => {setPost(!openPost)}}>Post ⤵️</button>
         </div>
             {openPost && 
             <div className={`${styles.WinePost} ${styles.WinePostContainer}`}>
-              <form action="post">
+              <form action="post" onSubmit={PostWine}>
                 <div className={styles.WinePostContainer}>
                 <div className={styles.WinePost1}>
-                  <span> <h1>Name:</h1><input type="text" /></span>
-                  <input type="file" />
+                  <span> <h1>Name:</h1><input name='Name' type="text" /></span> 
+                  <input type="file" name='File' />
                 </div>
 
                 <div className={styles.WinePost2}>
-                  <span> <h1>Type:<input type="text" /></h1></span>
-                  <span> <h1>Taste:<input type="text" /></h1></span>
-                  <span> <h1>Price:<input type="text" /> </h1></span>
-                  <span> <h1>Year:<input type="text" /></h1></span>
-                  <span> <h1>Alcohol (%):<input type="text" /></h1></span>
+                  <span> <h1>Type:<input name='type' type="text" /></h1></span>
+                  <span> <h1>Taste:<input name='taste' type="text" /></h1></span>
+                  <span> <h1>Price:<input name='price' type="number" /> </h1></span>
+                  <span> <h1>Year:<input name='year' type="number" /></h1></span>
+                  <span> <h1>Alcohol (%):<input name='alcoholContent' type="number" /></h1></span>
                 </div>
 
                 <div  className={styles.WinePost3}>
                   <h1>Description:</h1>
-                  <textarea name="" id=""></textarea>
-                  <h1>WineryId: </h1>
-                  <select name="" id="">
-                    <option value="1"></option>
-                    <option value="2"></option>
-                    <option value="3"></option>
+                  <textarea  name="description" id=""></textarea>
+                  <h1>Winery: </h1>
+                  <select name="winery" id="">
+                  {Winerys.map((row) =>(
+                      <option value={row.id}>{row.name}</option>
+                  ))}
                   </select>
                    <h1>GrapesId: </h1>
-                  <select name="" id="">
-                    <option value="1"></option>
-                    <option value="2"></option>
-                    <option value="3"></option>
-                  </select>
+                  <Select isMulti options={GrapeOptions} name='grapes'>
+
+                  </Select>
 
                 </div>
                 </div>
+                 <button type="submit" className={styles.Add}>Add wine</button>   
               </form>
             </div>}
 
         <div className={`${styles.ButtonHeader} ${styles.PatchHeader}`}>
-        <button className={`${styles.ToggleButton}`} onClick={() => {Toggle("Patch")}}>Patch ⤵️</button>
+        <button className={`${styles.ToggleButton}`} onClick={() => {setPatch(!openPatch)}}>Patch ⤵️</button>
         </div>
             {openPatch && 
             <div className={styles.WinePost}>
@@ -85,7 +124,7 @@ const AdminWine = () => {
             </div>}
 
         <div className={`${styles.ButtonHeader} ${styles.DeleteHeader}`}>
-        <button className={`${styles.ToggleButton}`} onClick={() => {Toggle("Delete")}}>Delete ⤵️</button>
+        <button className={`${styles.ToggleButton}`} onClick={() => {setDelete(!openDelete)}}>Delete ⤵️</button>
         </div>
             {openDelete && 
             <div className={styles.WinePost}>
