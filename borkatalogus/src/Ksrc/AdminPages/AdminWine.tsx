@@ -50,7 +50,7 @@ const AdminWine = () => {
         alcoholcontent: parseFloat(formJson.alcoholContent as string),
         file: formJson.File as File,
         wineryId: parseInt(formJson.winery as string),
-        grapeid: [1,2]
+        grapeid: selectedGrapes.map(g => g.value)
       } as WinePostType)
     }
 
@@ -71,6 +71,7 @@ const AdminWine = () => {
     }, [])
 
     const [GrapeOptions, setGrapesOptions] = useState<GrapeOptionsType[]>([])
+    const [selectedGrapes, setSelectedGrapes] = useState<GrapeOptionsType[]>([])
 
     useEffect(() => {
       if (Grapes.length > 0) {
@@ -117,9 +118,13 @@ const AdminWine = () => {
                   ))}
                   </select>
                    <h1>GrapesId: </h1>
-                  <Select isMulti options={GrapeOptions} name='grapes'>
-
-                  </Select>
+                  <Select
+                    id=""
+                    isMulti
+                    options={GrapeOptions}
+                    name='grapes'
+                    onChange={(value) => setSelectedGrapes(value as GrapeOptionsType[])}
+                  />
 
                 </div>
                 </div>
