@@ -1,4 +1,4 @@
-import AdminNav from './AdminNav'
+
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -8,8 +8,7 @@ import TableRow from '@mui/material/TableRow';
 import styles from './Admin.module.css'
 import { useEffect, useState } from 'react';
 import { GetDbData } from './AdminFetch';
-import { b, option } from 'motion/react-client';
-import type { WinePostType, WineGetType, WineryGetType, WineryPostType,GrapeGet,WinePatchImgType } from './AdminFetch';
+import type { WinePostType, WineGetType, WineryGetType, GrapeGet,WinePatchImgType } from './AdminFetch';
 import Select from 'react-select'
 import { ConfirmDialog } from 'primereact/confirmdialog'; 
 import { confirmDialog } from 'primereact/confirmdialog';

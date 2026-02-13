@@ -5,7 +5,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import styles from './Admin.module.css'
-import { use, useEffect, useState } from 'react'
+import {  useEffect, useState } from 'react'
 import { GetDbData } from './AdminFetch';
 import { PostGrape } from './AdminFetch';
 import type { GrapPostType } from './AdminFetch';

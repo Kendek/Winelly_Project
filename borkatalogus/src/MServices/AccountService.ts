@@ -1,7 +1,7 @@
 import axios from "axios";
 import type { UserType } from "../Mcomponents/SignUp";
 import type { UserDataLoginType } from "../Mcomponents/SignIn";
-import type { NewRatingType, Wine } from "../Mcontext/WineContextProvider";
+import type { NewRatingType} from "../Mcontext/WineContextProvider";
 axios.defaults.withCredentials = true;
 
 export const BaseUrl = "https://ql2dhq3t-5043.euw.devtunnels.ms"

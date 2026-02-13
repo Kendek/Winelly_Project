@@ -88,3 +88,7 @@ export async function AdminDelete(path:string, id:number)
 {
     protectedAPI.delete(`${BaseUrl}${path}/${id}`)
 }
+export async function AdminDeleteAccount( id:string)
+{
+    protectedAPI.delete(`${BaseUrl}/api/admin/deleteUser/${id}`)
+}
