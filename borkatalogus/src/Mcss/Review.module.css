@@ -219,8 +219,31 @@
   background: var(--primary-light-colour);
 }
 
+.deleteReviewBtn {
+  float: right;
+  background: var(--primary-colour);
+  border: none;
+  font-size: var(--label-font);
+  font-weight: bold;
+  color: var(--secondary-colour);
+  cursor: pointer;
+  border-radius: 8px;
+  padding: 6px 12px;
+  transition: 0.2s ease;
+
+}
+
+.deleteReviewBtn:hover {
+  background: var(--primary-light-colour);
+}
 
 @media (max-width: 768px) {
+
+  .reviewPage {
+    height: auto;
+    overflow-y: auto;
+  }
+
   .summaryBox {
     flex-direction: column;
   }
@@ -232,8 +255,8 @@
   .rightCol {
     position: static;
   }
-  .headerRow
-  {
+
+  .headerRow {
     flex-direction: column;
   }
 }
@@ -258,6 +281,7 @@
   from {
     opacity: 1;
   }
+
   to {
     opacity: 0;
   }

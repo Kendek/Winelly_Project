@@ -111,3 +111,17 @@ export async function AddRatings(userRating: NewRatingType) {
         return null;
     }
 }
+export async function DeleteRatings(currentReviewId: number) {
+    try {
+        const response = await protectedAPI.delete(`${BaseUrl}/api/rating/${currentReviewId}`)
+
+        if (response.status == 204) {
+            console.log("Rating deleted!");
+            return response;
+        }
+
+    } catch (error) {
+        console.log(error);
+        return null;
+    }
+}

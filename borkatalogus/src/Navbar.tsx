@@ -32,6 +32,7 @@ const Navbar = ({ cartIconRef }: NavbarProps) => {
             try {
                 const decoded: any = jwtDecode(token);
                 setRole(decoded.role);
+                localStorage.setItem("role", decoded.role)
             } catch {
                 setRole(null);
             }
@@ -121,7 +122,7 @@ const Navbar = ({ cartIconRef }: NavbarProps) => {
                 </Link>
                 {role === "Admin" && (<Link to={"/adminaccounts"} className={styles.adminBtn}>Admin</Link>)}
                 {isLoggedIn &&(<p><b>Dear</b> {localStorage.getItem("firstName") ? localStorage.getItem("firstName") : "Guest"}!</p>)}
-                {isLoggedIn && (<button className={styles.userLogout} onClick={async () => { await LogoutUser(); setIsLoggedIn(false); navigate("/home")}}>Logout</button>)}
+                {isLoggedIn && (<button className={styles.userLogout} onClick={async () => { await LogoutUser(); setIsLoggedIn(false); navigate("/home")}}><i className="fa-solid fa-right-from-bracket"></i></button>)}
                 <div ref={cartIconRef} className={styles.cartIconWrapper}>
                     <Link to="/cart" className={location.pathname === "/cart" || location.pathname === "/checkout" || location.pathname === "/done" ? styles.carticonactive : styles.carticon} onClick={() => { setClikced(false) }}>
                         <i className="fa-solid fa-cart-shopping"></i>

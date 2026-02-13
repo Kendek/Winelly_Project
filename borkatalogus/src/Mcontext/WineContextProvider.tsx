@@ -25,6 +25,7 @@ export type Wine = {
     createdOn: Date;
     content: string;
     createdBy: string;
+    createdByEmail: string;
   }[],
 };
 
