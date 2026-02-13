@@ -53,6 +53,11 @@ export type WinePostType = {
     grapeId: number[]
 }
 
+export type WinePatchImgType = {
+    id:number,
+    image : File
+}
+
 export async function GetDbData(url:string) {
 
     try{
@@ -70,9 +75,13 @@ export async function PostGrape(Payload:GrapPostType){
     protectedAPI.post(`${BaseUrl}/api/grape`, Payload)
 }
 export async function PostDbWine(Payload:WinePostType){
+     const response = await protectedAPI.post(`${BaseUrl}/api/wine`, Payload, { headers: { "Content-Type": "multipart/form-data" } }); console.log(response.data);
+}
+
+export async function PatchWineIMG(Payload:WinePatchImgType){
     console.log(Payload)
 
-     const response = await protectedAPI.post(`${BaseUrl}/api/wine`, Payload, { headers: { "Content-Type": "multipart/form-data" } }); console.log(response.data);
+     const response = await protectedAPI.patch(`${BaseUrl}/api/wine/UpdtImg`, Payload, { headers: { "Content-Type": "multipart/form-data" } }); console.log(response.data);
 }
 
 export async function AdminDelete(path:string, id:number)

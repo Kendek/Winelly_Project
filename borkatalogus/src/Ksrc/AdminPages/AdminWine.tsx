@@ -9,12 +9,12 @@ import styles from './Admin.module.css'
 import { useEffect, useState } from 'react';
 import { GetDbData } from './AdminFetch';
 import { b, option } from 'motion/react-client';
-import type { WinePostType, WineGetType, WineryGetType, WineryPostType,GrapeGet } from './AdminFetch';
+import type { WinePostType, WineGetType, WineryGetType, WineryPostType,GrapeGet,WinePatchImgType } from './AdminFetch';
 import Select from 'react-select'
 import { ConfirmDialog } from 'primereact/confirmdialog'; 
 import { confirmDialog } from 'primereact/confirmdialog';
 import { AdminDelete } from './AdminFetch';
-import { PostDbWine } from './AdminFetch';
+import { PostDbWine , PatchWineIMG } from './AdminFetch';
 const AdminWine = () => {
 
   type GrapeOptionsType = {
@@ -112,6 +112,21 @@ const AdminWine = () => {
     }, [Grapes])
 
 
+    const UpdateWineIMG = (e:any) =>{
+        // Prevent the browser from reloading the page
+      e.preventDefault();
+    
+      // Read the form data
+      const form = e.target;
+      const formData = new FormData(form);
+  
+  
+      // Or you can work with it as a plain object:
+      const formJson = Object.fromEntries(formData.entries());
+      PatchWineIMG({
+          id : parseInt(formJson.id as string),
+          image: formJson.image as File
+      } as WinePatchImgType)}
   return (
     <div>
       <div  className={styles.WineMain}>
@@ -161,11 +176,24 @@ const AdminWine = () => {
             </div>}
 
         <div className={`${styles.ButtonHeader} ${styles.PatchHeader}`}>
-        <button className={`${styles.ToggleButton}`} onClick={() => {setPatch(!openPatch)}}>Patch ⤵️</button>
+        <button className={`${styles.ToggleButton}`} onClick={() => {setPatch(!openPatch)}}>Patch IMG ⤵️</button>
         </div>
             {openPatch && 
             <div className={styles.WinePost}>
-              
+                <form className={styles.Post} method='post' onSubmit={UpdateWineIMG}>
+                   <label>
+                      <select name="id" id="">
+                        {Wines.map((row) => <option value={row.id}>{row.name}</option>)}
+                      </select>
+                   </label>
+                   <hr />
+                    <label>
+                      File:  <input type="file" name='image' />
+                    </label>
+                    <div>
+                        <button type="submit" className={styles.Add}>Add Grape</button>   
+                    </div>
+            </form>
             </div>}
 
         <div className={`${styles.ButtonHeader} ${styles.DeleteHeader}`}>
