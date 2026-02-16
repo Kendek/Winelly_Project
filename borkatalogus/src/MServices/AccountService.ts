@@ -4,7 +4,7 @@ import type { UserDataLoginType } from "../Mcomponents/SignIn";
 import type { NewRatingType} from "../Mcontext/WineContextProvider";
 axios.defaults.withCredentials = true;
 
-export const BaseUrl = "https://ql2dhq3t-5043.euw.devtunnels.ms"
+export const BaseUrl = "https://kqg39v9h-7072.euw.devtunnels.ms"
 
 export const protectedAPI = axios.create({ baseURL: BaseUrl })
 
