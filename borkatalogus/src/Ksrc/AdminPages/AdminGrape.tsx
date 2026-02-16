@@ -103,7 +103,7 @@ const AdminGrape = () => {
                    <label>
                       Name: <input type='text' name='name'/>
                    </label>
-                   <hr />
+    
                     <label>
                       Color: <input type='text' name='color'/> 
                     </label>

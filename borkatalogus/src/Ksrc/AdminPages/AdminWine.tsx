@@ -35,6 +35,8 @@ const AdminWine = () => {
   const [selectedGrapes, setSelectedGrapes] = useState<GrapeOptionsType[]>([])
   const [selectedPatchGrapes, setSelectedPatchGrapes] = useState<GrapeOptionsType[]>([])
 
+  const [postIMG, setPostIMG] = useState(null)
+
   function PostWine(e:any) {
        // Prevent the browser from reloading the page
       e.preventDefault();
@@ -178,6 +180,13 @@ const AdminWine = () => {
         e.preventDefault()
       }
    }
+
+  const PostIMGChange = (e: any) => {
+    if (e.target.files && e.target.files[0]) {
+      setPostIMG(e.target.files[0]);
+    }
+  }
+
     
   return (
     <div>
@@ -192,7 +201,8 @@ const AdminWine = () => {
                 <div className={styles.WinePostContainer}>
                 <div className={styles.WinePost1}>
                   <span> <h1>Name:</h1><input name='Name' type="text" /></span> 
-                  <input type="file" name='File' />
+                  <input type="file" name='File' onChange={PostIMGChange} />
+                  {postIMG && <img src={URL.createObjectURL(postIMG)} alt="preview" className={styles.previewImage} />}
                 </div>
 
                 <div className={styles.WinePost2}>
@@ -205,7 +215,7 @@ const AdminWine = () => {
 
                 <div  className={styles.WinePost3}>
                   <h1>Description:</h1>
-                  <textarea  name="description" id=""></textarea>
+                  <textarea style={{resize: 'none'}}  name="description" id=""></textarea>
                   <h1>Winery: </h1>
                   <select name="winery" id="">
                   {Winerys.map((row) =>(
@@ -242,7 +252,8 @@ const AdminWine = () => {
                    </label>
                    <hr />
                     <label>
-                      File:  <input type="file" name='image' />
+                      File:  <input type="file" name='image'  />
+
                     </label>
                     <div>
                         <button type="submit" className={styles.Add}>Add Grape</button>   
