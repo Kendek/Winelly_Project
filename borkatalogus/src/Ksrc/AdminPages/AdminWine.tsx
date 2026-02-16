@@ -252,7 +252,7 @@ const AdminWine = () => {
         <button className={`${styles.ToggleButton}`} onClick={() => {setIMGPatch(!openIMGPatch)}}>Patch IMG ⤵️</button>
         </div>
             {openIMGPatch && 
-            <div className={styles.WinePost}>
+            <div className={styles.PatchDiv}>
                 <form className={styles.Post} method='post' onSubmit={UpdateWineIMG}>
                    <label>
                       <select onChange={(e) => DisplayCurrentWineIMGPatch(parseInt(e.target.value))} name="id" id="">
@@ -274,7 +274,7 @@ const AdminWine = () => {
         <button className={`${styles.ToggleButton}`} onClick={() => {setDelete(!openDelete)}}>Delete ⤵️</button>
         </div>
             {openDelete && 
-            <div className={styles.WinePost}>
+            <div className={styles.DeleteDiv}>
                <TableContainer sx={{ maxHeight: '40vh' }}>
        <Table stickyHeader aria-label="sticky table" sx={{ minWidth: 650 }} >
           <TableHead>
@@ -308,9 +308,9 @@ const AdminWine = () => {
         </div>
 
             {openPatch && 
-            <div className={styles.WinePost}>
+            <div className={`${styles.PatchDiv}`}>
               <form action="post" onSubmit={PatchWine}>
-                <div style={{display:"flex", justifyContent:"center", marginBottom:"30px", flexDirection:"column", alignItems:"center"}}>
+                <div style={{display:"flex", justifyContent:"center", marginBottom:"20px", flexDirection:"column", alignItems:"center"}}>
                   <h1 className={styles.PatchTitle}>Select Wine to Patch:</h1>
                   <br />
                   <select onChange={(e) => SelectPatch(parseInt(e.target.value))} name="id" id="">

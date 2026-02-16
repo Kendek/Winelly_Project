@@ -118,7 +118,7 @@ const AdminGrape = () => {
         <button className={`${styles.ToggleButton}`} onClick={() => {setDelete(!openDelete)}}>Delete ⤵️</button>
         </div>
             {openDelete && 
-            <div className={styles.WinePost}>
+            <div className={styles.DeleteDiv}>
 
             <TableContainer sx={{ maxHeight: '60vh' }}>
           <Table stickyHeader aria-label="sticky table" sx={{ minWidth: 650 }} >

@@ -146,13 +146,19 @@
 
 .WinePost{
     border: #2f5f9d solid 3px;
+    border-radius: 3px;
     width: 80%;
 }
 .DeleteDiv{
     border: #EB6156 solid 3px;
+    border-radius: 3px;
     width: 80%;
 }
-
+.PatchDiv{
+    border: #06a6ae solid 3px;
+    width: 80%;
+    border-radius: 3px;
+}
 .AdminTitles{
     color: #8B1E3F;
     font-weight: bold;
@@ -312,3 +318,4 @@ textarea{
     margin-bottom: 20px;
     margin-top: 20px;
 }
+

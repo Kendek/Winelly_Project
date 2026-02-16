@@ -11,6 +11,8 @@ import AdminWine from './AdminWine';
 import { ConfirmDialog } from 'primereact/confirmdialog'; 
 import { confirmDialog } from 'primereact/confirmdialog';
 import { GetDbData,AdminDeleteAccount } from './AdminFetch';
+import AdminWinery from './AdminWinery';
+
 
 
 
@@ -22,7 +24,9 @@ const AdminAccounts = () => {
     lastName:string,
     email:string,
   }
-
+    const [openDelete, setDelete] = useState(false);
+    
+  const [accounts, setAccounts] = useState<Account[]>([]);
   useEffect(() => {
       const AccountsFetch = async () =>{
         try {
@@ -42,10 +46,7 @@ const AdminAccounts = () => {
     const reject = () => {
         console.log("Declined")
     }
-  const [openDelete, setDelete] = useState(false);
 
-
-  const [accounts, setAccounts] = useState<Account[]>([]);
       const showTemplate = (Iid:string) => {
 
         confirmDialog({
@@ -63,7 +64,7 @@ const AdminAccounts = () => {
 
   return (
 
-    <div>
+    <div style={{overflow : "hidden"}}>
     
    <div  className={styles.WineMain}>
         <h1 className={styles.AdminTitles}>Accounts</h1>
@@ -103,6 +104,7 @@ const AdminAccounts = () => {
             
       <AdminGrape></AdminGrape>
       <AdminWine></AdminWine>
+      <AdminWinery></AdminWinery>
 
 
     </div>
