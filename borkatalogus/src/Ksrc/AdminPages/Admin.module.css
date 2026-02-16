@@ -303,3 +303,10 @@ form{
 textarea{
     resize: none;
 }
+
+.PatchTitle{
+    color: #8B1E3F;
+    font-size: larger;
+    font-weight: bold;
+    display: block;
+}

@@ -36,6 +36,7 @@ const AdminWine = () => {
   const [selectedPatchGrapes, setSelectedPatchGrapes] = useState<GrapeOptionsType[]>([])
 
   const [postIMG, setPostIMG] = useState(null)
+  const [PatchIMG, setPatchIMG] = useState(null)
 
   function PostWine(e:any) {
        // Prevent the browser from reloading the page
@@ -186,6 +187,14 @@ const AdminWine = () => {
       setPostIMG(e.target.files[0]);
     }
   }
+    const PatchIMGChange = (e: any) => {
+    if (e.target.files && e.target.files[0]) {
+      setPatchIMG(e.target.files[0]); 
+    }
+  }
+  const DisplayCurrentWineIMGPatch = (id:number) => {
+    //setPatchIMG(Wines[id].fileId)
+  }
 
     
   return (
@@ -246,17 +255,17 @@ const AdminWine = () => {
             <div className={styles.WinePost}>
                 <form className={styles.Post} method='post' onSubmit={UpdateWineIMG}>
                    <label>
-                      <select name="id" id="">
+                      <select onChange={(e) => DisplayCurrentWineIMGPatch(parseInt(e.target.value))} name="id" id="">
                         {Wines.map((row) => <option value={row.id}>{row.name}</option>)}
                       </select>
                    </label>
                    <hr />
                     <label>
-                      File:  <input type="file" name='image'  />
-
+                      File:  <input  type="file" name='image' onChange={PatchIMGChange} />
+                      {PatchIMG && <img src={URL.createObjectURL(PatchIMG)} alt="preview" className={styles.previewImage} />}
                     </label>
                     <div>
-                        <button type="submit" className={styles.Add}>Add Grape</button>   
+                        <button type="submit" className={styles.Add}>Update Image</button>   
                     </div>
             </form>
             </div>}
@@ -300,10 +309,14 @@ const AdminWine = () => {
 
             {openPatch && 
             <div className={styles.WinePost}>
-                       <form action="post" onSubmit={PatchWine}>
-                <select onChange={(e) => SelectPatch(parseInt(e.target.value))} name="id" id="">
-                  {Wines.map((row) => <option value={row.id}>{row.name}</option>)}
+              <form action="post" onSubmit={PatchWine}>
+                <div style={{display:"flex", justifyContent:"center"}}>
+                  <h1 className={styles.PatchTitle}>Select Wine to Patch:</h1>
+                  <br />
+                  <select onChange={(e) => SelectPatch(parseInt(e.target.value))} name="id" id="">
+                      {Wines.map((row) => <option value={row.id}>{row.name}</option>)}
                 </select>
+                </div>
                 {SelectedWine && 
                 <div className={styles.WinePostContainer}>
                 <div className={styles.WinePost1}>
@@ -339,7 +352,10 @@ const AdminWine = () => {
 
                 </div>
                 </div>}
-                 <button type="submit" className={styles.Add}>Add wine</button>   
+                <div style={{display:"flex", justifyContent:"center"}}>
+                  <button type="submit" className={styles.Add}>Update wine</button>   
+                </div>
+
               </form>
             </div>}
         
