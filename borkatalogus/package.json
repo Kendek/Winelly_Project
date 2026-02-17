@@ -25,6 +25,7 @@
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-router-dom": "^7.11.0",
+    "react-select": "^5.10.2",
     "source-map-js": "^1.2.1"
   },
   "devDependencies": {

@@ -4,12 +4,14 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './Admin.module.css'
 import AdminGrape from './AdminGrape';
 import AdminWine from './AdminWine';
-import { ConfirmDialog } from 'primereact/confirmdialog'; 
 import { confirmDialog } from 'primereact/confirmdialog';
+import { GetDbData,AdminDeleteAccount } from './AdminFetch';
+import AdminWinery from './AdminWinery';
+
 
 
 
@@ -21,32 +23,28 @@ const AdminAccounts = () => {
     lastName:string,
     email:string,
   }
+    const [openDelete, setDelete] = useState(false);
+    
+  const [accounts, setAccounts] = useState<Account[]>([]);
+  useEffect(() => {
+      const AccountsFetch = async () =>{
+        try {
+          const AccountData = await GetDbData("/api/admin/users")
+          setAccounts(AccountData)
+        } catch (error) {
+          console.error("Error fetching data:", error)
+        }
+      }
+      AccountsFetch()
+    }, [])
 
-   const accept = () => {
-       console.log("Accepted!")
+   const accept = (id:string) => {
+       AdminDeleteAccount(id)
     }
 
-    const reject = () => {
-        console.log("Declined")
-    }
-  const [openDelete, setDelete] = useState(false);
 
 
-  const [accounts, setAccounts] = useState<Account[]>([
-    { id : "asd-01", firstName: "John", lastName: "Doe", email: "john@example.com"},
-    { id : "asd-02", firstName: "Jane", lastName: "Smith", email: "jane@example.com"},
-    { id : "asd-01", firstName: "John", lastName: "Doe", email: "john@example.com"},
-    { id : "asd-02", firstName: "Jane", lastName: "Smith", email: "jane@example.com"},
-    { id : "asd-01", firstName: "John", lastName: "Doe", email: "john@example.com"},
-    { id : "asd-02", firstName: "Jane", lastName: "Smith", email: "jane@example.com"},
-    { id : "asd-01", firstName: "John", lastName: "Doe", email: "john@example.com"},
-    { id : "asd-02", firstName: "Jane", lastName: "Smith", email: "jane@example.com"},
-    { id : "asd-01", firstName: "John", lastName: "Doe", email: "john@example.com"},
-    { id : "asd-02", firstName: "Jane", lastName: "Smith", email: "jane@example.com"},
-    { id : "asd-01", firstName: "John", lastName: "Doe", email: "john@example.com"},
-    { id : "asd-02", firstName: "Jane", lastName: "Smith", email: "jane@example.com"}
-  ]);
-      const showTemplate = () => {
+      const showTemplate = (Iid:string) => {
 
         confirmDialog({
             group: 'Template',
@@ -56,14 +54,14 @@ const AdminAccounts = () => {
                     <span>Please confirm to proceed moving forward.</span>
                 </div>
             ),
-            accept,
-            reject
+            accept:  () => accept(Iid)
+            
         });
     };
 
   return (
 
-    <div>
+    <div style={{overflow : "hidden"}}>
     
    <div  className={styles.WineMain}>
         <h1 className={styles.AdminTitles}>Accounts</h1>
@@ -90,7 +88,7 @@ const AdminAccounts = () => {
                   <TableCell>{row.lastName}</TableCell>
                   <TableCell>{row.email}</TableCell>
                   <TableCell>
-                         <button onClick={() => showTemplate()} className={styles.DeleteDbBtn}>Delete</button>
+                         <button onClick={() => showTemplate(row.id)} className={styles.DeleteDbBtn}>Delete</button>
                   </TableCell>
                 </TableRow>
               ))}
@@ -99,10 +97,10 @@ const AdminAccounts = () => {
       </TableContainer>
               </div>}
 
-              <ConfirmDialog group='Template' className={styles.ConfirmBox}  />
             
       <AdminGrape></AdminGrape>
       <AdminWine></AdminWine>
+      <AdminWinery></AdminWinery>
 
 
     </div>
