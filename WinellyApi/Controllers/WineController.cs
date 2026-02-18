@@ -108,7 +108,7 @@ namespace WinellyApi.Controllers
             return Ok(wineModel.ToWineDto());
         }
 
-        [HttpPatch("api/wine/UpdtImg")]
+        [HttpPatch("UpdtImg")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateWinePic([FromForm] int id, IFormFile image)
         {
