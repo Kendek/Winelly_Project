@@ -153,6 +153,7 @@ const AdminWine = () => {
               value: row.id,
               label: row.name
             })))
+            setSelectedPatchGrapes(SelectedWineData["grapes"].map((row:GrapeGet) => row.id))
     
         } catch (error) {
           console.error("Error fetching data:", error)
