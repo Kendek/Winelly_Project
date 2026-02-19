@@ -18,7 +18,10 @@ export type WineryGetType= {
     name: string,
     region: string,
     country: string,
-    established: number
+    established: number,
+    lat:number,
+    lon:number
+
 }
 export type WineryPostType= {
     name: string,

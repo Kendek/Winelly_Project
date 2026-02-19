@@ -14,9 +14,12 @@
 .Search{
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 5px;
     padding: 6px;
-
+    flex-direction: column;
+    color: var(--primary-colour);
+    align-items: center;
+    margin-top: 10px;
 }
 .MapCardVisible{
     display: flex;
@@ -32,4 +35,22 @@
     transform: translate(-50%,-50%);
     position: absolute;
     z-index: 1;
+}
+
+.MapSearsh{
+    margin-bottom: 10px;
+    padding: 10px 12px;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    font-family: inherit;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    width: 250px;
+}
+
+.MapSearch:focus
+{
+    outline: none;
+    border-color: #8B1E3F;
+    box-shadow: 0 0 8px rgba(139, 30, 63, 0.3);
 }

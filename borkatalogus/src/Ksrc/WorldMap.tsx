@@ -4,15 +4,12 @@ import * as am5map from "@amcharts/amcharts5/map";
 import am5geodata_worldLow from "@amcharts/amcharts5-geodata/worldLow";
 import styles from "../Kcss/Map.module.css"
 import { GetData } from './FetchMap';
+import { GetDbData } from './AdminPages/AdminFetch';
+import type { WineryGetType } from './AdminPages/AdminFetch';
 
-export type Marker ={
-    longitude : number,
-    latitude :  number,
-    name: string
-}
+
 const Chart = () => {
-    const [Markers, SetMarkers] = useState<Marker[]>([])
-    const Varosok = ["Debrecen", "Budapest" , "London", "Paris"]
+    const [Winerys, setWinerys] = useState<WineryGetType[]>([])
     const markerSeriesRef = useRef<any>(null);
 
     useLayoutEffect(() => { 
@@ -73,7 +70,7 @@ const Chart = () => {
         
         
         markerSeriesRef.current = MarkerSeries;
-        GenerateMarkers();
+       // GenerateMarkers();
 
     
         return () => {
@@ -82,42 +79,37 @@ const Chart = () => {
     }, []);
 
     useEffect(() => {
-        if (markerSeriesRef.current && Markers.length > 0) {
-            console.log(Markers)
-            Markers.forEach(marker => {
+        if (markerSeriesRef.current && Winerys.length > 0) {
+            console.log("Marker update")
+            Winerys.forEach(marker => {
                 markerSeriesRef.current.data.push({
-                    geometry: { type:"Point",  coordinates: [marker.longitude, marker.latitude]},
+                    geometry: { type:"Point",  coordinates: [marker.lon, marker.lat]},
                     title: marker.name,
                 });
             });
         }
-    }, [Markers]);
+    }, [Winerys]);
 
-    const GenerateMarkers = async () => {
-        const markerPromises = Varosok.map(varos => 
-            GetData(varos).then(data => {
-                if (data?.longitude !== undefined && data?.latitude !== undefined) {
-                    return {
-                        longitude: data.longitude,
-                        latitude: data.latitude,
-                        name : varos,
-                        url: "http://localhost:5173/webshop"
-                    };
-                }
-                return null;
-            })
-        );
-        
-        const results = await Promise.all(markerPromises);
-        SetMarkers(results.filter(m => m !== null));
-    }
+    useEffect(() => {
+        const AccountsFetch = async () =>{
+          try {
+            const WineryData = await GetDbData("/api/winery")
+            setWinerys(WineryData)
+            console.log(Winerys)
+          } catch (error) {
+            console.error("Error fetching data:", error)
+          }
+        }   
+        AccountsFetch()
+      }, [])
+
 
 
   return (
     <div >
         <div className={styles.Search}>
-            <input type="text" />
-            <button>Search</button>
+            <h1>Search area:</h1>
+            <input className={styles.MapSearch} type="text" />
         </div>
         <div  id="chartdiv" className={styles.ChartDiv} ></div>
     </div>

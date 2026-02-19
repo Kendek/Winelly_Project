@@ -329,22 +329,22 @@ const AdminWine = () => {
                 {SelectedWine && 
                 <div className={styles.WinePostContainer}>
                 <div className={styles.WinePost1}>
-                  <span> <h1>Name:</h1><input name='Name' type="text" defaultValue={`${SelectedWine["name"]}`} /></span> 
+                  <span> <h1>Name:</h1><input name='Name' type="text" value={`${SelectedWine["name"]}`} /></span> 
                 </div>
 
                 <div className={styles.WinePost2}>  
-                  <span> <h1>Type:<input name='type' defaultValue={`${SelectedWine["type"]}`} type="text" /></h1></span>
-                  <span> <h1>Taste:<input name='taste' defaultValue={`${SelectedWine["taste"]}`} type="text" /></h1></span>
-                  <span> <h1>Price:<input name='price' defaultValue={`${SelectedWine["price"]}`} type="number" onKeyDown={handleNumberKeyDown} /> </h1></span>
-                  <span> <h1>Year:<input name='year'defaultValue={`${SelectedWine["year"]}`} type="number" onKeyDown={handleNumberKeyDown} /></h1></span>
-                  <span> <h1>Alcohol (%):<input name='alcoholContent' defaultValue={`${SelectedWine["alcoholContent"]}`} type="number" onKeyDown={handleNumberKeyDown}/></h1></span>
+                  <span> <h1>Type:<input name='type' value={`${SelectedWine["type"]}`} type="text" /></h1></span>
+                  <span> <h1>Taste:<input name='taste' value={`${SelectedWine["taste"]}`} type="text" /></h1></span>
+                  <span> <h1>Price:<input name='price' value={`${SelectedWine["price"]}`} type="number" onKeyDown={handleNumberKeyDown} /> </h1></span>
+                  <span> <h1>Year:<input name='year'value={`${SelectedWine["year"]}`} type="number" onKeyDown={handleNumberKeyDown} /></h1></span>
+                  <span> <h1>Alcohol (%):<input name='alcoholContent' value={`${SelectedWine["alcoholContent"]}`} type="number" onKeyDown={handleNumberKeyDown}/></h1></span>
                 </div>
 
                 <div  className={styles.WinePost3}>
                   <h1>Description:</h1>
-                  <textarea  name="description" defaultValue={`${SelectedWine["description"]}`} id=""></textarea>
+                  <textarea  name="description" value={`${SelectedWine["description"]}`} id=""></textarea>
                   <h1>Winery: </h1>
-                  <select defaultValue={`${SelectedWine["WineryId"]}`} name="winery" id="">
+                  <select value={`${SelectedWine["WineryId"]}`} name="winery" id="">
                   {Winerys.map((row) =>(
                       <option value={row.id}>{row.name}</option>
                   ))}
@@ -355,6 +355,7 @@ const AdminWine = () => {
                     isMulti
                     options={GrapeOptions}
                     name='grapes'
+                    
                     onChange={(value) => setSelectedPatchGrapes(value as GrapeOptionsType[])}
                   />
                                   <div style={{display:"flex", justifyContent:"center"}}>

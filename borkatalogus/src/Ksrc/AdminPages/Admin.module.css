@@ -62,7 +62,7 @@
 }
 
 .Add{
-     background: none;
+    background: none;
     border: solid 2px black;
     font-size: 18px;
     background-color: #8B1E3F;
@@ -145,6 +145,7 @@
 }
 
 .WinePost{
+    transition: 1s;
     border: #2f5f9d solid 3px;
     border-radius: 3px;
     width: 80%;
@@ -262,7 +263,7 @@ form{
     resize: vertical;
 }
 
-.WinePost1 span,
+.WinePost1 span,    
 .WinePost2 span {
     display: flex;
     flex-direction: column;

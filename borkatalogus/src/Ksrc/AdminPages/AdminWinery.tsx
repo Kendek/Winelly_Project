@@ -198,16 +198,16 @@ const AdminWinery = () => {
                 <div style={{width: "100%", display: "flex", justifyContent: "center"}}> 
                  <form className={styles.Patch} method='post' onSubmit={PatchWinery}>
                   <label>
-                    Name: <input type='text' name='name' defaultValue={`${SelectedWinery["name"]}`} />
+                    Name: <input type='text' name='name' value={`${SelectedWinery["name"]}`} />
                   </label>
                   <label>
-                    Region: <input type='text' name='region' defaultValue={`${SelectedWinery["region"]}`} />
+                    Region: <input type='text' name='region' value={`${SelectedWinery["region"]}`} />
                   </label>
                   <label>
-                    Country: <input type='text' name='country' defaultValue={`${SelectedWinery["country"]}`} />
+                    Country: <input type='text' name='country' value={`${SelectedWinery["country"]}`} />
                   </label>
                   <label>
-                    Established: <input onKeyDown={handleNumberKeyDown} type='number' name='establishedYear' defaultValue={`${SelectedWinery["establishedYear"]}`} />
+                    Established: <input onKeyDown={handleNumberKeyDown} type='number' name='establishedYear' value={`${SelectedWinery["establishedYear"]}`} />
                   </label>
 
                   <div style={{display:"flex", justifyContent:"center"}}>
