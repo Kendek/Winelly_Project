@@ -13,7 +13,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
+    width: 100%;
     height: 100vh;
     background: transparent;
     z-index: 5;
@@ -29,7 +29,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
+    width: 100%;
     height: 100vh;
     backdrop-filter: blur(12px);
     background: rgba(255, 255, 255, 0.15);
@@ -54,7 +54,6 @@
     align-items: flex-start;
 }
 
-/* ---- Desktop Filter Panel ---- */
 .filterPanel {
     width: 250px;
     display: flex;
@@ -226,7 +225,6 @@
         color: white;
     }
 
-    /* Panel — inline a gomb alatt, animált */
     .filterPanel {
         width: calc(100% - 20px);
         position: relative;
@@ -242,7 +240,6 @@
         box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
         border: 1px solid rgba(122, 17, 50, 0.12);
         animation: none;
-        /* max-height animáció */
         max-height: 0;
         overflow: hidden;
         opacity: 0;
@@ -260,7 +257,6 @@
         pointer-events: auto;
     }
 
-    /* Animáció kikapcsolva mobilon */
     .filterPanel .filterBlock {
         animation: none !important;
         opacity: 1 !important;
@@ -269,7 +265,6 @@
         box-sizing: border-box;
     }
 
-    /* Show Results gomb — csak mobilon */
     .applyFilterBtn {
         display: flex;
         align-items: center;
@@ -297,7 +292,6 @@
     }
 }
 
-/* ---- Animations ---- */
 @keyframes slideDown {
     0%   { opacity: 0; transform: translateY(-100px); }
     100% { opacity: 1; transform: translateY(0); }

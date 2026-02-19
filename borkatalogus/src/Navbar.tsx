@@ -17,8 +17,8 @@ const Navbar = ({ cartIconRef }: NavbarProps) => {
 
     //UseState + Location
     const location = useLocation();
-    const [clicked, setClikced] = useState(false)
-    const { setCurrentWineId } = useContext(WineContext)
+    const [clicked, setClikced] = useState(false);
+    const { setCurrentWineId } = useContext(WineContext);
     const navigate = useNavigate();
 
     const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token"));
@@ -125,9 +125,9 @@ const Navbar = ({ cartIconRef }: NavbarProps) => {
                     }}
                 >Login
                 </Link>
-                {role === "Admin" && (<Link to={"/adminaccounts"} className={styles.adminBtn}>Admin</Link>)}
+                {role === "Admin" && (<Link to={"/adminaccounts"} className={location.pathname === "/adminaccounts" ? styles.pageLinkactive : styles.pageLink} onClick={() => { setClikced(false) }}>Admin</Link>)}
                 {isLoggedIn && role !== "Admin" && (<p><b>Dear</b> {localStorage.getItem("firstName") ? localStorage.getItem("firstName") : "Guest"}!</p>)}
-                {isLoggedIn && (<button className={styles.userLogout} onClick={async () => { await LogoutUser(); setIsLoggedIn(false) }}><i className="fa-solid fa-right-from-bracket"></i></button>)}
+                {isLoggedIn && (<button className={styles.userLogout} onClick={async () => { await LogoutUser(); setIsLoggedIn(false); navigate("/home") }}><i className="fa-solid fa-right-from-bracket"></i></button>)}
                 <div ref={cartIconRef} className={styles.cartIconWrapper}>
                     <Link to="/cart" className={location.pathname === "/cart" || location.pathname === "/checkout" || location.pathname === "/done" ? styles.carticonactive : styles.carticon} onClick={() => { setClikced(false) }}>
                         <i className="fa-solid fa-cart-shopping"></i>

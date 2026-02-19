@@ -1,7 +1,8 @@
 import axios from "axios";
 import type { UserType } from "../Mcomponents/SignUp";
 import type { UserDataLoginType } from "../Mcomponents/SignIn";
-import type { NewRatingType} from "../Mcontext/WineContextProvider";
+import type { NewRatingType } from "../Mcontext/WineContextProvider";
+import { useNavigate } from "react-router-dom";
 axios.defaults.withCredentials = true;
 
 export const BaseUrl = "https://kqg39v9h-7072.euw.devtunnels.ms"
@@ -83,7 +84,7 @@ export async function LogoutUser() {
                 localStorage.removeItem("token"),
                 localStorage.removeItem("role"),
                 window.dispatchEvent(new Event("storage"));
-            console.log("User Loged out!")
+            console.log("User Loged out!");
         }
 
     } catch (error) {
