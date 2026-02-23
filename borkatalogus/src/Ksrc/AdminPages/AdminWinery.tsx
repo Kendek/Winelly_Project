@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 import styles from './Admin.module.css'
 import type { WineryGetType, WineryPostType } from './AdminFetch';
 import {GetDbData , AdminDelete, PostDbWinery, handleNumberKeyDown, PatchDbWinery} from './AdminFetch';
-import { confirmDialog } from 'primereact/confirmdialog';
+import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
 
 
 
@@ -77,6 +77,9 @@ const AdminWinery = () => {
       }
 
       const SelectPatch =  (id:number) =>{
+
+        setSelectedWinery(undefined)
+
       const FetchSelectedWinery = async () =>{
         try {
           const SelectedWineData = await GetDbData(`/api/winery/${id}`)
@@ -178,14 +181,15 @@ const AdminWinery = () => {
           </TableBody>
         </Table>
       </TableContainer>
-
+                      
+      <ConfirmDialog group='Template' className={styles.ConfirmBox}  />
             </div>}
 
         <div className={`${styles.ButtonHeader} ${styles.PatchHeader}`}>
         <button className={`${styles.ToggleButton}`} onClick={() => {setPatch(!openPatch)}}>Patch ⤵️</button>
         </div>
             {openPatch && 
-            <div style={{width: "80%", display: "flex", flexDirection : "column"}} className={styles.PatchDiv}>
+            <div style={{width: "80%", height: "80vh", display: "flex", flexDirection : "column"}} className={styles.PatchDiv}>
            
                <div style={{display:"flex", justifyContent:"center", marginBottom:"20px", flexDirection:"column", alignItems:"center"}}>
                   <h1 className={styles.PatchTitle}>Select Winery to Patch:</h1>
@@ -198,16 +202,16 @@ const AdminWinery = () => {
                 <div style={{width: "100%", display: "flex", justifyContent: "center"}}> 
                  <form className={styles.Patch} method='post' onSubmit={PatchWinery}>
                   <label>
-                    Name: <input type='text' name='name' value={`${SelectedWinery["name"]}`} />
+                    Name: <input type='text' name='name' defaultValue={`${SelectedWinery["name"]}`} />
                   </label>
                   <label>
-                    Region: <input type='text' name='region' value={`${SelectedWinery["region"]}`} />
+                    Region: <input type='text' name='region' defaultValue={`${SelectedWinery["region"]}`} />
                   </label>
                   <label>
-                    Country: <input type='text' name='country' value={`${SelectedWinery["country"]}`} />
+                    Country: <input type='text' name='country' defaultValue={`${SelectedWinery["country"]}`} />
                   </label>
                   <label>
-                    Established: <input onKeyDown={handleNumberKeyDown} type='number' name='establishedYear' value={`${SelectedWinery["establishedYear"]}`} />
+                    Established: <input onKeyDown={handleNumberKeyDown} type='number' name='establishedYear' defaultValue={`${SelectedWinery["establishedYear"]}`} />
                   </label>
 
                   <div style={{display:"flex", justifyContent:"center"}}>

@@ -1,4 +1,3 @@
-
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -10,7 +9,7 @@ import { useEffect, useState } from 'react';
 import { GetDbData } from './AdminFetch';
 import type { WinePostType, WineGetType, WineryGetType, GrapeGet,WinePatchImgType, WinePatchType } from './AdminFetch';
 import Select from 'react-select'
-import { confirmDialog } from 'primereact/confirmdialog';
+import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
 import { AdminDelete } from './AdminFetch';
 import { PostDbWine , PatchWineIMG, PatchDbWine, handleNumberKeyDown } from './AdminFetch';
 const AdminWine = () => {
@@ -28,11 +27,16 @@ const AdminWine = () => {
   const [Winerys, setWinerys] = useState<WineryGetType[]>([])
   const [Wines, setWines] = useState<WineGetType[]>([])
   const [Grapes, setGrapes] = useState<GrapeGet[]>([])
-  const [SelectedWine, setSelectedWine] = useState()
+  const [SelectedWine, setSelectedWine] = useState<WineGetType>()
 
   const [GrapeOptions, setGrapesOptions] = useState<GrapeOptionsType[]>([])
-  const [selectedGrapes, setSelectedGrapes] = useState<GrapeOptionsType[]>([])
-  const [selectedPatchGrapes, setSelectedPatchGrapes] = useState<GrapeOptionsType[]>([])
+  const [selectedGrapes, setSelectedGrapes] = useState<number[]>([])
+  const [selectedPatchGrapes, setSelectedPatchGrapes] = useState<number[]>([])
+
+  const [defaultGrapeOptions, setDefaultGrapeOptions] =useState<GrapeOptionsType[]>([
+
+  ])
+
 
   const [postIMG, setPostIMG] = useState(null)
   const [PatchIMG, setPatchIMG] = useState<File | string | null>(null)
@@ -60,7 +64,7 @@ const AdminWine = () => {
         alcoholContent: parseFloat(formJson.alcoholContent as string),
         file: formJson.File as File,
         wineryId: parseInt(formJson.winery as string),
-        grapeId: selectedGrapes.map(g => g.value)
+        grapeIds: selectedGrapes
       } as WinePostType)
     }
 
@@ -107,6 +111,7 @@ const AdminWine = () => {
 
 
 
+ 
     useEffect(() => {
       if (Grapes.length > 0) {
         const options = Grapes.map((row) => ({
@@ -136,11 +141,20 @@ const AdminWine = () => {
 
 
     const SelectPatch =  (id:number) =>{
+      setSelectedWine(undefined)
+      setDefaultGrapeOptions([])
+
       const FetchSelectedWine = async () =>{
         try {
           const SelectedWineData = await GetDbData(`/api/wine/${id}`)
           setSelectedWine(SelectedWineData)
           console.log(SelectedWineData)
+            setDefaultGrapeOptions(SelectedWineData["grapes"].map((row: GrapeGet) => ({
+              value: row.id,
+              label: row.name
+            })))
+            setSelectedPatchGrapes(SelectedWineData["grapes"].map((row:GrapeGet) => row.id))
+    
         } catch (error) {
           console.error("Error fetching data:", error)
         }
@@ -175,7 +189,7 @@ const AdminWine = () => {
         price: parseFloat(formJson.price as string),
         alcoholContent: parseFloat(formJson.alcoholContent as string),
         wineryId: parseInt(formJson.winery as string),
-        grapeId: selectedPatchGrapes.map(g => g.value)
+        grapeIds: selectedPatchGrapes
       } as WinePatchType, SelectedWine["id"])
     }
 
@@ -198,6 +212,8 @@ const AdminWine = () => {
       setPatchIMG(null);
     }
   }
+
+
 
     
   return (
@@ -231,16 +247,16 @@ const AdminWine = () => {
                   <h1>Winery: </h1>
                   <select name="winery" id="">
                   {Winerys.map((row) =>(
-                      <option value={row.id}>{row.name}</option>
+                    <option value={row.id}>{row.name}</option>
                   ))}
                   </select>
                    <h1>GrapesId: </h1>
                   <Select
-                    id=""
-                    isMulti
-                    options={GrapeOptions}
-                    name='grapes'
-                    onChange={(value) => setSelectedGrapes(value as GrapeOptionsType[])}
+                  id=""
+                  isMulti
+                  options={GrapeOptions}
+                  name='grapes'
+                  onChange={(value) => setSelectedGrapes(value.map(g => g.value))}
                   />
 
                 </div>
@@ -311,13 +327,15 @@ const AdminWine = () => {
         </Table>
       </TableContainer>
 
+        
+      <ConfirmDialog group='Template' className={styles.ConfirmBox}  />
             </div>}     
               <div className={`${styles.ButtonHeader} ${styles.PatchHeader}`}>
         <button className={`${styles.ToggleButton}`} onClick={() => {setPatch(!openPatch)}}>Patch ⤵️</button>
         </div>
 
             {openPatch && 
-            <div className={`${styles.PatchDiv}`}>
+            <div style={{height: "80vh"}} className={`${styles.PatchDiv}`}>
               <form action="post" onSubmit={PatchWine}>
                 <div style={{display:"flex", justifyContent:"center", marginBottom:"20px", flexDirection:"column", alignItems:"center"}}>
                   <h1 className={styles.PatchTitle}>Select Wine to Patch:</h1>
@@ -326,37 +344,39 @@ const AdminWine = () => {
                       {Wines.map((row) => <option value={row.id}>{row.name}</option>)}
                 </select>
                 </div>
-                {SelectedWine && 
-                <div className={styles.WinePostContainer}>
+                
+                {SelectedWine && defaultGrapeOptions.length >0 &&
+                <div  className={styles.WinePostContainer}>
                 <div className={styles.WinePost1}>
-                  <span> <h1>Name:</h1><input name='Name' type="text" value={`${SelectedWine["name"]}`} /></span> 
+                  <span> <h1>Name:</h1><input name='Name' type="text" defaultValue={`${SelectedWine["name"]}`} /></span> 
                 </div>
 
                 <div className={styles.WinePost2}>  
-                  <span> <h1>Type:<input name='type' value={`${SelectedWine["type"]}`} type="text" /></h1></span>
-                  <span> <h1>Taste:<input name='taste' value={`${SelectedWine["taste"]}`} type="text" /></h1></span>
-                  <span> <h1>Price:<input name='price' value={`${SelectedWine["price"]}`} type="number" onKeyDown={handleNumberKeyDown} /> </h1></span>
-                  <span> <h1>Year:<input name='year'value={`${SelectedWine["year"]}`} type="number" onKeyDown={handleNumberKeyDown} /></h1></span>
-                  <span> <h1>Alcohol (%):<input name='alcoholContent' value={`${SelectedWine["alcoholContent"]}`} type="number" onKeyDown={handleNumberKeyDown}/></h1></span>
+                  <span> <h1>Type:<input name='type' defaultValue={`${SelectedWine["type"]}`} type="text" /></h1></span>
+                  <span> <h1>Taste:<input name='taste' defaultValue={`${SelectedWine["taste"]}`} type="text" /></h1></span>
+                  <span> <h1>Price:<input name='price' defaultValue={`${SelectedWine["price"]}`} type="number" onKeyDown={handleNumberKeyDown} /> </h1></span>
+                  <span> <h1>Year:<input name='year'defaultValue={`${SelectedWine["year"]}`} type="number" onKeyDown={handleNumberKeyDown} /></h1></span>
+                  <span> <h1>Alcohol (%):<input name='alcoholContent' defaultValue={`${SelectedWine["alcoholContent"]}`} type="number" onKeyDown={handleNumberKeyDown}/></h1></span>
                 </div>
 
                 <div  className={styles.WinePost3}>
                   <h1>Description:</h1>
-                  <textarea  name="description" value={`${SelectedWine["description"]}`} id=""></textarea>
+                  <textarea  name="description" defaultValue={`${SelectedWine["description"]}`} id=""></textarea>
                   <h1>Winery: </h1>
-                  <select value={`${SelectedWine["WineryId"]}`} name="winery" id="">
+                  <select value={`${SelectedWine["wineryId"]}`} name="winery" id="">
                   {Winerys.map((row) =>(
                       <option value={row.id}>{row.name}</option>
                   ))}
                   </select>
                    <h1>GrapesId: </h1>
                   <Select
+                    defaultValue={defaultGrapeOptions}
                     id=""
                     isMulti
                     options={GrapeOptions}
                     name='grapes'
                     
-                    onChange={(value) => setSelectedPatchGrapes(value as GrapeOptionsType[])}
+                    onChange={(value) => setSelectedPatchGrapes(value.map(g => g.value))}
                   />
                                   <div style={{display:"flex", justifyContent:"center"}}>
                   <button type="submit" className={styles.Add}>Update wine</button>   

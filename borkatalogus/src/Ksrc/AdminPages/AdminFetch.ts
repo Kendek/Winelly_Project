@@ -34,13 +34,13 @@ export type WineGetType = {
     name: string,
     type:string,
     fileId:string,
-    alcoholcontent:number,
+    alcoholContent:number,
     description: string,
     taste:string,
     year:number,
     price:number,
     url:string,
-    winderyid:number,
+    wineryId:number,
     grapes: GrapeGet[]
 }
 export type WinePostType = {
@@ -53,7 +53,7 @@ export type WinePostType = {
     alcoholContent:number,
     file:File,
     wineryId:number,
-    grapeId: number[]
+    grapeIds: number[]
 }
 
 export type WinePatchType = {
@@ -65,7 +65,7 @@ export type WinePatchType = {
     price:number,
     alcoholContent:number,
     wineryId:number,
-    grapeId: number[]
+    grapeIds: number[]
 }
 
 export type WinePatchImgType = {
@@ -90,7 +90,9 @@ export async function PostGrape(Payload:GrapPostType){
     protectedAPI.post(`${BaseUrl}/api/grape`, Payload)
 }
 export async function PostDbWine(Payload:WinePostType){
-     const response = await protectedAPI.post(`${BaseUrl}/api/wine`, Payload, { headers: { "Content-Type": "multipart/form-data" } }); console.log(response.data);
+    console.log(Payload)
+    const response = await protectedAPI.post(`${BaseUrl}/api/wine`, Payload, { headers: { "Content-Type": "multipart/form-data" } });
+    console.log(response.data);
 }
 export async function PostDbWinery(Payload:WineryPostType){
      const response = await protectedAPI.post(`${BaseUrl}/api/winery`, Payload);

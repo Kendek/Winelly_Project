@@ -10,7 +10,7 @@ import { GetDbData } from './AdminFetch';
 import { PostGrape } from './AdminFetch';
 import type { GrapPostType } from './AdminFetch';
 import { AdminDelete } from './AdminFetch';
-import { confirmDialog } from 'primereact/confirmdialog';
+import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
 
 const AdminGrape = () => {
 
@@ -34,6 +34,7 @@ const AdminGrape = () => {
 
     const showTemplate = (Ipath:string, Iid:number) => {
 
+      console.log("pressed")
     confirmDialog({
             group: 'Template',
             message: (
@@ -108,6 +109,7 @@ const AdminGrape = () => {
                     </div>
             </form>
             </div>}
+          
       
 
       <div className={`${styles.ButtonHeader} ${styles.DeleteHeader}`}>
@@ -141,7 +143,8 @@ const AdminGrape = () => {
           </Table>
         </TableContainer>
 
-
+        
+      <ConfirmDialog group='Template' className={styles.ConfirmBox}  />
             </div>}    
   </div>
 

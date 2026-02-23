@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 import styles from './Admin.module.css'
 import AdminGrape from './AdminGrape';
 import AdminWine from './AdminWine';
-import { confirmDialog } from 'primereact/confirmdialog';
+import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
 import { GetDbData,AdminDeleteAccount } from './AdminFetch';
 import AdminWinery from './AdminWinery';
 
@@ -45,7 +45,7 @@ const AdminAccounts = () => {
 
 
       const showTemplate = (Iid:string) => {
-
+        
         confirmDialog({
             group: 'Template',
             message: (
@@ -95,7 +95,11 @@ const AdminAccounts = () => {
           </TableBody>
         </Table>
       </TableContainer>
+
+              
+      <ConfirmDialog group='Template' className={styles.ConfirmBox}  />
               </div>}
+            
 
             
       <AdminGrape></AdminGrape>
