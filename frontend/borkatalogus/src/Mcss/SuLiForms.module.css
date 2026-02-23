@@ -1,0 +1,201 @@
+/* Main Div + signUp/logIn side */
+.formSide {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    min-height: 580px;
+    backface-visibility: hidden;
+    background: white;
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--container-radius);
+    padding: 30px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    animation: fadeInOpacity 0.6s ease-out;
+}
+
+.signupForm {
+    transform: rotateY(180deg);
+}
+
+.loginForm {
+    transform: rotateY(0deg);
+}
+/*---------------*/
+
+/* Form Elements */
+.formHeader {
+    text-align: center;
+    margin-bottom: 22px;
+}
+
+.formTitle {
+    font-size: var(--large-title-font);
+    font-weight: 700;
+    color: var(--primary-colour);
+    margin: 0 0 8px 0;
+    background: linear-gradient(135deg, var(--primary-colour), var(--primary-light-colour));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.formGroup {
+    margin-bottom: 16px;
+}
+
+.formRow {
+    display: flex;
+    gap: 12px;
+}
+
+.formRow .formGroup {
+    flex: 1;
+}
+
+.formLabel {
+    display: block;
+    color: var(--primary-colour);
+    font-size: var(--label-font);
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.formInput {
+    width: 100%;
+    padding: 14px 18px;
+    border: 2px solid #e2e8f0;
+    border-radius: var(--inputs-radius);
+    font-size: var(--label-font);
+    background: white;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.formInput:focus {
+    border-color: var(--primary-light-colour);
+    background: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px #8e183b39;
+}
+
+.formLabelsInputs
+{
+    margin-top: 6vh;
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+}
+
+.passwordGroup {
+    position: relative;
+}
+
+.passwordToggle {
+    position: absolute;
+    right: 10px;
+    top: 67%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #a0aec0;
+    cursor: pointer;
+    padding: 4px;
+    transition: color 0.2s;
+}
+
+.passwordToggle:hover {
+    color: var(--primary-colour)
+}
+/*---------------*/
+
+/* Buttons + Switch elements */
+.submitBtn {
+    width: 100%;
+    background: linear-gradient(135deg, var(--primary-light-colour), var(--primary-colour));
+    color: white;
+    border: none;
+    padding: 16px;
+    border-radius: var(--inputs-radius);
+    font-size: var(--label-font);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.submitBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 35px #8e183b39;
+}
+
+.submitBtn:active {
+    transform: translateY(0);
+}
+
+.formActions {
+    margin-top: 5vh;
+    display: flex;
+    flex-direction: column;
+    gap: 4vh;
+}
+
+.formSwitch {
+    text-align: center;
+    margin-top: 16px;
+}
+
+.switchText {
+    color: var(--primary-colour);
+    font-size: var(--label-font);
+    margin: 0;
+}
+
+.switchLink {
+    color: var(--primary-colour);
+    font-weight: 600;
+    cursor: pointer;
+    transition: color 0.2s;
+    margin-left: 0.5vw;
+}
+
+.switchLink:hover {
+    color: var(--primary-light-colour);
+}
+/*---------------*/
+
+/* Animation */
+@keyframes fadeInOpacity {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+/*---------------*/
+
+/* Mobile */
+@media (max-width: 768px) 
+{
+    .formSide
+    {
+        min-height: 500px;
+    }
+    .formHeader 
+    {
+        margin-bottom: 0px;
+    }
+    .formActions 
+    {
+        margin-top: 3vh;
+        gap: 1vh;
+    }
+
+}
+/* ------------- */

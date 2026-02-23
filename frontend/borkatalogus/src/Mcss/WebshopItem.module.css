@@ -1,0 +1,122 @@
+.singleItem {
+    flex: 0 0 220px;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    border: 3px solid rgba(215, 215, 215, 0.682);
+    border-radius: var(--smalldiv-radius);
+    cursor: pointer;
+    animation: slideLeft 0.5s ease forwards;
+    animation-delay: calc(var(--i) * 0.1s);
+    opacity: 0;
+}
+
+.flyingImage {
+    position: fixed;
+    width: 80px;
+    height: auto;
+    z-index: 9999;
+    pointer-events: none;
+    transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 8px;
+}
+
+
+.imageWrapper {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+    background-color: var(--secondary-colour);
+}
+
+.imageWrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+
+.overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.379);
+    backdrop-filter: blur(5px);
+    border-top: 3px solid rgba(215, 215, 215, 0.682);
+}
+
+.itemTexts {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px;
+}
+
+.itemTitle {
+    margin-bottom: 2vh;
+    font-size: var(--small-item-font);
+    color: var(--primary-light-colour);
+    font-weight: 600;
+}
+
+.itemPrice {
+    font-size: var(--description-font);
+    margin-bottom: 1vh;
+    gap: 20px;
+    color: var(--primary-light-colour);
+    font-weight: 700;
+}
+
+.itemBtn {
+    width: 100%;
+    background: linear-gradient(135deg, var(--primary-light-colour), var(--primary-colour));
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: var(--inputs-radius);
+    font-size: var(--label-font);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.itemBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 35px #8e183b39;
+}
+
+.itemBtn:active {
+    transform: translateY(0);
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .singleItem {
+        min-width: 250px;
+        gap: 15px;
+    }
+}
+
+/* ------------ */
+
+/* Animation */
+@keyframes slideLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(+100px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* ------------ */

@@ -1,0 +1,36 @@
+.authContainer {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: var(--secondary-colour);  
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 100;
+}
+
+.authContainer *,
+.authContainer *::before,
+.authContainer *::after {
+    box-sizing: border-box;
+}
+
+.formWrapper {
+    width: 420px;
+    height: 100%;
+}
+
+.formContainer {
+    width: 100%;
+    height: auto;
+    min-height: 680px;
+    transform-style: preserve-3d;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.formContainer.flipped {
+    transform: rotateY(180deg);
+}
+

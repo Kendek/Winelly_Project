@@ -1,0 +1,357 @@
+.mainDiv {
+    margin: 0;
+    padding: 0;
+    background-color: var(--secondary-colour);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.filterOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: transparent;
+    z-index: 5;
+}
+
+.blurred {
+    filter: blur(8px);
+    opacity: 0.4;
+    transition: all 0.3s ease;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    backdrop-filter: blur(12px);
+    background: rgba(255, 255, 255, 0.15);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    animation: fadeIn 0.3s ease forwards;
+}
+
+.container {
+    width: 100%;
+    background-color: var(--secondary-colour);
+}
+
+.contentArea {
+    display: flex;
+    gap: 100px;
+    padding: 30px;
+    align-items: flex-start;
+}
+
+.filterPanel {
+    width: 240px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    position: sticky;
+    top: 120px;
+    margin-top: 30px;
+}
+
+.filterPanel > .filterBlock:first-child {
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    background: transparent;
+}
+
+.filterBlock {
+    background-color: transparent;
+    border-radius: 12px;
+    color: var(--primary-colour);
+    position: relative;
+    animation: slideDown 0.45s ease forwards;
+    opacity: 0;
+}
+
+.filterBlock i {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px;
+    color: rgba(139, 30, 63, 0.45);
+    pointer-events: none;
+}
+
+.filterBlock input {
+    width: 100%;
+    padding: 11px 12px 11px 36px;
+    color: var(--primary-colour);
+    border-radius: 10px;
+    border: 1.5px solid rgba(139, 30, 63, 0.3);
+    font-size: var(--label-font);
+    background: rgba(255, 255, 255, 0.85);
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.filterBlock input::placeholder { color: rgba(139, 30, 63, 0.45); }
+
+.filterBlock input:focus {
+    border-color: rgba(139, 30, 63, 0.45);
+    box-shadow: 0 0 0 3px rgba(139, 30, 63, 0.08);
+    background: #fff;
+}
+
+.filterTypes {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.filterTypes span {
+    font-size: var(--label-font);
+    font-weight: 500;
+    color: rgba(139, 30, 63, 0.85);
+    padding: 8px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    letter-spacing: 0.01em;
+}
+
+.filterTypes span:hover {
+    background: rgba(139, 30, 63, 0.06);
+    color: var(--primary-colour);
+}
+
+.accordionBlock {
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1.5px solid rgba(139, 30, 63, 0.22);
+    background: rgba(255, 255, 255, 0.85);
+    animation: slideDown 0.45s ease forwards;
+    opacity: 0;
+}
+
+.accordionHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 13px 16px;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    width: 100%;
+    text-align: left;
+    color: var(--primary-colour);
+    font-size: var(--label-font);
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    transition: background-color 0.2s ease;
+    font-family: inherit;
+}
+
+.accordionHeader:hover {
+    background: rgba(139, 30, 63, 0.04);
+}
+
+.accordionChevron {
+    font-size: 11px;
+    color: rgba(139, 30, 63, 0.5);
+    transition: transform 0.3s ease;
+}
+
+.accordionChevron.open {
+    transform: rotate(180deg);
+}
+
+.accordionBody {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                padding 0.3s ease;
+    padding: 0 16px;
+}
+
+.accordionBody.open {
+    max-height: 600px;
+    padding: 4px 16px 16px;
+}
+
+.activeTaste {
+    background-color: rgba(139, 30, 63, 0.1) !important;
+    color: var(--primary-colour) !important;
+    font-weight: 700 !important;
+}
+
+.filterPrice {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    font-size: var(--label-font);
+    font-weight: 500;
+    color: rgba(139, 30, 63, 0.9);
+}
+
+.filterPrice p {
+    text-align: center;
+    font-size: var(--label-font);
+    letter-spacing: 0.03em;
+    color: rgba(139, 30, 63, 0.9);
+}
+
+.removeFilterBtn {
+    width: 100%;
+    background-color: transparent;
+    color: rgba(139, 30, 63, 0.75);
+    border: 1.5px solid rgba(139, 30, 63, 0.3);
+    padding: 10px;
+    border-radius: 10px;
+    font-size: var(--label-font);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    letter-spacing: 0.02em;
+    opacity: 0;
+    animation: slideDown 0.45s ease forwards;
+    font-family: inherit;
+}
+
+.removeFilterBtn:hover {
+    background-color: rgba(139, 30, 63, 0.06);
+    border-color: rgba(139, 30, 63, 0.4);
+    color: var(--primary-colour);
+}
+
+.removeFilterBtn:active { transform: translateY(1px); }
+
+.itemsGrid {
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+    background-color: var(--secondary-colour);
+    padding: 10px;
+    gap: 30px;
+    margin: 20px;
+}
+
+.filterToggle { display: none; }
+.applyFilterBtn { display: none; }
+
+@media (max-width: 768px) {
+
+    .contentArea {
+        position: relative;
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+        gap: 10px;
+    }
+
+    .filterToggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        width: calc(100% - 20px);
+        margin: 8px auto 0;
+        background-color: rgba(255,255,255,0.6);
+        color: var(--primary-colour);
+        border: 1.5px solid rgba(139,30,63,0.2);
+        padding: 11px 20px;
+        border-radius: 30px;
+        font-size: var(--label-font);
+        font-weight: 600;
+        cursor: pointer;
+        letter-spacing: 0.03em;
+        transition: background-color 0.2s ease;
+        z-index: 20;
+        font-family: inherit;
+    }
+
+    .filterPanel {
+        width: 100%;
+        position: relative;
+        top: auto;
+        margin: 0 auto;
+        gap: 8px;
+        background-color: white;
+        padding: 0 16px;
+        border-radius: 16px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+        border: 1.5px solid rgba(139, 30, 63, 0.1);
+        animation: none;
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        pointer-events: none;
+        transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                    opacity 0.3s ease,
+                    padding 0.3s ease;
+        z-index: 100;
+    }
+
+    .filterPanel.open {
+        max-height: 1400px;
+        opacity: 1;
+        padding: 16px;
+        pointer-events: auto;
+    }
+
+    .accordionBlock {
+        animation: none !important;
+        opacity: 1 !important;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .filterBlock {
+        animation: none !important;
+        opacity: 1 !important;
+    }
+
+    .applyFilterBtn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        width: 100%;
+        background-color: var(--primary-colour);
+        color: white;
+        border: none;
+        padding: 13px;
+        border-radius: var(--inputs-radius);
+        font-size: var(--label-font);
+        font-weight: 700;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+        letter-spacing: 0.02em;
+        font-family: inherit;
+    }
+
+    .applyFilterBtn:hover { background-color: var(--primary-light-colour); }
+    .applyFilterBtn:active { transform: translateY(1px); }
+
+    .itemsGrid {
+        margin: 0;
+        justify-content: center;
+        width: 100%;
+    }
+}
+
+@keyframes slideDown {
+    0%   { opacity: 0; transform: translateY(-20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}

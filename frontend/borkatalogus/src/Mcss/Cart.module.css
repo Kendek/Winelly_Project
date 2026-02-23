@@ -1,0 +1,249 @@
+.mainDiv {
+    margin: 0;
+    padding: 0;
+    background-color: var(--secondary-colour);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    position: relative;
+    overflow: visible;
+    z-index: 1;
+}
+
+.slideOutLeft {
+    animation: cartSlideOutLeft 0.4s ease forwards;
+}
+
+
+@keyframes cartSlideOutLeft {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+
+    to {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+}
+
+
+.cartContainer {
+    display: flex;
+    gap: 40px;
+    max-width: 1200px;
+    width: 100%;
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    padding: 40px;
+}
+
+.cartItems {
+    flex: 2;
+    color: var(--primary-colour);
+}
+
+.cartItems>p {
+    font-size: var(--large-title-font);
+}
+
+.itemCount {
+    color: #888;
+    margin-bottom: 20px;
+}
+
+.cartItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #eee;
+    margin-top: 5vh;
+    font-size: var(--description-font);
+}
+.itemInfo p:first-child
+{
+    font-weight: 600;
+}
+
+.itemInfo p {
+    margin: 4px 0;
+    color: var(--light-primary-colour);
+}
+
+.itemControls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.itemControls span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
+}
+
+.quantityBtn {
+    padding: 10px;
+    margin: 10px;
+    font-size: var(--label-font);
+    border-radius: var(--inputs-radius);
+    background-color: #f9f9f9;
+    outline: none;
+    border: 2px solid var(--primary-colour);
+    cursor: pointer;
+    transition: all ease 0.3s;
+}
+
+.quantityBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 35px #8e183b39;
+}
+
+.quantityBtn:active {
+    transform: translateY(0);
+}
+
+.removeBtn {
+    background: none;
+    border: none;
+    font-size: 18px;
+    color: #dc3545;
+    cursor: pointer;
+}
+
+.backLink {
+    display: inline-block;
+    margin-top: 20px;
+    color: #555;
+    font-size: var(--label-font);
+    text-decoration: none;
+}
+
+.backLink:hover {
+    color: #b62752;
+}
+
+.summary {
+    flex: 1;
+    background: #f9f9f9;
+    border-radius: 12px;
+    padding: 24px;
+    color: var(--primary-colour);
+}
+
+.summary p {
+    margin-bottom: 24px;
+    font-size: var(--large-title-font);
+}
+
+.summaryRow {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    color: var(--light-primary-colour);
+}
+
+.codeInput {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    margin-top: 8px;
+}
+
+.summaryTotal {
+    display: flex;
+    justify-content: space-between;
+    margin: 24px 0;
+    font-weight: bold;
+}
+
+.checkoutBtn {
+    width: 100%;
+    padding: 12px;
+    background: var(--primary-colour);
+    color: white;
+    font-weight: 600;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.checkoutBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 35px #8e183b39;
+}
+
+.checkoutBtn:active {
+    transform: translateY(0);
+}
+
+.discountToggle {
+    margin: 25px 0;
+    font-weight: 600;
+    color: var(--primary-colour);
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.discountToggle:hover {
+    text-decoration: underline;
+}
+
+.codeInput {
+    width: 100%;
+    padding: 10px;
+    border-radius: var(--smalldiv-radius);
+    border: 2px solid var(--primary-colour);
+    margin-bottom: 16px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.codeInput:focus {
+    border: 2px solid var(--primary-colour);
+    background: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px #8e183b39;
+}
+
+.codeSubmit
+{
+    width: 100%;
+    padding: 8px;
+    background: var(--primary-colour);
+    color: white;
+    font-weight: 600;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.codeSubmit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 35px #8e183b39;
+}
+
+.codeSubmit:active {
+    transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+    .cartContainer {
+        flex-direction: column;
+    }
+
+    .cartItems>p {
+        font-size: var(--title-font);
+    }
+    .cartItem {
+        font-size: var(--label-font);
+    }
+}

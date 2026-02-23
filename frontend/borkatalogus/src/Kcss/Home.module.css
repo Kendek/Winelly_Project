@@ -1,0 +1,223 @@
+::-webkit-scrollbar {
+    display: none;
+}
+
+
+.HomeMain {
+    color: #a82a4f;
+    scrollbar-width: none;
+    display: flex;
+    width: 100%;
+    gap: 0;
+    flex-direction: column;
+}
+
+.HomeFirst {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    flex-direction: column;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    background-image: url("../public/HomeBG.png");
+}
+
+.WineBottle {
+    transform: scale(10%);
+    position: absolute;
+    visibility: hidden;
+}
+
+.TextContainer {
+    margin-top: 8%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    margin-left: 40%;
+    color: white;
+    text-align: center;
+    text-shadow: 2px 2px black;
+    font-size: larger;
+    width: 40vw;
+
+    h2 {
+        text-decoration: underline;
+    }
+
+    h1 {
+        font-weight: bold;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .TextContainer {
+        width: 80vw;
+        margin-left: 0%;
+        font-size: large;
+    }
+
+    .FavCardContainer {
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: left;
+        align-items: normal;
+    }
+
+    .HomeSecond {
+        background-image: none;
+    }
+}
+
+.HomeSecond {
+    background-color: white;
+    background-image: url("../public/OilCrownBg2.png");
+    width: 100%;
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.Stars :global(.MuiRating-iconFilled),
+.Stars :global(.MuiRating-iconEmpty) {
+    color: white;
+    font-size: 150%;
+}
+
+.FlexBox {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.LineDecor {
+    width: 40%;
+    height: 1%;
+    border: 4px solid #a82a4f;
+}
+
+.Title {
+    width: 50%;
+    text-align: center;
+    font-weight: bold;
+    color: #a82a4f;
+    transform: scale(150%);
+    margin-top: 2%;
+    margin-bottom: 2%;
+    font-size: xx-large;
+    text-shadow: 1px 1px black;
+}
+
+.FavCardContainer {
+    z-index: 1;
+    display: flex;
+    width: 90%;
+    flex-direction: row;
+    gap: 10%;
+    height: 80%;
+    justify-content: center;
+    align-items: center;
+}
+
+.OrderButton {
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    background: linear-gradient(135deg, #d03262, #8B1E3F);
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.OrderButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 35px #8e183b39;
+}
+
+
+
+.ImgBg {
+    margin-top: 10%;
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    background-image: url("../public/GrapePlant.jpg");
+    background-position: 70%;
+    background-size: 210%;
+    border-radius: 50%;
+    transition: 1s;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+
+    img {
+
+        transform: scale(130%);
+    }
+}
+
+.CardTitle {
+    text-shadow: 0px 1px 0px black (255, 255, 255, 0.397);
+    text-align: left;
+    padding: 2%;
+    font-size: x-small;
+
+}
+
+.CardDesc {
+    z-index: 1;
+    display: block;
+    margin-top: 10%;
+}
+
+.CardDesc,
+.CardTitle,
+.Discount,
+.CardPrice {
+    color: black;
+    font-size: large;
+}
+
+.Discount {
+    float: right;
+    text-decoration: line-through;
+    color: #a82a4f;
+}
+
+.CardPrice {
+    float: right;
+}
+
+.CardRating {
+    font-size: x-large;
+    float: left;
+    padding: 2%;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: scale(130%);
+}
+
+.UnderLine {
+    text-decoration: underline;
+}
+
+.White {
+    border: 2px white solid;
+    width: 80%;
+}
+
+.HomeThird {}
