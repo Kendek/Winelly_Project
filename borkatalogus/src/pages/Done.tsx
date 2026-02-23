@@ -15,13 +15,20 @@ const Done = () => {
     const email = localStorage.getItem("email") || "test@example.com";
 
     const orderHTML = cart.map(item => `
-  <div style="margin-bottom: 15px;">
-    <img src="${item.wine.url}" width="120" style="border-radius: 8px;" />
-    <p><strong>${item.wine.name}</strong></p>
-    <p>Amount: ${item.quantity}</p>
-    <p>Price: ${formatPrice(item.wine.price * item.quantity)}</p>
-  </div>
+  <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom: 20px; border-collapse: collapse;">
+    <tr>
+      <td width="120" style="padding-right: 10px;">
+        <img src="${item.wine.url}" width="120" style="display: block; border-radius: 8px;" />
+      </td>
+      <td style="vertical-align: top; font-size: 14px;">
+        <strong>${item.wine.name}</strong><br>
+        Amount: ${item.quantity}<br>
+        Price: ${formatPrice(item.wine.price * item.quantity)}
+      </td>
+    </tr>
+  </table>
 `).join("");
+
 
 
     const shipping = 2500;

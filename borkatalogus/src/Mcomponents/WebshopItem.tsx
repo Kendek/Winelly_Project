@@ -12,7 +12,7 @@ type WebshopItemProps = {
 const WebshopItem = ({ filteredWines, cartIconRef }: WebshopItemProps) => {
 
     /* Add to cart Animation*/
-    
+
     const startFlyAnimation = (imgElement: HTMLImageElement) => {
         const cartIcon = cartIconRef.current;
         if (!cartIcon) return;
@@ -55,7 +55,6 @@ const WebshopItem = ({ filteredWines, cartIconRef }: WebshopItemProps) => {
         setCurrentWineId(wine.id);
     }
 
-
     return (
         filteredWines.map((wine, index) => (
             <div key={index} className={style.singleItem} style={{ "--i": index } as any} onClick={() => handleClick(wine)}>
@@ -72,13 +71,13 @@ const WebshopItem = ({ filteredWines, cartIconRef }: WebshopItemProps) => {
                                 </div>
                             </div>
                             <div>
-                                <button className={style.itemBtn} onClick={(e) => { 
-                                    e.stopPropagation(); 
-                                    handleAddToCart(e, wine); 
-                                    const img = e.currentTarget.closest(`.${style.singleItem}`)?.querySelector("img"); 
-                                    if (img) startFlyAnimation(img); 
-                                    }}>
-                                        <i className="fa-solid fa-cart-shopping" />
+                                <button className={style.itemBtn} onClick={(e) => {
+                                    e.stopPropagation();
+                                    handleAddToCart(e, wine);
+                                    const img = e.currentTarget.closest(`.${style.singleItem}`)?.querySelector("img");
+                                    if (img) startFlyAnimation(img);
+                                }}>
+                                    <i className="fa-solid fa-cart-shopping" />
                                 </button>
                             </div>
                         </div>

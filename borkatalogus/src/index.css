@@ -32,6 +32,12 @@ body {
   --smalldiv-radius: 4px;
 }
 
+@media screen and (max-width: 768px) {
+  #root {
+    overflow-x: clip;
+  }
+}
+
 .MuiRating-iconFilled {
   color: var(--primary-colour);
 }
