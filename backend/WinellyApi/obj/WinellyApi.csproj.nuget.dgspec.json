@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Programozas\\2025-26 susu\\Vizsgaremek\\Vizsgaremek-MKK\\WinellyApi\\WinellyApi.csproj": {}
+    "C:\\Programozas\\2025-26 susu\\Vizsgaremek\\Winelly_Project\\Winelly_Project\\backend\\WinellyApi\\WinellyApi.csproj": {}
   },
   "projects": {
-    "C:\\Programozas\\2025-26 susu\\Vizsgaremek\\Vizsgaremek-MKK\\WinellyApi\\WinellyApi.csproj": {
+    "C:\\Programozas\\2025-26 susu\\Vizsgaremek\\Winelly_Project\\Winelly_Project\\backend\\WinellyApi\\WinellyApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Programozas\\2025-26 susu\\Vizsgaremek\\Vizsgaremek-MKK\\WinellyApi\\WinellyApi.csproj",
+        "projectUniqueName": "C:\\Programozas\\2025-26 susu\\Vizsgaremek\\Winelly_Project\\Winelly_Project\\backend\\WinellyApi\\WinellyApi.csproj",
         "projectName": "WinellyApi",
-        "projectPath": "C:\\Programozas\\2025-26 susu\\Vizsgaremek\\Vizsgaremek-MKK\\WinellyApi\\WinellyApi.csproj",
+        "projectPath": "C:\\Programozas\\2025-26 susu\\Vizsgaremek\\Winelly_Project\\Winelly_Project\\backend\\WinellyApi\\WinellyApi.csproj",
         "packagesPath": "C:\\Users\\Kukola Kende\\.nuget\\packages\\",
-        "outputPath": "C:\\Programozas\\2025-26 susu\\Vizsgaremek\\Vizsgaremek-MKK\\WinellyApi\\obj\\",
+        "outputPath": "C:\\Programozas\\2025-26 susu\\Vizsgaremek\\Winelly_Project\\Winelly_Project\\backend\\WinellyApi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

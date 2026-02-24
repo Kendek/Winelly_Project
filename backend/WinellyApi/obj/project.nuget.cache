@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "clU4MNcQR1g=",
+  "dgSpecHash": "tGti9dGgbbU=",
   "success": true,
-  "projectFilePath": "C:\\Programozas\\2025-26 susu\\Vizsgaremek\\Vizsgaremek-MKK\\WinellyApi\\WinellyApi.csproj",
+  "projectFilePath": "C:\\Programozas\\2025-26 susu\\Vizsgaremek\\Winelly_Project\\Winelly_Project\\backend\\WinellyApi\\WinellyApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Kukola Kende\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\Kukola Kende\\.nuget\\packages\\imagekit\\5.0.0\\imagekit.5.0.0.nupkg.sha512",

@@ -79,7 +79,7 @@ export function WineContextProvider({ children }: { children: React.ReactNode })
 
   async function fetchData() {
     try {
-      const response = await protectedAPI.get(`${BaseUrl}/api/wine`);
+      const response = await protectedAPI.get(`/api/wine`);
       setDatas(response.data);
     } catch (error) {
       console.log(error);

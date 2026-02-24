@@ -1,0 +1,31 @@
+version: "3.9"
+
+services:
+  backend:
+    build:
+      context: ./backend/WinellyApi
+      dockerfile: Dockerfile
+    container_name: backend
+    ports:
+      - "8080:8080"
+    volumes: 
+      - ./backend/WinellyApi/Data/WinellyDb.db:/app/Data/WinellyDb.db
+    environment:
+      ASPNETCORE_URLS: "http://+:8080"
+    networks:
+      - appnet
+
+  frontend:
+    build:
+      context: ./frontend/borkatalogus
+      dockerfile: Dockerfile
+    container_name: frontend
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+    networks:
+      - appnet
+
+networks:
+  appnet:
