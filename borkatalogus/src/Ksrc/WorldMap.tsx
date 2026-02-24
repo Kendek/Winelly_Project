@@ -6,6 +6,7 @@ import styles from "../Kcss/Map.module.css"
 import { GetData } from './FetchMap';
 import { GetDbData } from './AdminPages/AdminFetch';
 import type { WineryGetType } from './AdminPages/AdminFetch';
+import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 
 
 const Chart = () => {
@@ -14,6 +15,10 @@ const Chart = () => {
 
     useLayoutEffect(() => { 
         let root = am5.Root.new("chartdiv");
+
+        root.setThemes([
+            am5themes_Animated.new(root)
+        ])
 
         let chart = root.container.children.push(
             am5map.MapChart.new(root, {
@@ -27,11 +32,10 @@ const Chart = () => {
             })
         );
 
+
         let PolygonSeries  = chart.series.push(
             am5map.MapPolygonSeries.new(root,{
                 geoJSON: am5geodata_worldLow,
-                fill: am5.color("#8B1E3F"),
-                stroke : am5.color("#ffffff")
             })
         );
 
@@ -42,7 +46,7 @@ const Chart = () => {
              am5map.MapPolygonSeries.new(root, {})
         );
         backgroundSeries.mapPolygons.template.setAll({
-            fill: am5.color("#2ea2d3"),
+            fill: am5.color("#c0bcbc"),
         });
 
         backgroundSeries.data.push({
@@ -54,7 +58,7 @@ const Chart = () => {
         MarkerSeries.bullets.push(function(){
             let circle = am5.Circle.new(root,{
                 radius: 5,
-                fill: am5.color("#000000"),
+                fill: am5.color("#8B1E3F"),
                 tooltipText: "{title}"
             })
 
@@ -70,9 +74,7 @@ const Chart = () => {
         
         
         markerSeriesRef.current = MarkerSeries;
-       // GenerateMarkers();
 
-    
         return () => {
         root.dispose();
         };
