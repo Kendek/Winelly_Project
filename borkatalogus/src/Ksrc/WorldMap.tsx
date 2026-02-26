@@ -1,4 +1,5 @@
 import { useEffect, useLayoutEffect, useState, useRef, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import * as am5 from "@amcharts/amcharts5";
 import * as am5map from "@amcharts/amcharts5/map";
 import am5geodata_worldLow from "@amcharts/amcharts5-geodata/worldLow";
@@ -13,6 +14,7 @@ import { duration, easing } from '@mui/material';
 export let area : string | null = null
 
 const Chart = () => {
+    const navigate = useNavigate();
     const [Winerys, setWinerys] = useState<WineryGetType[]>([])
     const markerSeriesRef = useRef<any>(null);
     const chartRef = useRef<any>(null); 
@@ -79,6 +81,7 @@ const Chart = () => {
                 const dataContext = e["target"]?.["_dataItem"]?.["dataContext"] as { area?: string };
                 area = `${dataContext?.area}`
                 console.log(area)
+                navigate('/webshop');
                 });
 
 
