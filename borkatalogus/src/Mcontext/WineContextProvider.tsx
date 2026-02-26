@@ -11,6 +11,7 @@ export type Wine = {
   year: number,
   price: number,
   alcoholContent: number,
+  region: string,
   url: string,
   fileId: string,
   wineryId: number,
