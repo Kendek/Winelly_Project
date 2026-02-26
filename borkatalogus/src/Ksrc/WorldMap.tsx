@@ -1,26 +1,31 @@
-import { useEffect, useLayoutEffect, useState, useRef } from 'react';
+import { useEffect, useLayoutEffect, useState, useRef, useContext } from 'react';
 import * as am5 from "@amcharts/amcharts5";
 import * as am5map from "@amcharts/amcharts5/map";
 import am5geodata_worldLow from "@amcharts/amcharts5-geodata/worldLow";
 import styles from "../Kcss/Map.module.css"
-import { GetData } from './FetchMap';
 import { GetDbData } from './AdminPages/AdminFetch';
 import type { WineryGetType } from './AdminPages/AdminFetch';
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 
 
+
+export let area : string | null = ""
+
 const Chart = () => {
     const [Winerys, setWinerys] = useState<WineryGetType[]>([])
     const markerSeriesRef = useRef<any>(null);
+    const chartRef = useRef<any>(null); 
+    const [SelectedWinery, setSelectedWinery]= useState<WineryGetType>()
 
     useLayoutEffect(() => { 
+        area = null;
         let root = am5.Root.new("chartdiv");
 
         root.setThemes([
             am5themes_Animated.new(root)
         ])
 
-        let chart = root.container.children.push(
+        var chart = root.container.children.push(
             am5map.MapChart.new(root, {
                 panX: "rotateX",
                 panY: "rotateY",
@@ -28,9 +33,15 @@ const Chart = () => {
                 paddingBottom: 20,
                 paddingTop: 20,
                 paddingLeft: 20,
-                paddingRight: 20
+                paddingRight: 20,
+                wheelY: "zoom",
+                minZoomLevel: 0.5,
+                maxZoomLevel: 32
             })
         );
+
+
+        chartRef.current = chart;
 
 
         let PolygonSeries  = chart.series.push(
@@ -40,7 +51,8 @@ const Chart = () => {
         );
 
         PolygonSeries.mapPolygons.template.setAll({
-            tooltipText : "{name}"
+            tooltipText : "{name}",
+            interactive: true
         })
         let backgroundSeries = chart.series.unshift(
              am5map.MapPolygonSeries.new(root, {})
@@ -71,8 +83,9 @@ const Chart = () => {
                 sprite: circle
             })
         })
-        
-        
+
+
+
         markerSeriesRef.current = MarkerSeries;
 
         return () => {
@@ -86,7 +99,7 @@ const Chart = () => {
             Winerys.forEach(marker => {
                 markerSeriesRef.current.data.push({
                     geometry: { type:"Point",  coordinates: [marker.lon, marker.lat]},
-                    title: marker.name,
+                    title:`${marker.name}, ${marker.region}`,
                 });
             });
         }
@@ -105,13 +118,40 @@ const Chart = () => {
         AccountsFetch()
       }, [])
 
+    const ZoomOnSelect =(id:number) =>{
+        
+        const FetchSelectedWinery = async () =>{
+        try {
+          const SelectedWineData = await GetDbData(`/api/winery/${id}`)
+          setSelectedWinery(SelectedWineData)
+        } catch (error) {
+          console.error("Error fetching data:", error)
+        }
+      }
+      FetchSelectedWinery()
+    }
 
+    useEffect(() =>{
+
+
+        if(SelectedWinery)
+        {
+            chartRef.current.animate({ key: "rotationX", to: -SelectedWinery.lon, duration: 1500, easing: am5.ease.inOut(am5.ease.cubic) });
+            chartRef.current.animate({ key: "rotationY", to: -SelectedWinery.lat, duration: 1500, easing: am5.ease.inOut(am5.ease.cubic) });
+            setTimeout(function (){
+                chartRef.current.zoomIn()
+
+            },1500)
+        }
+    }, [SelectedWinery])
 
   return (
     <div >
         <div className={styles.Search}>
-            <h1>Search area:</h1>
-            <input className={styles.MapSearch} type="text" />
+            <h1>Search winery:</h1>
+            <select  onChange={(e) => ZoomOnSelect(parseInt(e.target.value))} > 
+                {Winerys.map((row) => <option value={row.id}>{row.name}, {row.region}</option>)}
+            </select>
         </div>
         <div  id="chartdiv" className={styles.ChartDiv} ></div>
     </div>

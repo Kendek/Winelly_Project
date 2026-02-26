@@ -45,7 +45,7 @@ const HomeSecondPart = () => {
         <div className={styles.FavCardContainer}>
           {FavWines  &&
           <div ref={FavRef}>
-                {Greeting("asd")}
+                {/*{Greeting("asd")}*/}
 
                 {/* <FavCard  classname="FavCardUp"></FavCard> */}
                 {/* <FavCard  classname="FavCardDown"></FavCard> */}
