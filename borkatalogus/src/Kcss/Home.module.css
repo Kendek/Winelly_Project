@@ -10,6 +10,7 @@
     width: 100%;
     gap: 0;
     flex-direction: column;
+    overflow: hidden;
 }
 
 .HomeFirst {
@@ -20,6 +21,7 @@
     background-repeat: no-repeat;
     background-size: cover;
     height: 100vh;
+    
     background-image: url("../public/HomeBG.png");
 }
 
@@ -74,6 +76,7 @@
 .HomeSecond {
     background-color: white;
     background-image: url("../public/OilCrownBg2.png");
+    background-size: cover;
     width: 100%;
     height: 90vh;
     display: flex;

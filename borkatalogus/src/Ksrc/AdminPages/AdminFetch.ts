@@ -128,3 +128,4 @@ export const handleNumberKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) =>
         e.preventDefault()
       }
    }
+

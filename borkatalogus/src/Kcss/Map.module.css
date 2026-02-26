@@ -6,8 +6,7 @@
     align-items: center;
 }
 .ChartDiv{
-    border:  black 2px solid;
-    width: 40vw;
+    width: 100vw;
     height: 80vh; 
     
 }
@@ -15,11 +14,36 @@
     display: flex;
     justify-content: center;
     gap: 5px;
-    padding: 6px;
     flex-direction: column;
     color: var(--primary-colour);
     align-items: center;
     margin-top: 10px;
+}
+
+.Search h1 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.Search select {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    background-color: #fff;
+    color: #333;
+    width: 260px;
+    margin-bottom: 10px;
+}
+
+.Search select:focus {
+    outline: none;
+    border-color: #8B1E3F;
+    box-shadow: 0 0 5px rgba(139, 30, 63, 0.4);
+}
+
+.Search option:hover {
+    background-color: #f5f5f5;
 }
 .MapCardVisible{
     display: flex;
