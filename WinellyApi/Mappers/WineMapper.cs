@@ -19,6 +19,7 @@ namespace WinellyApi.Mappers
                 Year = wineModel.Year,
                 Price = wineModel.Price,
                 AlcoholContent = wineModel.AlcoholContent,
+                Region = wineModel.Winery.Region,
                 Url = wineModel.Url,
                 FileId = wineModel.FileId,
                 WineryId = wineModel.WineryId,

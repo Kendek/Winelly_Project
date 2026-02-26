@@ -25,7 +25,7 @@ namespace WinellyApi.Controllers
         [HttpGet]
         public async Task<IActionResult> GetWines()
         {
-            var wines = await _context.Wines.Include(w => w.Wine_GrapeConnections).ThenInclude(wg => wg.Grape).Include(x => x.Ratings).ThenInclude(x => x.AppUser).ToListAsync();
+            var wines = await _context.Wines.Include(x => x.Winery).Include(w => w.Wine_GrapeConnections).ThenInclude(wg => wg.Grape).Include(x => x.Ratings).ThenInclude(x => x.AppUser).ToListAsync();
             var winesDto = wines.Select(wine => wine.ToWineDto());
             return Ok(winesDto);
         }
