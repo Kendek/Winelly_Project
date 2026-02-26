@@ -12,6 +12,7 @@ services:
       - ./backend/WinellyApi/Data/WinellyDb.db:/app/Data/WinellyDb.db
     environment:
       ASPNETCORE_URLS: "http://+:8080"
+      ASPNETCORE_ENVIRONMENT: "Docker"
     networks:
       - appnet
 
@@ -24,6 +25,8 @@ services:
       - "5173:5173"
     depends_on:
       - backend
+    environment:
+      - VITE_BASE_URL=http://localhost:8080
     networks:
       - appnet
 
