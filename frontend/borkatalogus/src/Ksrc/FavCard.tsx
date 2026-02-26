@@ -4,7 +4,7 @@ import { Rating } from '@mui/material';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
-const FavCard = (props: { classname: string }) => {
+const FavCard = (props: { classname: string, image:File, name:string, price:number, rating:number   }) => {
      AOS.init({
       duration:1000
     });
@@ -14,11 +14,10 @@ const FavCard = (props: { classname: string }) => {
                     <img src="WineBottle.png" alt="" />
               </div>
                 <div className={styles.CardDesc}>
-                  <span className={styles.CardTitle}>Badenhorst Secateurs</span> 
-                  <span className={styles.CardPrice}>189.99$</span>
-                  <span className={styles.Discount}>200 $</span>
+                  <span className={styles.CardTitle}>{props.name}</span> 
+                  <span className={styles.CardPrice}>{props.price}</span>
                   
-                  <span className={styles.CardRating}><Rating value={4} readOnly precision={0.5}></Rating></span>
+                  <span className={styles.CardRating}><Rating value={props.rating} readOnly precision={0.5}></Rating></span>
                   <button type="button" className={styles.OrderButton}>Order!</button>
                 </div>
             </div>

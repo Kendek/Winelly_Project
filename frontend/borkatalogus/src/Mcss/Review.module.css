@@ -4,7 +4,7 @@
   padding: 60px 40px 40px 40px;
   width: 70%;
   max-height: 85vh;
-  overflow: hidden;
+  overflow-y: auto;
   box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
   animation: slideUp 0.3s ease-out forwards;
   position: relative;

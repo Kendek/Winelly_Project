@@ -20,9 +20,10 @@ const Webshop = ({ cartIconRef }: WebshopProps) => {
   const [inputValue, setInputValue] = useState("");
   const [showReview, setShowReview] = useState(false);
 
-  const [categoryOpen, setCategoryOpen] = useState(true);
-  const [priceOpen, setPriceOpen] = useState(true);
-  const [ratingOpen, setRatingOpen] = useState(true);
+  const [categoryOpen, setCategoryOpen] = useState(false);
+  const [regionOpen, setRegionOpen] = useState(false);
+  const [priceOpen, setPriceOpen] = useState(false);
+  const [ratingOpen, setRatingOpen] = useState(false);
 
   const [minRating, setMinRating] = useState<number | null>(null);
 
@@ -51,6 +52,17 @@ const Webshop = ({ cartIconRef }: WebshopProps) => {
   }, {});
   const tasteList = Object.entries(tasteCounts);
 
+  const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
+  const regionFilter = (region: string) =>
+    setSelectedRegion(prev => prev === region ? null : region);
+
+   const RegionCounts = wines.reduce((acc: Record<string, number>, wine) => {
+    const region = wine.region.toLowerCase();
+    acc[region] = (acc[region] || 0) + 1;
+    return acc;
+  }, {});
+  const regionList = Object.entries(RegionCounts);
+
   const applyFilters = () => {
     let result = wines;
     if (inputValue.trim() !== "") {
@@ -58,6 +70,9 @@ const Webshop = ({ cartIconRef }: WebshopProps) => {
     }
     if (selectedTaste) {
       result = result.filter(w => w.taste.toLowerCase() === selectedTaste);
+    }
+     if (selectedRegion) {
+      result = result.filter(w => w.region.toLowerCase() === selectedRegion);
     }
     result = result.filter(w => w.price >= priceValue[0] && w.price <= priceValue[1]);
 
@@ -75,11 +90,14 @@ const Webshop = ({ cartIconRef }: WebshopProps) => {
   useEffect(() => { applyFilters(); }, [inputValue]);
   useEffect(() => { applyFilters(); }, [priceValue]);
   useEffect(() => { applyFilters(); }, [selectedTaste]);
+  useEffect(() => { applyFilters(); }, [selectedRegion]);
   useEffect(() => { applyFilters(); }, [minRating]);
 
   const Reset = () => {
     setInputValue("");
+    document.getElementById("regionList")?.scrollTo({ top: 0, behavior: 'smooth' });
     setSelectedTaste(null);
+    setSelectedRegion(null);
     setPriceValue([0, maxPrice]);
     setMinRating(null);
   };
@@ -145,6 +163,30 @@ const Webshop = ({ cartIconRef }: WebshopProps) => {
                       className={selectedTaste === taste ? style.activeTaste : ""}
                     >
                       {taste.charAt(0).toUpperCase() + taste.slice(1)}
+                      <span style={{ opacity: 0.45, fontWeight: 400, marginLeft: 4 }}>({count})</span>
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+             <div className={style.accordionBlock} style={{ animationDelay: '0.15s' }}>
+              <button
+                className={style.accordionHeader}
+                onClick={() => setRegionOpen(o => !o)}
+              >
+                Region
+                <i className={`fas fa-chevron-down ${style.accordionChevron} ${regionOpen ? style.open : ""}`}></i>
+              </button>
+              <div className={`${style.accordionBody} ${regionOpen ? style.open : ""}`}>
+                <div className={style.regionList} id='regionList'>
+                  {regionList.map(([region, count]) => (
+                    <span
+                      key={region}
+                      onClick={() => regionFilter(region)}
+                      className={selectedRegion === region ? style.activeRegion : ""}
+                    >
+                      {region.charAt(0).toUpperCase() + region.slice(1)}
                       <span style={{ opacity: 0.45, fontWeight: 400, marginLeft: 4 }}>({count})</span>
                     </span>
                   ))}

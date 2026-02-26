@@ -11,6 +11,7 @@ export type Wine = {
   year: number,
   price: number,
   alcoholContent: number,
+  region: string,
   url: string,
   fileId: string,
   wineryId: number,
@@ -91,7 +92,7 @@ export function WineContextProvider({ children }: { children: React.ReactNode })
   }, []);
 
   return (
-    <WineContext.Provider value={{ wines: datas, setWines: setDatas, currentWineId, setCurrentWineId, cart: cartItems, setCartItems }}>
+    <WineContext.Provider value={{ wines: datas, setWines: setDatas, currentWineId, setCurrentWineId, cart: cartItems, setCartItems}}>
       {children}
     </WineContext.Provider>
   )
