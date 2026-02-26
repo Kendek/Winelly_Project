@@ -5,10 +5,10 @@ import type { NewRatingType } from "../Mcontext/WineContextProvider";
 import { useNavigate } from "react-router-dom";
 axios.defaults.withCredentials = true;
 
-export const BaseUrl = ""
+export const BaseUrl = "http://localhost:8080"
 console.log(BaseUrl)
 
-export const protectedAPI = axios.create({ baseURL: "" })
+export const protectedAPI = axios.create({ baseURL: BaseUrl })
 
 protectedAPI.interceptors.request.use(config => {
     const token = localStorage.getItem("token")
