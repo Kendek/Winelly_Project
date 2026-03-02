@@ -6,6 +6,7 @@ import { WineContext, type Wine } from '../Mcontext/WineContextProvider';
 import CurrentWine from '../Mcomponents/CurrentWine';
 import Review from './Review';
 import { Rating } from '@mui/material';
+import { getArea, setArea } from '../Ksrc/WorldMap';
 
 type WebshopProps = {
   cartIconRef: React.RefObject<HTMLDivElement | null>
@@ -52,11 +53,19 @@ const Webshop = ({ cartIconRef }: WebshopProps) => {
   }, {});
   const tasteList = Object.entries(tasteCounts);
 
-  const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
-  const regionFilter = (region: string) =>
-    setSelectedRegion(prev => prev === region ? null : region);
+  const [selectedRegion, setSelectedRegion] = useState<string | null>(getArea()?.toLocaleLowerCase() || null);
+  console.log(selectedRegion)
+  const regionFilter = (region: string) => {
+    setSelectedRegion(prev => {
+      if (prev === region) {
+        setArea(null);
+        return null;
+      }
+      return region;
+    });
+  };
 
-   const RegionCounts = wines.reduce((acc: Record<string, number>, wine) => {
+  const RegionCounts = wines.reduce((acc: Record<string, number>, wine) => {
     const region = wine.region.toLowerCase();
     acc[region] = (acc[region] || 0) + 1;
     return acc;
@@ -71,10 +80,12 @@ const Webshop = ({ cartIconRef }: WebshopProps) => {
     if (selectedTaste) {
       result = result.filter(w => w.taste.toLowerCase() === selectedTaste);
     }
-     if (selectedRegion) {
+    if (selectedRegion) {
       result = result.filter(w => w.region.toLowerCase() === selectedRegion);
     }
-    result = result.filter(w => w.price >= priceValue[0] && w.price <= priceValue[1]);
+    if (priceValue[1] > 0) {
+      result = result.filter(w => w.price >= priceValue[0] && w.price <= priceValue[1]);
+    }
 
     if (minRating !== null) {
       result = result.filter(w => {
@@ -97,6 +108,7 @@ const Webshop = ({ cartIconRef }: WebshopProps) => {
     setInputValue("");
     document.getElementById("regionList")?.scrollTo({ top: 0, behavior: 'smooth' });
     setSelectedTaste(null);
+    setArea(null);
     setSelectedRegion(null);
     setPriceValue([0, maxPrice]);
     setMinRating(null);
@@ -170,7 +182,7 @@ const Webshop = ({ cartIconRef }: WebshopProps) => {
               </div>
             </div>
 
-             <div className={style.accordionBlock} style={{ animationDelay: '0.15s' }}>
+            <div className={style.accordionBlock} style={{ animationDelay: '0.15s' }}>
               <button
                 className={style.accordionHeader}
                 onClick={() => setRegionOpen(o => !o)}
