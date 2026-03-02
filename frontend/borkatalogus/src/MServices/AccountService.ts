@@ -5,8 +5,7 @@ import type { NewRatingType } from "../Mcontext/WineContextProvider";
 import { useNavigate } from "react-router-dom";
 axios.defaults.withCredentials = true;
 
-export const BaseUrl = import.meta.env.VITE_BASE_URL;
-console.log(BaseUrl)
+export const BaseUrl = "https://tn93bbcq-7072.euw.devtunnels.ms"
 
 export const protectedAPI = axios.create({ baseURL: BaseUrl })
 
