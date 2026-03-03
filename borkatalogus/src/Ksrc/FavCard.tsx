@@ -1,24 +1,34 @@
 import styles from "../Kcss/Home.module.css"
 import '../Kcss/FavCard.css'
 import { Rating } from '@mui/material';
-import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { useNavigate } from "react-router-dom";
 
-const FavCard = (props: { classname: string, image:File, name:string, price:number, rating:number   }) => {
-     AOS.init({
-      duration:1000
-    });
+let currentWine: number | null = null;
+export const getCurrentWine = () =>currentWine;
+export const setCurrentWine = (val: number|null) => {currentWine =val};
+
+const FavCard = (props: {CardImg: string, classname: string,  name:string, price:number, rating:number, WineId:number   }) => {
+
+   const navigate = useNavigate();
+
+   const SelectCardWine = () =>{
+    setCurrentWine(props.WineId)
+    navigate('/webshop')
+}
+
   return (
-            <div data-aos="fade-down" className={props.classname} >
+            <div className={props.classname} >
               <div className={styles.ImgBg}>
-                    <img src="WineBottle.png" alt="" />
+                    <img className={styles.CardIMG} src={props.CardImg} alt="" />
               </div>
                 <div className={styles.CardDesc}>
                   <span className={styles.CardTitle}>{props.name}</span> 
-                  <span className={styles.CardPrice}>{props.price}</span>
+                  <br />
+                  <span className={styles.CardPrice}>{props.price} Ft</span>
                   
                   <span className={styles.CardRating}><Rating value={props.rating} readOnly precision={0.5}></Rating></span>
-                  <button type="button" className={styles.OrderButton}>Order!</button>
+                  <button type="button" onClick={() =>SelectCardWine} className={styles.OrderButton}>Order!</button>
                 </div>
             </div>
   )

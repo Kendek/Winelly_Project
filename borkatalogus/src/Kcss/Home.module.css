@@ -11,6 +11,7 @@
     gap: 0;
     flex-direction: column;
     overflow: hidden;
+        overflow-y: scroll;
 }
 
 .HomeFirst {
@@ -54,35 +55,16 @@
     }
 }
 
-@media screen and (max-width: 768px) {
-    .TextContainer {
-        width: 80vw;
-        margin-left: 0%;
-        font-size: large;
-    }
-
-    .FavCardContainer {
-        flex-direction: column;
-        flex-wrap: wrap;
-        justify-content: left;
-        align-items: normal;
-    }
-
-    .HomeSecond {
-        background-image: none;
-    }
-}
-
 .HomeSecond {
     background-color: white;
     background-image: url("../public/OilCrownBg2.png");
     background-size: cover;
     width: 100%;
-    height: 90vh;
     display: flex;
     align-items: center;
     flex-direction: column;
 }
+
 
 .Stars :global(.MuiRating-iconFilled),
 .Stars :global(.MuiRating-iconEmpty) {
@@ -107,8 +89,7 @@
 .Title {
     width: 50%;
     text-align: center;
-    font-weight: bold;
-    color: #a82a4f;
+    
     transform: scale(150%);
     margin-top: 2%;
     margin-bottom: 2%;
@@ -120,11 +101,10 @@
     z-index: 1;
     display: flex;
     width: 90%;
-    flex-direction: row;
     gap: 10%;
-    height: 80%;
     justify-content: center;
     align-items: center;
+    min-height: 80vh;
 }
 
 .OrderButton {
@@ -151,6 +131,8 @@
 
 
 .ImgBg {
+    display: flex;
+    align-items: center;
     margin-top: 10%;
     display: flex;
     flex-direction: column;
@@ -174,14 +156,20 @@
     text-shadow: 0px 1px 0px black (255, 255, 255, 0.397);
     text-align: left;
     padding: 2%;
-    font-size: x-small;
-
+    font-size: medium;
+    color: #a82a4f !important;
+    font-weight: bold;
+    text-decoration: underline;
+    
 }
 
 .CardDesc {
     z-index: 1;
     display: block;
     margin-top: 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .CardDesc,
@@ -189,17 +177,18 @@
 .Discount,
 .CardPrice {
     color: black;
-    font-size: large;
+    font-size: larger;
 }
 
 .Discount {
     float: right;
     text-decoration: line-through;
-    color: #a82a4f;
+    color: #a82a4f; 
 }
 
 .CardPrice {
-    float: right;
+    color: #a82a4f !important;
+    font-weight: bold;
 }
 
 .CardRating {
@@ -222,5 +211,31 @@
     border: 2px white solid;
     width: 80%;
 }
+.CardIMG
+{
+    width: 230px;
+    height: 280px;
+    object-fit: contain;  /* Scales down to fit, no cropping */
+    object-position: center;
+    display: block;
+}
 
 .HomeThird {}
+
+
+@media screen and (max-width: 768px) {
+    .TextContainer {
+        width: 80vw;
+        margin-left: 0%;
+        font-size: large;
+    }
+    .FavCardContainer {
+        flex-direction: column;
+        justify-content: left;
+        align-items: center;
+    }
+
+    .HomeSecond {
+        background-image: none;
+    }
+}

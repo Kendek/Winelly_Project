@@ -1,5 +1,5 @@
-import { useEffect, useLayoutEffect, useState, useRef, useContext } from 'react';
-import { data, useNavigate } from 'react-router-dom';
+import { useEffect, useLayoutEffect, useState, useRef } from 'react';
+import {  useNavigate } from 'react-router-dom';
 import * as am5 from "@amcharts/amcharts5";
 import * as am5map from "@amcharts/amcharts5/map";
 import am5geodata_worldLow from "@amcharts/amcharts5-geodata/worldLow";
@@ -7,9 +7,6 @@ import styles from "../Kcss/Map.module.css"
 import { GetDbData } from './AdminPages/AdminFetch';
 import type { WineryGetType } from './AdminPages/AdminFetch';
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
-import { duration } from '@mui/material';
-
-
 
 
 let area: string | null = null;
@@ -23,11 +20,6 @@ const Chart = () => {
     const chartRef = useRef<any>(null); 
     const [SelectedWinery, setSelectedWinery]= useState<WineryGetType>()
 
-    const selectedCircleRef     = useRef<am5.Circle | null>(null);
-const selectedPulseRef      = useRef<am5.Circle | null>(null);
-const selectedGlowRef       = useRef<am5.Circle | null>(null);
-const pulseAnimRef          = useRef<any>(null);
-const pulseOpacityAnimRef   = useRef<any>(null);
 
     useLayoutEffect(() => { 
         let root = am5.Root.new("chartdiv");

@@ -13,7 +13,7 @@ const Home = () => {
     <div className={styles.HomeMain}>
 
       <div className={styles.HomeFirst}>  
-        <div data-aos="fade-down" className={styles.TextContainer}>
+        <div  className={styles.TextContainer}>
           <h1>Quality & Quantity at one place!</h1>
           <h3>A a wide variety of wine from all around the world!</h3>
           <h3>Trusted and used by thousands of users everyday.</h3>

@@ -42,6 +42,7 @@ export type WineGetType = {
     url:string,
     wineryId:number,
     grapes: GrapeGet[]
+    ratings: any
 }
 export type WinePostType = {
     name: string,
