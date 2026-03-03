@@ -6,6 +6,8 @@ import { WineContext, type Wine } from '../Mcontext/WineContextProvider';
 import CurrentWine from '../Mcomponents/CurrentWine';
 import Review from './Review';
 import { Rating } from '@mui/material';
+import { getArea, setArea } from "../Ksrc/WorldMap";
+import { useLocation } from 'react-router-dom';
 
 type WebshopProps = {
   cartIconRef: React.RefObject<HTMLDivElement | null>
@@ -13,7 +15,15 @@ type WebshopProps = {
 
 const Webshop = ({ cartIconRef }: WebshopProps) => {
 
-  const { wines, currentWineId } = useContext(WineContext)
+  const { wines, currentWineId, setCurrentWineId } = useContext(WineContext)
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.state?.wineId) {
+      setCurrentWineId(location.state.wineId);
+    }
+  }, [location.state]);
+
   const [maxPrice, setMaxPrice] = useState(0);
   const [priceValue, setPriceValue] = useState<number[]>([0, 0]);
   const [openFilter, setOpenFilter] = useState(false);
@@ -24,6 +34,14 @@ const Webshop = ({ cartIconRef }: WebshopProps) => {
   const [regionOpen, setRegionOpen] = useState(false);
   const [priceOpen, setPriceOpen] = useState(false);
   const [ratingOpen, setRatingOpen] = useState(false);
+
+  const regionArea = getArea();
+
+  useEffect(() => {
+    return () => {
+      setArea(null);
+    };
+  }, []);
 
   const [minRating, setMinRating] = useState<number | null>(null);
 
@@ -52,11 +70,20 @@ const Webshop = ({ cartIconRef }: WebshopProps) => {
   }, {});
   const tasteList = Object.entries(tasteCounts);
 
-  const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
-  const regionFilter = (region: string) =>
-    setSelectedRegion(prev => prev === region ? null : region);
+  const [selectedRegion, setSelectedRegion] = useState<string | null>(regionArea ? regionArea.toLowerCase() : null);
+  const regionFilter = (region: string) => {
+    const lower = region.toLowerCase();
+    setSelectedRegion(prev => {
+      if (prev === lower) {
+        setArea(null);
+        return null;
+      }
+      return lower;
+    });
+  };
 
-   const RegionCounts = wines.reduce((acc: Record<string, number>, wine) => {
+
+  const RegionCounts = wines.reduce((acc: Record<string, number>, wine) => {
     const region = wine.region.toLowerCase();
     acc[region] = (acc[region] || 0) + 1;
     return acc;
@@ -71,7 +98,7 @@ const Webshop = ({ cartIconRef }: WebshopProps) => {
     if (selectedTaste) {
       result = result.filter(w => w.taste.toLowerCase() === selectedTaste);
     }
-     if (selectedRegion) {
+    if (selectedRegion) {
       result = result.filter(w => w.region.toLowerCase() === selectedRegion);
     }
     result = result.filter(w => w.price >= priceValue[0] && w.price <= priceValue[1]);
@@ -170,7 +197,7 @@ const Webshop = ({ cartIconRef }: WebshopProps) => {
               </div>
             </div>
 
-             <div className={style.accordionBlock} style={{ animationDelay: '0.15s' }}>
+            <div className={style.accordionBlock} style={{ animationDelay: '0.15s' }}>
               <button
                 className={style.accordionHeader}
                 onClick={() => setRegionOpen(o => !o)}
