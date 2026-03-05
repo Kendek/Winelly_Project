@@ -31,7 +31,7 @@
 }
 
 .TextContainer {
-    margin-top: 8%;
+    margin-top: 5%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -43,9 +43,10 @@
     text-shadow: 2px 2px black;
     font-size: larger;
     width: 30vw;
-      border: 2px dashed rgba(255, 255, 255, 0.836);
+    border: 2px dashed rgba(255, 255, 255, 0.836);
     padding: 100px 10px 100px 10px;
     border-radius: 10px;
+    animation: UpDown 3s ease-in-out infinite;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 
     h2 {
@@ -221,6 +222,7 @@
     object-fit: contain;  
     object-position: center;
     display: block;
+    transition: 1s;
 }
 .CircleRing {
   position: absolute;
@@ -231,6 +233,8 @@
   pointer-events: none;
 }
 
+
+
 @keyframes spinSlow {
   to { transform: rotate(360deg); }
 }
@@ -240,6 +244,15 @@
     }
     100% {
         background-color: transparent;
+    }
+}
+
+@keyframes UpDown {
+    50% {
+        transform: translateY(8px);
+    }
+    100% {
+        transform: translateY(0);
     }
 }
 

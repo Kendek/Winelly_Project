@@ -1,24 +1,23 @@
 import styles from "../Kcss/Home.module.css"
 import HomeSecondPart from "../Ksrc/HomeSecondPart"
 import { Rating } from '@mui/material';
-import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { FaAngleDoubleDown } from "react-icons/fa";
+import AOS from 'aos';
 
 export const ScrollForward = () => {
   window.scrollBy({ top: window.innerHeight, behavior: "smooth" });
 }
 const Home = () => {
-  AOS.init({
-    duration:1000
-  });
-
+AOS.init({
+  duration: 1000,
+});
 
   return (
     <div className={styles.HomeMain}>
 
       <div className={styles.HomeFirst}>  
-        <div  className={styles.TextContainer}>
+        <div data-aos="fade-down" data-aos-duration="1500"  className={styles.TextContainer}>
           <h1>Quality & Quantity at one place!</h1>
           <h3>A a wide variety of wine from all around the world!</h3>
           <h3>Trusted and used by thousands of users everyday.</h3>

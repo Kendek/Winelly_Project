@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react"
+import { useEffect,  useState } from "react"
 import styles from "../Kcss/Home.module.css"
 import FavCard from "./FavCard"
 import { GetDbData } from "./AdminPages/AdminFetch"
@@ -12,6 +12,7 @@ const HomeSecondPart = () => {
 
   const [randomRatings, setRandomRatings]  = useState<number[]>([])
   
+
 
 
     useEffect(() => {
@@ -65,7 +66,11 @@ useEffect(() =>{
          {/* {RandomWines.length > 2 && randomRatings.length> 2 &&  */}
         <div className={styles.FavCardContainer}>
           
-                <FavCard WineId={1} classname="FavCardUp" name={"Tokaji Aszi ||"} price={39990} rating={4.2}></FavCard>
+                <FavCard duration="2200" WineId={1} classname="FavCardDown" name={"Tokaji Aszi ||"} price={39990} rating={4.2}></FavCard>
+
+                <FavCard duration="1200" WineId={1} classname="FavCardUp" name={"Tokaji Aszi ||"} price={39990} rating={4.2}></FavCard>
+
+                <FavCard duration="2200" WineId={1} classname="FavCardDown  " name={"Tokaji Aszi ||"} price={39990} rating={4.2}></FavCard>
 {/* 
 
                 <FavCard WineId={RandomWines[0]["id"]} CardImg={RandomWines[0]["url"]} classname="FavCardUp" name={RandomWines[0]["name"]} price={RandomWines[0]["price"]} rating={randomRatings[0]}></FavCard>
