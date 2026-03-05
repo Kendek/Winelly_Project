@@ -40,6 +40,8 @@ const AdminAccounts = () => {
 
    const accept = (id:string) => {
        AdminDeleteAccount(id)
+      setAccounts(accounts.filter(account => account.id !== id));
+       setDelete(false)
     }
 
 
@@ -83,7 +85,7 @@ const AdminAccounts = () => {
           <TableBody>
 
               {accounts.map((row) =>(
-                <TableRow>
+                <TableRow key={row.id}>
                   <TableCell>{row.firstName}</TableCell>
                   <TableCell>{row.lastName}</TableCell>
                   <TableCell>{row.email}</TableCell>

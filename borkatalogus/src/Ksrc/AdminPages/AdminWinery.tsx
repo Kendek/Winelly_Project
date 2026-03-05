@@ -22,9 +22,12 @@ const AdminWinery = () => {
 
   const [SelectedWinery, setSelectedWinery] = useState()
 
+  const [UpdateState, setUpdateState]  = useState(true)
   
     useEffect(() => {
-        const AccountsFetch = async () =>{
+      setWinerys([])
+      console.log("Fetch")
+        var AccountsFetch = async () =>{
           try {
             const WineryData = await GetDbData("/api/winery")
             setWinerys(WineryData)
@@ -33,10 +36,12 @@ const AdminWinery = () => {
           }
         }
         AccountsFetch()
-      }, [])
+      }, [UpdateState])
 
        const accept = (id:number) => {
            AdminDelete("/api/winery", id)
+           setWinerys(Winerys.filter(winery => winery.id !== id));
+
         }
     
         const reject = () => {
@@ -57,7 +62,7 @@ const AdminWinery = () => {
                 reject
             });
         };
-      function PostWinery(e:any) {
+      async function PostWinery(e:any) {
          // Prevent the browser from reloading the page
         e.preventDefault();
     
@@ -68,12 +73,16 @@ const AdminWinery = () => {
     
         // Or you can work with it as a plain object:
         const formJson = Object.fromEntries(formData.entries());
-        PostDbWinery({
+
+        await PostDbWinery({
           name: formJson.name as string,
           region: formJson.region as string,
           country: formJson.country as string,
           establishedYear: parseInt(formJson.establishedYear as string),
         } as WineryPostType)
+
+        setUpdateState(UpdateState =>!UpdateState)
+      
       }
 
       const SelectPatch =  (id:number) =>{
@@ -88,12 +97,13 @@ const AdminWinery = () => {
         } catch (error) {
           console.error("Error fetching data:", error)
         }
+
       }
       FetchSelectedWinery()
 
     }
 
-    const PatchWinery = (e:any) =>{
+    async function PatchWinery(e:any){
 
       e.preventDefault();
     
@@ -110,12 +120,13 @@ const AdminWinery = () => {
         return;
       }
 
-      PatchDbWinery({
+     await PatchDbWinery({
         name: formJson.name as string,
         region: formJson.region as string,
         country: formJson.country as string,
         establishedYear: parseInt(formJson.establishedYear as string),
       } as WineryPostType, SelectedWinery["id"])
+              setUpdateState(UpdateState =>!UpdateState)
     }
       
   return (

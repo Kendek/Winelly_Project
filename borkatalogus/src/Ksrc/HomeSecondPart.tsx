@@ -36,9 +36,9 @@ const HomeSecondPart = () => {
  }, [Wines])
 
 useEffect(() =>{
-    if (RandomWines.length === 0) return;            // don’t run on mount
+    if (RandomWines.length === 0) return;         
 
-    // compute average score for each wine
+
     const averages: number[] = RandomWines.map(wine => {
       const scores: number[] = wine.ratings?.map((r: any) => r.score) ?? [];
       if (scores.length === 0) return 0;
@@ -46,7 +46,7 @@ useEffect(() =>{
       return total / scores.length;
     });
 
-    setRandomRatings(averages);                      // one state update
+    setRandomRatings(averages);                    
     console.log("randomRatings (averages):", averages);
 }, [RandomWines])
 
