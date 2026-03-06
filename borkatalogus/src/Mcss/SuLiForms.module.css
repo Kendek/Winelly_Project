@@ -1,17 +1,14 @@
-/* Main Div + signUp/logIn side */
 .formSide {
     position: absolute;
     width: 100%;
     height: auto;
     min-height: 580px;
     backface-visibility: hidden;
-
     background: rgba(255, 255, 255, 0.16);
     backdrop-filter: blur(32px) saturate(1.1);
     -webkit-backdrop-filter: blur(32px) saturate(1.1);
     border: 1px solid rgba(255, 255, 255, 0.30);
     border-top: 1px solid rgba(255, 255, 255, 0.50);
-
     border-radius: var(--container-radius);
     padding: 30px;
     box-shadow:
@@ -23,11 +20,6 @@
     animation: fadeInOpacity 0.6s ease-out;
 }
 
-/* Arany fény vonal eltávolítva */
-.formSide::after {
-    display: none;
-}
-
 .signupForm {
     transform: rotateY(180deg);
 }
@@ -35,9 +27,7 @@
 .loginForm {
     transform: rotateY(0deg);
 }
-/*---------------*/
 
-/* Form Elements */
 .formHeader {
     text-align: center;
     margin-bottom: 22px;
@@ -125,9 +115,7 @@
 .passwordToggle:hover {
     color: var(--primary-colour);
 }
-/*---------------*/
 
-/* Buttons + Switch elements */
 .submitBtn {
     width: 100%;
     background: linear-gradient(135deg, #d4567a 0%, #a82050 50%, #7a1535 100%);
@@ -204,16 +192,12 @@
     text-decoration: underline;
     text-underline-offset: 3px;
 }
-/*---------------*/
 
-/* Animation */
 @keyframes fadeInOpacity {
     from { opacity: 0; }
-    to   { opacity: 1; }
+    to { opacity: 1; }
 }
-/*---------------*/
 
-/* Mobile */
 @media (max-width: 768px) {
     .formSide {
         min-height: 500px;
@@ -225,5 +209,17 @@
         margin-top: 3vh;
         gap: 1vh;
     }
+    .submitBtn {
+        padding: 12px;
+        font-size: 15px;
+    }
+    .formSwitch {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+    }
+    .switchLink {
+        margin-left: 0;
+    }
 }
-/* ------------- */

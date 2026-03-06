@@ -10,12 +10,8 @@
     z-index: 100;
     position: relative;
     overflow: hidden;
-
-    /* Borászati háttér gradient - ez váltja a var(--secondary-colour)-t */
     background: radial-gradient(ellipse at 25% 15%, #9e1f45 0%, #5a1020 40%, #2d0a14 70%, #1a060e 100%);
 }
-
-/* Ambient fény orbok */
 .authContainer::before,
 .authContainer::after {
     content: '';

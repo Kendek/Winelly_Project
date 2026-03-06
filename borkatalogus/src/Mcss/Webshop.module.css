@@ -6,46 +6,22 @@
     align-items: flex-start;
     justify-content: center;
     position: relative;
-    overflow-x: hidden;
 
-    /* Ugyanaz a sötét gradient mint a login */
     background: radial-gradient(ellipse at 20% 30%, #c4284f 0%, #8a1530 35%, #3d0a18 65%, #1a060e 100%);
     background-attachment: fixed;
 }
 
-/* Ambient orbok - ugyanaz mint loginnál */
-.mainDiv::before,
-.mainDiv::after {
-    content: '';
-    position: fixed;
-    border-radius: 50%;
-    filter: blur(90px);
-    opacity: 0.35;
-    pointer-events: none;
-    animation: wineOrb 16s ease-in-out infinite alternate;
-    z-index: 0;
-}
-.mainDiv::before {
-    width: 600px; height: 600px;
-    background: radial-gradient(circle, #c4284f 0%, transparent 70%);
-    top: -100px; left: -100px;
-}
-.mainDiv::after {
-    width: 450px; height: 450px;
-    background: radial-gradient(circle, rgba(10, 2, 6, 0.60) 0%, transparent 70%);
-    bottom: -150px; right: -150px;
-    animation-delay: -8s;
-    animation-direction: alternate-reverse;
-}
 @keyframes wineOrb {
-    0%   { transform: translate(0, 0) scale(1); }
+    0% { transform: translate(0, 0) scale(1); }
     100% { transform: translate(40px, 25px) scale(1.10); }
 }
 
 .filterOverlay {
     position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100vh;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
     background: transparent;
     z-index: 5;
 }
@@ -58,8 +34,10 @@
 
 .overlay {
     position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100vh;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
     backdrop-filter: blur(12px);
     background: rgba(0, 0, 0, 0.40);
     display: flex;
@@ -82,7 +60,6 @@
     align-items: flex-start;
 }
 
-/* ---- Filter Panel ---- */
 .filterPanel {
     width: 240px;
     flex-shrink: 0;
@@ -90,7 +67,7 @@
     flex-direction: column;
     gap: 6px;
     position: sticky;
-    top: 60px;
+    top: 120px;
     margin-top: 30px;
 }
 
@@ -103,7 +80,7 @@
 
 .filterBlock {
     background-color: transparent;
-    border-radius: 12px;
+    border-radius: var(--inputs-radius);
     color: rgba(255,255,255,0.88);
     position: relative;
     animation: slideDown 0.45s ease forwards;
@@ -120,44 +97,47 @@
     pointer-events: none;
 }
 
-/* Search input */
 .filterBlock input {
     width: 100%;
     padding: 11px 12px 11px 36px;
     color: rgba(255,255,255,0.88);
-    border-radius: 10px;
+    border-radius: var(--inputs-radius);
     border: 1px solid rgba(255, 255, 255, 0.16);
     font-size: var(--label-font);
     background: rgba(255, 255, 255, 0.08);
     backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
     transition: border-color 0.25s ease, box-shadow 0.25s ease;
     outline: none;
     box-sizing: border-box;
 }
-.filterBlock input::placeholder { color: rgba(255, 255, 255, 0.30); }
+
+.filterBlock input::placeholder {
+    color: rgba(255, 255, 255, 0.30);
+}
+
 .filterBlock input:focus {
     border-color: rgba(255, 255, 255, 0.35);
     box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.06);
     background: rgba(255, 255, 255, 0.12);
 }
 
-/* Filter type list items */
 .filterTypes {
     display: flex;
     flex-direction: column;
     gap: 2px;
 }
+
 .filterTypes span {
     font-size: var(--label-font);
     font-weight: 500;
     color: rgba(255, 255, 255, 0.70);
     padding: 8px 10px;
-    border-radius: 8px;
+    border-radius: var(--inputs-radius);
     cursor: pointer;
     transition: background-color 0.2s ease, color 0.2s ease;
     letter-spacing: 0.01em;
 }
+
 .filterTypes span:hover {
     background: rgba(255, 255, 255, 0.08);
     color: rgba(255,255,255,0.95);
@@ -171,30 +151,30 @@
     gap: 2px;
     padding-right: 4px;
 }
+
 .regionList span {
     font-size: var(--label-font);
     font-weight: 500;
     color: rgba(255, 255, 255, 0.70);
     padding: 8px 10px;
-    border-radius: 8px;
+    border-radius: var(--inputs-radius);
     cursor: pointer;
     transition: background-color 0.2s ease, color 0.2s ease;
     letter-spacing: 0.01em;
 }
+
 .regionList span:hover {
     background: rgba(255, 255, 255, 0.08);
     color: rgba(255,255,255,0.95);
 }
 
-/* Accordion */
 .accordionBlock {
-    border-radius: 12px;
+    border-radius: var(--inputs-radius);
     overflow: hidden;
     border: 1px solid rgba(255, 255, 255, 0.18);
     border-top: 1px solid rgba(255, 255, 255, 0.28);
     background: rgba(255, 255, 255, 0.11);
     backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
     animation: slideDown 0.45s ease forwards;
     opacity: 0;
 }
@@ -214,8 +194,8 @@
     font-weight: 700;
     letter-spacing: 0.03em;
     transition: background-color 0.2s ease;
-    font-family: inherit;
 }
+
 .accordionHeader:hover {
     background: rgba(255, 255, 255, 0.05);
 }
@@ -225,6 +205,7 @@
     color: rgba(255, 255, 255, 0.40);
     transition: transform 0.3s ease;
 }
+
 .accordionChevron.open {
     transform: rotate(180deg);
 }
@@ -235,19 +216,19 @@
     transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s ease;
     padding: 0 16px;
 }
+
 .accordionBody.open {
     max-height: 600px;
     padding: 4px 16px 16px;
 }
 
-/* Active filter states */
-.activeTaste, .activeRegion {
+.activeTaste,
+.activeRegion {
     background-color: rgba(255, 255, 255, 0.14) !important;
     color: #ffffff !important;
     font-weight: 700 !important;
 }
 
-/* Price filter */
 .filterPrice {
     display: flex;
     flex-direction: column;
@@ -256,6 +237,7 @@
     font-weight: 500;
     color: rgba(255,255,255,0.80);
 }
+
 .filterPrice p {
     text-align: center;
     font-size: var(--label-font);
@@ -263,14 +245,13 @@
     color: rgba(255,255,255,0.80);
 }
 
-/* Clear filters button */
 .removeFilterBtn {
     width: 100%;
     background-color: transparent;
     color: rgba(255, 255, 255, 0.60);
     border: 1px solid rgba(255, 255, 255, 0.18);
     padding: 10px;
-    border-radius: 10px;
+    border-radius: var(--image-radius);
     font-size: var(--label-font);
     font-weight: 600;
     cursor: pointer;
@@ -278,16 +259,18 @@
     letter-spacing: 0.02em;
     opacity: 0;
     animation: slideDown 0.45s ease forwards;
-    font-family: inherit;
 }
+
 .removeFilterBtn:hover {
     background-color: rgba(255, 255, 255, 0.08);
     border-color: rgba(255, 255, 255, 0.30);
     color: rgba(255,255,255,0.90);
 }
-.removeFilterBtn:active { transform: translateY(1px); }
 
-/* Items grid */
+.removeFilterBtn:active {
+    transform: translateY(1px);
+}
+
 .itemsGrid {
     display: flex;
     flex: 1;
@@ -297,10 +280,14 @@
     margin: 20px;
 }
 
-.filterToggle { display: none; }
-.applyFilterBtn { display: none; }
+.filterToggle {
+    display: none;
+}
 
-/* ---- Mobile ---- */
+.applyFilterBtn {
+    display: none;
+}
+
 @media (max-width: 768px) {
     .contentArea {
         position: relative;
@@ -319,7 +306,6 @@
         margin: 8px auto 0;
         background: rgba(255, 255, 255, 0.10);
         backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
         color: rgba(255,255,255,0.88);
         border: 1px solid rgba(255, 255, 255, 0.18);
         padding: 11px 20px;
@@ -330,7 +316,6 @@
         letter-spacing: 0.03em;
         transition: background-color 0.2s ease;
         z-index: 20;
-        font-family: inherit;
     }
 
     .filterPanel {
@@ -341,20 +326,18 @@
         gap: 8px;
         background: rgba(255, 255, 255, 0.07);
         backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
         padding: 0 16px;
-        border-radius: 16px;
+        border-radius: var(--container-radius);
         border: 1px solid rgba(255, 255, 255, 0.12);
         animation: none;
         max-height: 0;
         overflow: hidden;
         opacity: 0;
         pointer-events: none;
-        transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-                    opacity 0.3s ease,
-                    padding 0.3s ease;
+        transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease, padding 0.3s ease;
         z-index: 100;
     }
+
     .filterPanel.open {
         max-height: 1400px;
         opacity: 1;
@@ -368,6 +351,7 @@
         width: 100%;
         box-sizing: border-box;
     }
+
     .filterBlock {
         animation: none !important;
         opacity: 1 !important;
@@ -390,10 +374,15 @@
         cursor: pointer;
         transition: background-color 0.2s ease;
         letter-spacing: 0.02em;
-        font-family: inherit;
     }
-    .applyFilterBtn:hover { background: rgba(192, 73, 106, 0.90); }
-    .applyFilterBtn:active { transform: translateY(1px); }
+
+    .applyFilterBtn:hover {
+        background: rgba(192, 73, 106, 0.90);
+    }
+
+    .applyFilterBtn:active {
+        transform: translateY(1px);
+    }
 
     .itemsGrid {
         margin: 0;
@@ -403,10 +392,11 @@
 }
 
 @keyframes slideDown {
-    0%   { opacity: 0; transform: translateY(-20px); }
+    0% { opacity: 0; transform: translateY(-20px); }
     100% { opacity: 1; transform: translateY(0); }
 }
+
 @keyframes fadeIn {
     from { opacity: 0; }
-    to   { opacity: 1; }
+    to { opacity: 1; }
 }

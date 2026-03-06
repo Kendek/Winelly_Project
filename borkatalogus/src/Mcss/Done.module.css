@@ -1,24 +1,22 @@
 .mainDiv {
     margin: 0;
-    padding: 0;
+    padding: 20px;
     background-color: var(--secondary-colour);
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 20px;
     position: relative;
     overflow: hidden;
 }
 
-.hide
-{
+.hide {
     display: none;
 }
 
 .containerDone {
     background: white;
-    border-radius: 14px;
+    border-radius: var(--container-radius);
     padding: 30px 40px;
     border: 3px solid var(--primary-colour);
     display: flex;
@@ -29,7 +27,7 @@
     text-align: center;
 }
 
-.containerDone>span {
+.containerDone > span {
     margin: 0;
     font-size: var(--large-title-font);
     color: var(--primary-colour);
@@ -44,7 +42,7 @@
 .orderBox {
     background-color: var(--secondary-colour);
     padding: 10px;
-    border-radius: 14px;
+    border-radius: var(--container-radius);
     display: flex;
     flex-direction: column;
     gap: 14px;
@@ -59,7 +57,7 @@
 .itemImg {
     width: 50px;
     height: 50px;
-    border-radius: 8px;
+    border-radius: var(--inputs-radius);
     background: rgba(149, 149, 149, 0.226);
     display: flex;
     align-items: center;
@@ -73,17 +71,15 @@
     object-fit: contain;
 }
 
-.itemName {
-    flex: 1;
+.itemName,
+.itemQty {
     font-weight: 500;
     font-size: var(--description-font);
     color: var(--primary-colour);
 }
 
-.itemQty {
-    font-weight: 500;
-    font-size: var(--description-font);
-    color: var(--primary-colour);
+.itemName {
+    flex: 1;
 }
 
 .backButton {
@@ -92,7 +88,7 @@
     background-color: var(--primary-colour);
     color: white;
     border: none;
-    border-radius: 10px;
+    border-radius: var(--inputs-radius);
     font-size: 16px;
     font-weight: 500;
     cursor: pointer;
@@ -113,7 +109,6 @@
         transform: translateX(100%);
         opacity: 0;
     }
-
     to {
         transform: translateX(0);
         opacity: 1;

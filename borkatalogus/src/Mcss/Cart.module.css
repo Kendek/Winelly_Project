@@ -1,12 +1,11 @@
 .mainDiv {
     margin: 0;
-    padding: 0;
+    padding: 20px;
     background-color: var(--secondary-colour);
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 20px;
     position: relative;
     overflow: visible;
     z-index: 1;
@@ -16,19 +15,16 @@
     animation: cartSlideOutLeft 0.4s ease forwards;
 }
 
-
 @keyframes cartSlideOutLeft {
     from {
         transform: translateX(0);
         opacity: 1;
     }
-
     to {
         transform: translateX(-100%);
         opacity: 0;
     }
 }
-
 
 .cartContainer {
     display: flex;
@@ -46,7 +42,7 @@
     color: var(--primary-colour);
 }
 
-.cartItems>p {
+.cartItems > p {
     font-size: var(--large-title-font);
 }
 
@@ -65,8 +61,8 @@
     margin-top: 5vh;
     font-size: var(--description-font);
 }
-.itemInfo p:first-child
-{
+
+.itemInfo p:first-child {
     font-weight: 600;
 }
 
@@ -80,6 +76,7 @@
     align-items: center;
     gap: 12px;
 }
+
 .itemControls span {
     display: flex;
     align-items: center;
@@ -150,10 +147,20 @@
 
 .codeInput {
     width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    margin-top: 8px;
+    padding: 10px;
+    border-radius: var(--smalldiv-radius);
+    border: 2px solid var(--primary-colour);
+    margin-bottom: 16px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.codeInput:focus {
+    border: 2px solid var(--primary-colour);
+    background: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px #8e183b39;
 }
 
 .summaryTotal {
@@ -196,26 +203,7 @@
     text-decoration: underline;
 }
 
-.codeInput {
-    width: 100%;
-    padding: 10px;
-    border-radius: var(--smalldiv-radius);
-    border: 2px solid var(--primary-colour);
-    margin-bottom: 16px;
-    font-size: 14px;
-    transition: all 0.3s ease;
-    outline: none;
-}
-
-.codeInput:focus {
-    border: 2px solid var(--primary-colour);
-    background: white;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px #8e183b39;
-}
-
-.codeSubmit
-{
+.codeSubmit {
     width: 100%;
     padding: 8px;
     background: var(--primary-colour);
@@ -226,6 +214,7 @@
     cursor: pointer;
     transition: all 0.3s ease;
 }
+
 .codeSubmit:hover {
     transform: translateY(-2px);
     box-shadow: 0 12px 35px #8e183b39;
@@ -239,8 +228,7 @@
     .cartContainer {
         flex-direction: column;
     }
-
-    .cartItems>p {
+    .cartItems > p {
         font-size: var(--title-font);
     }
     .cartItem {

@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: rgba(249, 246, 242);
+  background-color: var(--secondary-colour);
   color: var(--primary-colour);
   padding: 0 2.5rem;
   height: 68px;
@@ -12,17 +12,6 @@
   z-index: 9999;
   backdrop-filter: blur(18px) saturate(1.4);
   -webkit-backdrop-filter: blur(18px) saturate(1.4);
-}
-
-.navbar::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 2.5rem;
-  right: 2.5rem;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(139, 30, 63, 0.2), transparent);
-  pointer-events: none;
 }
 
 .navbarleft {
@@ -85,7 +74,7 @@
 }
 
 .pageLink {
-  color: rgba(139, 30, 63);
+  color: var(--primary-colour);
   font-size: var(--label-font);
   font-weight: 500;
   text-decoration: none;
@@ -135,7 +124,7 @@
 }
 
 .navbarright p {
-  color: rgba(139, 30, 63);
+  color: var(--primary-colour);
   font-size: var(--label-font);
   font-weight: 500;
   margin: 0;
@@ -183,9 +172,8 @@
   box-shadow: 0 4px 16px rgba(139, 30, 63, 0.4);
 }
 
-/* LOGIN — ugyanolyan mint a többi navlink */
 .usericon {
-  color: rgba(139, 30, 63);
+  color: var(--primary-colour);
   font-size: var(--label-font);
   font-weight: 500;
   text-decoration: none;
@@ -205,7 +193,6 @@
   background-color: rgba(139, 30, 63, 0.06);
 }
 
-/* Bejelentkezve — aktív állapot mint a pageLinkactive */
 .usericonlogin {
   color: var(--primary-colour);
   font-size: var(--label-font);
@@ -306,11 +293,6 @@
     height: 60px;
   }
 
-  .navbar::after {
-    left: 1rem;
-    right: 1rem;
-  }
-
   .navbarleft {
     min-width: auto;
   }
@@ -355,18 +337,6 @@
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: -8px 0 40px rgba(20, 5, 10, 0.12);
     overflow-y: auto;
-  }
-
-  .navlinksActive::before,
-  .navlinks::before {
-    content: '';
-    display: block;
-    width: 36px;
-    height: 3px;
-    background-color: rgba(139, 30, 63, 0.2);
-    border-radius: 100px;
-    margin-bottom: 1.5rem;
-    flex-shrink: 0;
   }
 
   .navlinks .pageLink,
