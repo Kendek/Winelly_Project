@@ -25,7 +25,7 @@ AOS.init({
           <h1 className={styles.Stars}><Rating className={styles.Stars} value={5} precision={0.5} readOnly></Rating></h1>
           <h3>Worldwide shipping in everyday of the year for affordable price.</h3>
           <div className={`${styles.LineDecor} ${styles.White}` }></div>
-          <h2>Order Now 🛒</h2>
+          <h2 className={styles.OrderBtn}>  Order Now 🛒</h2>
 
         </div>  
       </div>

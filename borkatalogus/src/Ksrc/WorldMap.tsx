@@ -7,6 +7,7 @@ import styles from "../Kcss/Map.module.css"
 import { GetDbData } from './AdminPages/AdminFetch';
 import type { WineryGetType } from './AdminPages/AdminFetch';
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
+import AOS from 'aos'
 
 
 let area: string | null = null;
@@ -14,6 +15,10 @@ export const getArea = () =>area;
 export const setArea = (val: string|null) => {area =val};
 
 const Chart = () => {
+    AOS.init({
+      duration: 1000,
+    });
+
     const navigate = useNavigate();
     const [Winerys, setWinerys] = useState<WineryGetType[]>([])
     const markerSeriesRef = useRef<any>(null);
@@ -43,15 +48,31 @@ const Chart = () => {
                 maxPanOut: 0,
             })
         );
+        var gradient = am5.RadialGradient.new(root, {
+        stops: [
+            { color: am5.color(0xe05080), offset: 0 },    
+            { color: am5.color(0xb03050), offset: 0.35 }, 
+            { color: am5.color(0x8f2040), offset: 0.65 },
+            { color: am5.color(0x5a1828), offset: 1 }    
+        ]
+});
 
 
         chartRef.current = chart;
+
+        chart.animate({
+            key: "rotationX",
+            from: 0,
+            to: 360,
+            duration: 30000,
+            loops: Infinity
+        });
 
 
         let PolygonSeries  = chart.series.push(
             am5map.MapPolygonSeries.new(root,{
                 geoJSON: am5geodata_worldLow,
-                fill: am5.color("#cfa446"),
+                fill: am5.color("#d1b883"),
 
             })
         );
@@ -65,7 +86,8 @@ const Chart = () => {
              am5map.MapPolygonSeries.new(root, {})
         );
         backgroundSeries.mapPolygons.template.setAll({
-            fill: am5.color("#2a6283"),
+            fillGradient: gradient,
+            fillOpacity: 1
         });
 
         backgroundSeries.data.push({
@@ -190,7 +212,7 @@ const Chart = () => {
 
   return (
     <div className={styles.main}>
-        <div className={styles.Search}>
+        <div ata-aos="fade-up" data-aos-duration="3000" className={styles.Search}>
             <h1>Search winery:</h1>
             <select  onChange={(e) => ZoomOnSelect(parseInt(e.target.value))} > 
                 {Winerys.map((row) => <option value={row.id}>{row.name}, {row.region}</option>)}
