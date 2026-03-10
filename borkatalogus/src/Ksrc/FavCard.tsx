@@ -5,7 +5,7 @@ import 'aos/dist/aos.css';
 import { useNavigate } from "react-router-dom";
 
 
-const FavCard = (props: {  classname: string, name: string, price: number, rating: number, WineId: number, duration: string }) => {
+const FavCard = (props: { CardImg:string, classname: string, name: string, price: number, rating: number, WineId: number, duration: string }) => {
 
 
   const navigate = useNavigate();
@@ -17,7 +17,7 @@ const FavCard = (props: {  classname: string, name: string, price: number, ratin
     <div data-aos="fade-down" data-aos-duration={props.duration}   className={`${props.classname} ${styles.AnimatedCard}`} >
       <div  className={styles.ImgBg}>
         <div className={styles.CircleRing} />
-        <img className={styles.CardIMG} src={('../public/wineTest.png')} alt="" />
+        <img className={styles.CardIMG} src={props.CardImg} alt="" />
       </div>
       <div className={styles.CardDesc}>
         <span data-aos="fade-right" data-aos-duration={props.duration}   className={styles.CardTitle}>{props.name}</span>

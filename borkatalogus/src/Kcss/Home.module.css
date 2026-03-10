@@ -1,6 +1,11 @@
 ::-webkit-scrollbar {
     display: none;
 }
+.WineBottle {
+    transform: scale(10%);
+    position: absolute;
+    visibility: hidden;
+}
 .HomeMain {
     color: #a82a4f;
     scrollbar-width: none;
@@ -9,51 +14,144 @@
     gap: 0;
     flex-direction: column;
     overflow: hidden;
-        overflow-y: scroll;
+    overflow-y: scroll;
 }
 .HomeFirst {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
+    justify-content: center;
     width: 100%;
     flex-direction: column;
     background-repeat: no-repeat;
     background-size: cover;
     height: 100vh;
     background-image: url("../public/HomeBG.png");
+    padding-right: 12%;
 }
-.WineBottle {
-    transform: scale(10%);
-    position: absolute;
-    visibility: hidden;
-}
+
 .TextContainer {
-    margin-top: 5%;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     flex-direction: column;
-    gap: 30px;
-    margin-left: 40%;
+    gap: 22px;
     color: white;
-    text-align: center;
-    text-shadow: 2px 2px black;
-    font-size: larger;
-    width: 30vw;
-    border: 2px solid rgba(255, 255, 255, 0.836);
-    padding: 100px 10px 100px 10px;
-    border-radius: 10px;
+    text-align: left;
+    width: 32vw;
+    padding: 48px 40px;
+    border-radius: 20px;
+    height: 60%;
+
+    background: linear-gradient(135deg, rgba(255,255,255,0.07) 0%, rgba(139,30,63,0.12) 100%);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.12),
+        0 40px 80px rgba(0, 0, 0, 0.45);
+
     animation: UpDown 3s ease-in-out infinite;
-    height: 60vh;
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 
-    h2 {
-        text-decoration: underline;
-    }
-
-    h1 {
-        font-weight: bold;
-    }
+    h2 { text-decoration: none; }
+    h1 { font-weight: bold; }
 }
+
+.HeroTag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.9);
+    padding: 8px 16px;
+    border-radius: 100px;
+    width: fit-content;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.15),
+        0 4px 24px rgba(0, 0, 0, 0.2);
+}
+
+.HeroHeading {
+    font-size: clamp(1.5rem, 2.8vw, 2.2rem);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, #ffffff 0%, #f0a0b8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0;
+    text-shadow: none;
+}
+
+.HeroBody {
+    font-size: clamp(0.85rem, 1.1vw, 0.95rem);
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0;
+    font-weight: 300;
+    letter-spacing: 0.01em;
+    text-shadow: none;
+}
+
+.HeroDivider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(196, 40, 79, 0.6), transparent);
+}
+
+.HeroOrderBtn {
+    width: 100%;
+    background: linear-gradient(135deg, #d03262, #8B1E3F);
+    color: white;
+    border: none;
+    padding: 14px 20px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 4px;
+    text-align: center;
+}
+
+.HeroOrderBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 35px rgba(142, 24, 59, 0.4);
+}
+
+.Stars :global(.MuiRating-iconFilled),
+.Stars :global(.MuiRating-iconEmpty) {
+    color: rgba(255,255,255,0.9);
+    font-size: 150%;
+}
+
+.StarsRow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 0.05em;
+}
+
+@media screen and (max-width: 768px) {
+    .HomeFirst {
+        justify-content: center;
+        align-items: center;
+        padding-right: 0;
+    }
+    .TextContainer {
+        width: 85vw;
+        align-items: center;
+        text-align: center;
+    }}
 .HomeSecond { 
     width: 100%;
     padding-top: 3vh;
@@ -62,7 +160,6 @@
     flex-direction: column;
 }
 .GradientBackground{
-    z-index: -10;
     background: radial-gradient(ellipse at 20% 30%, #c4284f 0%, #8a1530 35%, #3d0a18 65%, #1a060e 100%);   
 }
 .HomeDivider{
@@ -70,10 +167,7 @@
     height: 2vh;
     background-color: black;
 }
-.Stars :global(.MuiRating-iconFilled),.Stars :global(.MuiRating-iconEmpty) {
-    color: white;
-    font-size: 150%;
-}
+
 .FlexBox {
     display: flex;
     flex-direction: row;
@@ -82,9 +176,10 @@
     width: 100%;
 }
 .LineDecor {
-    width: 40%;
+    width: 30%;
+    margin: 50px;
     height: 1%;
-    border: 4px solid white;
+    border: 3px solid white;
     box-shadow: black 0px 0px 5px;
 }
 .Title {
@@ -99,8 +194,7 @@
     color: white;
 }
 .FavCardContainer {
-    
-    z-index: 1;
+    z-index: 10;
     display: flex;
     width: 90%;
     gap: 10%;
@@ -122,6 +216,7 @@
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
+    cursor: pointer;
 }
 .OrderButton:hover {
     transform: translateY(-2px);
@@ -158,7 +253,6 @@
     font-weight: bold;
 }
 .CardDesc {
-    z-index: 1;
     display: block;
     margin-top: 10%;
     display: flex;
@@ -172,10 +266,9 @@
   justify-content: center;
   align-items: center;
   position: fixed;
-  bottom: 20px;        /* distance from bottom */
-  left: 5%;           /* center horizontally */
-  transform: translateX(-50%);
-  z-index: 999;        /* stay above other elements */
+  bottom: 20px;      
+  left: 5%;          
+  transform: translateX(-50%);  
   cursor: pointer;
   width: 90px;
   border-radius: 50%;
@@ -238,10 +331,6 @@
         transform: translateY(0);
     }
 }
-.White {
-    border: 2px white solid;
-    width: 80%;
-}
 @media screen and (max-width: 768px) {
     .TextContainer {
         width: 80vw;
@@ -262,33 +351,120 @@
     }
 
 }
-.HomeThird{
+.HomeThird {
     min-height: 80vh;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
     width: 100%;
+    gap: 5%;
+    position: relative;
+
 }
-.HomeMapGlobe,.HomeMapInfo {
-    width: 30vw;
+
+.HomeThird::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 60% 50%, rgba(196, 40, 79, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+
+}
+
+.HomeMapInfo {
+    width: 32vw;
+    min-height: 60vh;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 28px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: linear-gradient(135deg, rgba(255,255,255,0.04) 0%, rgba(139,30,63,0.08) 100%);
+    backdrop-filter: blur(12px);
+    text-align: left;
+    color: white;
+    padding: 48px 40px;
+    box-shadow:
+        0 0 0 1px rgba(255,255,255,0.05),
+        0 40px 80px rgba(0,0,0,0.4),
+        inset 0 1px 0 rgba(255,255,255,0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.HomeMapInfo::before {
+    content: '🍷';
+    position: absolute;
+    top: -20px;
+    right: -10px;
+    font-size: 120px;
+    opacity: 0.2;
+    pointer-events: none;
+    transform: rotate(-15deg);
+}
+
+.HomeMapGlobe {
+    width: 42vw;
     height: 70vh;
-    border: white 2px dashed;
-    border-radius: 3px;
+    border-radius: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
+    border: 1px solid rgba(255,255,255,0.08);
+    overflow: hidden;
+    box-shadow: 0 40px 80px rgba(0,0,0,0.4);
 }
-.HomeMapInfo{
-    flex-direction: column;
-    justify-content: start;
-    gap: 20px;
-    text-align: center;
-    color: white;
-    text-shadow: 2px 2px black;
-    font-size: larger;
-    padding: 20px;
 
+.MapHeading {
+    font-size: clamp(1.4rem, 2.5vw, 2rem);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, #ffffff 0%, #f0a0b8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0;
 }
+
+.MapBody {
+    font-size: clamp(0.85rem, 1.2vw, 1rem);
+    line-height: 1.75;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0;
+    font-weight: 300;
+    letter-spacing: 0.01em;
+}
+
+.MapDivider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(196, 40, 79, 0.6), transparent);
+}
+.MapTag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.9);
+    padding: 8px 16px;
+    border-radius: 100px;
+    width: fit-content;
+
+    /* Glassy effect */
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.15),
+        0 4px 24px rgba(0, 0, 0, 0.2);
+}
+
 .HomeMapGlobe{
 
 

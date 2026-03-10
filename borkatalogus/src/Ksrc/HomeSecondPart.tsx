@@ -63,24 +63,18 @@ useEffect(() =>{
             <div className={styles.LineDecor}></div>
           </div>
       
-         {/* {RandomWines.length > 2 && randomRatings.length> 2 &&  */}
+         {RandomWines.length > 2 && randomRatings.length> 2 &&
         <div className={styles.FavCardContainer}>
           
-                <FavCard duration="2200" WineId={1} classname="FavCardDown" name={"Tokaji Aszi ||"} price={39990} rating={4.2}></FavCard>
 
-                <FavCard duration="1200" WineId={1} classname="FavCardUp" name={"Tokaji Aszi ||"} price={39990} rating={4.2}></FavCard>
+                <FavCard duration="2200" WineId={RandomWines[0]["id"]} CardImg={RandomWines[0]["url"]} classname="FavCardDown" name={RandomWines[0]["name"]} price={RandomWines[0]["price"]} rating={randomRatings[0]}></FavCard>
 
-                <FavCard duration="2200" WineId={1} classname="FavCardDown  " name={"Tokaji Aszi ||"} price={39990} rating={4.2}></FavCard>
-{/* 
+                <FavCard duration="1200" WineId={RandomWines[1]["id"]} CardImg={RandomWines[1]["url"]} classname="FavCardUp" name={RandomWines[1]["name"]} price={RandomWines[1]["price"]} rating={randomRatings[1]}></FavCard>
 
-                <FavCard WineId={RandomWines[0]["id"]} CardImg={RandomWines[0]["url"]} classname="FavCardUp" name={RandomWines[0]["name"]} price={RandomWines[0]["price"]} rating={randomRatings[0]}></FavCard>
-
-                <FavCard WineId={RandomWines[1]["id"]} CardImg={RandomWines[1]["url"]} classname="FavCardDown" name={RandomWines[1]["name"]} price={RandomWines[1]["price"]} rating={randomRatings[1]}></FavCard>
-
-                <FavCard WineId={RandomWines[2]["id"]} CardImg={RandomWines[2]["url"]} classname="FavCardUp" name={RandomWines[2]["name"]} price={RandomWines[2]["price"]} rating={randomRatings[2]}></FavCard> */}
+                <FavCard duration="2200" WineId={RandomWines[2]["id"]} CardImg={RandomWines[2]["url"]} classname="FavCardDown" name={RandomWines[2]["name"]} price={RandomWines[2]["price"]} rating={randomRatings[2]}></FavCard> 
               
         </div>
-        {/* }  */}
+        } 
       </div>
   )
 }
