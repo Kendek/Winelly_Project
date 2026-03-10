@@ -1,7 +1,6 @@
 .mainDiv {
     margin: 0;
     padding: 0;
-    background-color: var(--secondary-colour);
     min-height: 100vh;
     display: flex;
     align-items: center;

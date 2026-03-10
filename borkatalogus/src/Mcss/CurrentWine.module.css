@@ -13,15 +13,15 @@
     -webkit-backdrop-filter: blur(6px);
 }
 
+.currentWineImage {}
+
 .overlay {
     display: flex;
     flex-direction: row;
-    gap: 0;
     width: 100%;
     height: 100%;
 }
 
-/* Flying cart animation */
 .flyingImage {
     position: fixed;
     top: 0;
@@ -32,8 +32,6 @@
     pointer-events: none;
     transition: all 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
-
-.currentWineImage {}
 
 .container {
     background: var(--secondary-colour);
@@ -59,7 +57,7 @@
     position: absolute;
     top: 16px;
     left: 16px;
-    background: transparent;
+    background: white;
     border: 1.5px solid rgba(139, 30, 63, 0.3);
     font-size: 13px;
     font-weight: 600;
@@ -83,33 +81,21 @@
 
 .wineLeftSide {
     flex: 0 0 42%;
-    background: linear-gradient(160deg, var(--secondary-colour) 0%, #eeebe4 60%, #e5dfd5 100%);
+    background: linear-gradient(160deg, #5a0e2c 65%, #8b2a4a 35%);
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 40px 30px;
     position: relative;
     overflow: hidden;
-}
-
-.wineLeftSide::before {
-    content: '';
-    position: absolute;
-    width: 300px;
-    height: 300px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(139, 30, 63, 0.08) 0%, transparent 70%);
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
+}   
 
 .wineLeftSide img {
     width: auto;
     height: 100%;
     max-height: 520px;
     object-fit: contain;
-    filter: drop-shadow(0 20px 40px rgba(139, 30, 63, 0.22));
+    filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.45));
     position: relative;
     z-index: 1;
     transition: transform 0.4s ease;
@@ -159,7 +145,6 @@
 
 .wineRating span {
     display: flex;
-    flex-direction: row;
     align-items: center;
     gap: 8px;
     font-size: var(--description-font);
@@ -183,12 +168,12 @@
     cursor: pointer;
     transition: border-color 0.2s;
     padding-bottom: 1px;
-    margin-left: 0;
 }
 
 .wineRating b:hover {
     border-color: var(--primary-colour);
 }
+
 .divider {
     width: 100%;
     height: 1px;
@@ -304,7 +289,6 @@
     box-shadow: 0 6px 16px rgba(139, 30, 63, 0.25);
 }
 
-/*   MOBILE   */
 @media (max-width: 768px) {
 
     .container {
@@ -420,7 +404,6 @@
     }
 }
 
-/* ========== ANIMATIONS ========== */
 @keyframes slideUp {
     from {
         opacity: 0;
