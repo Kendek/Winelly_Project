@@ -320,6 +320,8 @@ form{
 }
 textarea{
     resize: none;
+    min-width: 200px;
+    min-height: 90px;
 }
 
 .PatchTitle{
@@ -381,6 +383,7 @@ textarea{
     border-radius: 3px;
     padding: 20px 12px 28px 12px;
     background: linear-gradient(180deg, rgba(3,183,191,0.03), rgba(3,183,191,0.01));
+    min-height:  100vh;
 }
 
 /* Ensure select dropdown is clearly visible */
@@ -402,3 +405,6 @@ textarea{
     }
 }
 
+.AdminContainer{
+    background-color: white;
+}

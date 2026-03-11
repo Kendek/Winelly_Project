@@ -79,6 +79,8 @@ const AdminWinery = () => {
           region: formJson.region as string,
           country: formJson.country as string,
           establishedYear: parseInt(formJson.establishedYear as string),
+          description: formJson.description as string,
+          mapUrl: formJson.mapUrl as string
         } as WineryPostType)
 
         setUpdateState(UpdateState =>!UpdateState)
@@ -125,6 +127,8 @@ const AdminWinery = () => {
         region: formJson.region as string,
         country: formJson.country as string,
         establishedYear: parseInt(formJson.establishedYear as string),
+        description: formJson.description as string,
+        mapUrl: formJson.mapUrl as string 
       } as WineryPostType, SelectedWinery["id"])
               setUpdateState(UpdateState =>!UpdateState)
     }
@@ -153,6 +157,12 @@ const AdminWinery = () => {
                    <label>
                       Established: <input onKeyDown={handleNumberKeyDown} type='number' name='establishedYear'/>
                    </label>
+                   <label>
+                      Description <textarea name='description'></textarea>
+                   </label>
+                   <label>
+                      Google Map Url: <input type="text" name='mapUrl' />
+                   </label>
                     <div>
                         <button type="submit" className={styles.Add}>Add Winery</button>   
                     </div>
@@ -173,6 +183,8 @@ const AdminWinery = () => {
               <TableCell>Region</TableCell>
               <TableCell>Country</TableCell>
               <TableCell>Established</TableCell>
+              <TableCell>Map Url</TableCell>
+              <TableCell>Description</TableCell>
               <TableCell>Delete</TableCell>
             </TableRow>
           </TableHead>
@@ -184,6 +196,8 @@ const AdminWinery = () => {
                   <TableCell>{row.region}</TableCell>
                   <TableCell>{row.country}</TableCell>
                   <TableCell>{row.established}</TableCell>
+                  <TableCell>{row.mapUrl}</TableCell>
+                  <TableCell>{row.description}</TableCell>
                   <TableCell>
                          <button onClick={() => showTemplate(row.id)} className={styles.DeleteDbBtn}>Delete</button>
                   </TableCell>
@@ -224,6 +238,12 @@ const AdminWinery = () => {
                   <label>
                     Established: <input onKeyDown={handleNumberKeyDown} type='number' name='establishedYear' defaultValue={`${SelectedWinery["establishedYear"]}`} />
                   </label>
+                    <label>
+                      Description <textarea defaultValue={`${SelectedWinery["description"]}`} name='description'></textarea>
+                   </label>
+                   <label>
+                      Google Map Url: <input defaultValue={`${SelectedWinery["mapUrl"]}`}  type="text" name='mapUrl' />
+                   </label>
 
                   <div style={{display:"flex", justifyContent:"center"}}>
                   <button type="submit" className={styles.Add}>Update Winery</button>   

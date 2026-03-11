@@ -20,14 +20,18 @@ export type WineryGetType= {
     country: string,
     established: number,
     lat:number,
-    lon:number
+    lon:number,
+    description:string,
+    mapUrl:string
 
 }
 export type WineryPostType= {
     name: string,
     region: string,
     country: string,
-    establishedYear: number
+    establishedYear: number,
+    description:string,
+    mapUrl:string
 }
 export type WineGetType = {
     id:number,
