@@ -12,6 +12,8 @@ namespace WinellyApi.Models
         public double Lat {  get; set; }
         public double Lon { get; set; }
         public int EstablishedYear { get; set; }
+        public string Description { get; set; }
+        public string MapUrl { get; set; }
         public List<Wine> Wines { get; set; } = new();
     }
 }

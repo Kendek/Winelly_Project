@@ -73,6 +73,8 @@ namespace WinellyApi.Controllers
             }
             if (updateDto.Country != null) wineryModel.Country = updateDto.Country;
             if (updateDto.EstablishedYear != 0)  wineryModel.EstablishedYear = updateDto.EstablishedYear;
+            if (updateDto.Description != null) wineryModel.Description = updateDto.Description;
+            if (updateDto.MapUrl != null) wineryModel.MapUrl = updateDto.MapUrl;
 
             await _context.SaveChangesAsync();
             return Ok(wineryModel.ToWineryDto());
