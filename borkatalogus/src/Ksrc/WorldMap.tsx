@@ -9,7 +9,14 @@ import type { WineryGetType } from './AdminPages/AdminFetch';
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 import AOS from 'aos'
 
-
+type ClickedMarkerType ={
+    title:string | undefined,
+    area: string | undefined,
+    description: string | undefined,
+    year: number | undefined,
+    url: string | undefined,
+    country: string| undefined
+}
 let area: string | null = null;
 export const getArea = () =>area;
 export const setArea = (val: string|null) => {area =val};
@@ -24,8 +31,60 @@ const Chart = () => {
     const markerSeriesRef = useRef<any>(null);
     const chartRef = useRef<any>(null); 
     const [SelectedWinery, setSelectedWinery]= useState<WineryGetType>()
+    const [hideOrShow, sethideOrShow] = useState(false)
 
+    const [clickedMarker, setClickedMarker] = useState<ClickedMarkerType | null>()
 
+    const InfoDiv  = useRef<any>(null)
+
+    const NavigateToWebshop= (e:any) =>{
+             
+                navigate('/webshop');
+    }
+
+    const DisplayInfoBox=(e: am5.ISpritePointerEvent) =>{
+            setClickedMarker(null)
+           const dataContext = e["target"]?.["_dataItem"]?.["dataContext"] as {
+            title?:string,
+            area?: string,
+            country?:string, 
+            url?:string,
+            description?:string,
+            year?:number
+            };
+            if(dataContext)
+            {
+                setClickedMarker({
+                    title: dataContext.title,
+                    area: dataContext.area,
+                    description: dataContext.description,
+                    year: dataContext.year,
+                    url: dataContext.url,
+                    country: dataContext.country
+                })
+            }
+            //if(dataContext.area)
+            //setArea(dataContext?.area)
+            sethideOrShow(true)
+    }
+    useEffect(()=>{
+        console.log(clickedMarker)
+    },[clickedMarker])
+
+    const FillDisplayBoxWithInfo= () =>{
+        if (!clickedMarker) return null;
+        return (
+            <div>
+                <h3>{clickedMarker.title}</h3>
+                <button onClick={()=>sethideOrShow(false)}>Quit</button>
+                <p><strong>Area:</strong> {clickedMarker.area}</p>
+                <p><strong>Country:</strong> {clickedMarker.country}</p>
+                <p><strong>Description:</strong> {clickedMarker.description}</p>
+                <p><strong>Established:</strong> {clickedMarker.year}</p>
+                {clickedMarker.url && <p><strong>Map URL:</strong> <a href={clickedMarker.url} target="_blank" rel="noopener noreferrer">View on Map</a></p>}
+            </div>
+        );
+    }
     useLayoutEffect(() => { 
         let root = am5.Root.new("chartdiv");
 
@@ -104,11 +163,7 @@ const Chart = () => {
             })
 
             circle.events.on("click", (e) => {
-                const dataContext = e["target"]?.["_dataItem"]?.["dataContext"] as { area?: string };
-                if(dataContext.area)
-                    setArea(dataContext?.area)
-                console.log(area)
-                navigate('/webshop');
+                    DisplayInfoBox(e)
                 });
 
 
@@ -134,7 +189,11 @@ const Chart = () => {
                     geometry: { type:"Point",  coordinates: [marker.lon, marker.lat]},
                     title:`${marker.name}, ${marker.region}`,
                     area: `${marker.region}`,
-                    id: marker.id
+                    id: marker.id,
+                    description: marker.description,
+                    year: marker.establishedYear,
+                    url: marker.mapUrl,
+                    country: marker.country
                 });
             });
         }
@@ -214,6 +273,11 @@ const Chart = () => {
     <div className={styles.main}>
         <div ata-aos="fade-up" data-aos-duration="3000" className={styles.Search}>
             <h1>Search winery:</h1>
+            {hideOrShow && (
+                <div ref={InfoDiv} className={`${styles.InfoBox} ${styles.asd}`}>
+                    {FillDisplayBoxWithInfo()}
+                </div>
+            )}
             <select  onChange={(e) => ZoomOnSelect(parseInt(e.target.value))} > 
                 {Winerys.map((row) => <option value={row.id}>{row.name}, {row.region}</option>)}
             </select>

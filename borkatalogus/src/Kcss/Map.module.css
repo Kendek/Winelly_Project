@@ -94,3 +94,17 @@
         overflow-x: hidden;
         overflow-y: hidden;
 }
+.InfoBox{
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 40%;
+    height: 70%;
+     background: radial-gradient(ellipse at 20% 30%, #c4284f 0%, #8a1530 35%, #3d0a18 65%, #1a060e 100%);
+    visibility: visible;
+    z-index: 100;
+    border-radius: var(--container-radius);
+
+}
+

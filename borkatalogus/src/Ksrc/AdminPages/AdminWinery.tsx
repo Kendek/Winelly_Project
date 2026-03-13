@@ -195,7 +195,7 @@ const AdminWinery = () => {
                   <TableCell>{row.name}</TableCell>
                   <TableCell>{row.region}</TableCell>
                   <TableCell>{row.country}</TableCell>
-                  <TableCell>{row.established}</TableCell>
+                  <TableCell>{row.establishedYear}</TableCell>
                   <TableCell>{row.mapUrl}</TableCell>
                   <TableCell>{row.description}</TableCell>
                   <TableCell>
