@@ -37,9 +37,10 @@ const Chart = () => {
 
     const InfoDiv  = useRef<any>(null)
 
-    const NavigateToWebshop= (e:any) =>{
-             
-                navigate('/webshop');
+    const NavigateToWebshop= (area:string | undefined) =>{
+        if(area)
+            setArea(area)
+        navigate('/webshop');
     }
 
     const DisplayInfoBox=(e: am5.ISpritePointerEvent) =>{
@@ -63,28 +64,57 @@ const Chart = () => {
                     country: dataContext.country
                 })
             }
-            //if(dataContext.area)
-            //setArea(dataContext?.area)
             sethideOrShow(true)
     }
-    useEffect(()=>{
-        console.log(clickedMarker)
-    },[clickedMarker])
 
-    const FillDisplayBoxWithInfo= () =>{
-        if (!clickedMarker) return null;
-        return (
-            <div>
-                <h3>{clickedMarker.title}</h3>
-                <button onClick={()=>sethideOrShow(false)}>Quit</button>
-                <p><strong>Area:</strong> {clickedMarker.area}</p>
-                <p><strong>Country:</strong> {clickedMarker.country}</p>
-                <p><strong>Description:</strong> {clickedMarker.description}</p>
-                <p><strong>Established:</strong> {clickedMarker.year}</p>
-                {clickedMarker.url && <p><strong>Map URL:</strong> <a href={clickedMarker.url} target="_blank" rel="noopener noreferrer">View on Map</a></p>}
+const FillDisplayBoxWithInfo = () => {
+    if (!clickedMarker) return null;
+    return (
+        <>
+            <div className={styles.InfoBoxTag}>
+                <i className="fa-solid fa-wine-bottle"></i> Winery Details
             </div>
-        );
-    }
+
+            <h3 className={styles.InfoBoxTitle}>{clickedMarker.title}</h3>
+
+            <div className={styles.InfoBoxDivider} />
+
+            <div className={styles.InfoBoxRow}>
+                <div className={styles.InfoBoxField}>
+                    <span className={styles.InfoBoxLabel}>Area</span>
+                    <span className={styles.InfoBoxValue}>{clickedMarker.area}</span>
+                </div>
+                <div className={styles.InfoBoxField}>
+                    <span className={styles.InfoBoxLabel}>Country</span>
+                    <span className={styles.InfoBoxValue}>{clickedMarker.country}</span>
+                </div>
+                <div className={styles.InfoBoxField}>
+                    <span className={styles.InfoBoxLabel}>Established</span>
+                    <span className={styles.InfoBoxValue}>{clickedMarker.year}</span>
+                </div>
+            </div>
+
+            <div className={styles.InfoBoxDivider} />
+
+            <p className={styles.InfoBoxDescription}>{clickedMarker.description}</p>
+
+            {clickedMarker.url && (
+                <a className={styles.InfoBoxMapLink} href={clickedMarker.url} target="_blank" rel="noopener noreferrer">
+                    <i className="fa-solid fa-location-dot"></i> View on Map →
+                </a>
+            )}
+
+            <div className={styles.InfoBoxActions}>
+                <button className={styles.InfoBoxPrimaryBtn} onClick={() => NavigateToWebshop(clickedMarker.area)}>
+                    Check out Wines from this Winery <i className="fa-solid fa-cart-shopping"></i>
+                </button>
+                <button className={styles.InfoBoxSecondaryBtn} onClick={() => sethideOrShow(false)}>
+                    Close
+                </button>
+            </div>
+        </>
+    );
+}
     useLayoutEffect(() => { 
         let root = am5.Root.new("chartdiv");
 

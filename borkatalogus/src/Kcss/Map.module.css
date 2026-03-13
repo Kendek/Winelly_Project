@@ -94,17 +94,155 @@
         overflow-x: hidden;
         overflow-y: hidden;
 }
-.InfoBox{
+.InfoBox {
     position: absolute;
-    top: 60%;
+    top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
-    width: 40%;
-    height: 70%;
-     background: radial-gradient(ellipse at 20% 30%, #c4284f 0%, #8a1530 35%, #3d0a18 65%, #1a060e 100%);
-    visibility: visible;
+    transform: translate(-50%, -50%);
+    width: 38%;
+    max-height: 75%;
+    overflow-y: auto;
     z-index: 100;
-    border-radius: var(--container-radius);
+    border-radius: 20px;
+    padding: 40px 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 
+    /* Less transparent, more opaque glass */
+    background: linear-gradient(135deg, rgba(30, 8, 16, 0.82) 0%, rgba(139,30,63,0.75) 100%);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.12),
+        0 40px 80px rgba(0, 0, 0, 0.6);
 }
 
+.InfoBoxTag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.9);
+    padding: 9px 18px;
+    border-radius: 100px;
+    width: fit-content;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.InfoBoxTitle {
+    font-size: clamp(1.6rem, 2.4vw, 2.2rem);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, #ffffff 0%, #f0a0b8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0;
+}
+
+.InfoBoxDivider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(196, 40, 79, 0.6), transparent);
+    flex-shrink: 0;
+}
+
+.InfoBoxRow {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.InfoBoxField {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.InfoBoxLabel {
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(220, 80, 120, 0.95);
+}
+
+.InfoBoxValue {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 400;
+    line-height: 1.6;
+}
+
+.InfoBoxDescription {
+    font-size: 1.05rem;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 300;
+    line-height: 1.75;
+    margin: 0;
+}
+
+.InfoBoxActions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 4px;
+}
+
+.InfoBoxPrimaryBtn {
+    width: 100%;
+    background: linear-gradient(135deg, #d03262, #8B1E3F);
+    color: white;
+    border: none;
+    padding: 15px 20px;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.InfoBoxPrimaryBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 35px rgba(142, 24, 59, 0.45);
+}
+
+.InfoBoxSecondaryBtn {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    padding: 13px 20px;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.InfoBoxSecondaryBtn:hover {
+    background: rgba(255, 255, 255, 0.13);
+    color: white;
+}
+
+.InfoBoxMapLink {
+    color: rgba(240, 160, 184, 0.95);
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.InfoBoxMapLink:hover {
+    color: white;
+}
