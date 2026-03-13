@@ -6,7 +6,12 @@ import { WineContext, type Wine } from '../Mcontext/WineContextProvider';
 import CurrentWine from '../Mcomponents/CurrentWine';
 import Review from './Review';
 import { Rating } from '@mui/material';
+<<<<<<< HEAD
 import { getArea, setArea } from '../Ksrc/WorldMap';
+=======
+import { getArea, setArea } from "../Ksrc/WorldMap";
+import { useLocation } from 'react-router-dom';
+>>>>>>> 036812be0e7555b2a9b0d73fcfc23176a56ac1bb
 
 type WebshopProps = {
   cartIconRef: React.RefObject<HTMLDivElement | null>
@@ -14,7 +19,15 @@ type WebshopProps = {
 
 const Webshop = ({ cartIconRef }: WebshopProps) => {
 
-  const { wines, currentWineId } = useContext(WineContext)
+  const { wines, currentWineId, setCurrentWineId } = useContext(WineContext)
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.state?.wineId) {
+      setCurrentWineId(location.state.wineId);
+    }
+  }, [location.state]);
+
   const [maxPrice, setMaxPrice] = useState(0);
   const [priceValue, setPriceValue] = useState<number[]>([0, 0]);
   const [openFilter, setOpenFilter] = useState(false);
@@ -25,6 +38,14 @@ const Webshop = ({ cartIconRef }: WebshopProps) => {
   const [regionOpen, setRegionOpen] = useState(false);
   const [priceOpen, setPriceOpen] = useState(false);
   const [ratingOpen, setRatingOpen] = useState(false);
+
+  const regionArea = getArea();
+
+  useEffect(() => {
+    return () => {
+      setArea(null);
+    };
+  }, []);
 
   const [minRating, setMinRating] = useState<number | null>(null);
 
@@ -53,6 +74,7 @@ const Webshop = ({ cartIconRef }: WebshopProps) => {
   }, {});
   const tasteList = Object.entries(tasteCounts);
 
+<<<<<<< HEAD
   const [selectedRegion, setSelectedRegion] = useState<string | null>(getArea()?.toLocaleLowerCase() || null);
   console.log(selectedRegion)
   const regionFilter = (region: string) => {
@@ -62,6 +84,17 @@ const Webshop = ({ cartIconRef }: WebshopProps) => {
         return null;
       }
       return region;
+=======
+  const [selectedRegion, setSelectedRegion] = useState<string | null>(regionArea ? regionArea.toLowerCase() : null);
+  const regionFilter = (region: string) => {
+    const lower = region.toLowerCase();
+    setSelectedRegion(prev => {
+      if (prev === lower) {
+        setArea(null);
+        return null;
+      }
+      return lower;
+>>>>>>> 036812be0e7555b2a9b0d73fcfc23176a56ac1bb
     });
   };
 
@@ -121,15 +154,29 @@ const Webshop = ({ cartIconRef }: WebshopProps) => {
   }, [currentWineId]);
 
   const sliderSx = {
-    color: '#8B1E3F',
+    color: 'rgba(255, 255, 255, 0.90)',
     '& .MuiSlider-thumb': {
-      backgroundColor: '#8B1E3F',
+      backgroundColor: '#ffffff',
       width: 16,
       height: 16,
-      '&:hover, &.Mui-focusVisible': { boxShadow: '0 0 0 8px rgba(139,30,63,0.1)' },
+      '&:hover, &.Mui-focusVisible': { boxShadow: '0 0 0 8px rgba(255, 255, 255, 0.15)' },
     },
-    '& .MuiSlider-track': { height: 3 },
-    '& .MuiSlider-rail': { backgroundColor: 'rgba(139,30,63,0.15)', opacity: 1, height: 3 }
+    '& .MuiSlider-track': {
+      height: 3,
+      backgroundColor: '#ffffff',
+      borderColor: '#ffffff',
+    },
+    '& .MuiSlider-rail': {
+      backgroundColor: 'rgba(255, 255, 255, 0.25)',
+      opacity: 1,
+      height: 3
+    }
+  };
+
+  const ratingSx = {
+    '& .MuiRating-iconFilled':  { color: '#ffffff' },
+    '& .MuiRating-iconHover':   { color: 'rgba(255, 255, 255, 0.80)' },
+    '& .MuiRating-iconEmpty':   { color: 'rgba(255, 255, 255, 0.30)' },
   };
 
   return (
@@ -218,7 +265,7 @@ const Webshop = ({ cartIconRef }: WebshopProps) => {
                 <Rating
                   value={minRating}
                   onChange={(e, newValue) => setMinRating(prev => prev === newValue ? null : newValue)}
-                  sx={sliderSx}
+                  sx={ratingSx}
                 />
               </div>
             </div>

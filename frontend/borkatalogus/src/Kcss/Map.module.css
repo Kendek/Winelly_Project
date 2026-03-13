@@ -16,8 +16,15 @@
     gap: 5px;
     flex-direction: column;
     color: var(--primary-colour);
+    font-weight: bold;
     align-items: center;
     margin-top: 10px;
+    background-color: #ffffff;
+    border-radius: 40px;
+    width: 340px;
+    margin: auto;
+    margin-top: 20px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
 }
 
 .Search h1 {
@@ -80,4 +87,10 @@
     outline: none;
     border-color: #8B1E3F;
     box-shadow: 0 0 8px rgba(139, 30, 63, 0.3);
+}
+.main{
+        background-color: #333;
+        padding-bottom: 2rem;
+        overflow-x: hidden;
+        overflow-y: hidden;
 }

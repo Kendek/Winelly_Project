@@ -2,13 +2,45 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background-color: var(--secondary-colour);  
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 20px;
     z-index: 100;
+    position: relative;
+    overflow: hidden;
+    background: radial-gradient(ellipse at 25% 15%, #9e1f45 0%, #5a1020 40%, #2d0a14 70%, #1a060e 100%);
+}
+.authContainer::before,
+.authContainer::after {
+    content: '';
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.45;
+    pointer-events: none;
+    animation: wineOrb 14s ease-in-out infinite alternate;
+}
+.authContainer::before {
+    width: 520px;
+    height: 520px;
+    background: radial-gradient(circle, #8e183b 0%, transparent 70%);
+    top: -140px;
+    left: -140px;
+}
+.authContainer::after {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(201, 169, 110, 0.30) 0%, transparent 70%);
+    bottom: -100px;
+    right: -100px;
+    animation-delay: -7s;
+    animation-direction: alternate-reverse;
+}
+@keyframes wineOrb {
+    0%   { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(30px, 20px) scale(1.08); }
 }
 
 .authContainer *,
@@ -20,6 +52,8 @@
 .formWrapper {
     width: 420px;
     height: 100%;
+    position: relative;
+    z-index: 10;
 }
 
 .formContainer {
@@ -33,4 +67,3 @@
 .formContainer.flipped {
     transform: rotateY(180deg);
 }
-

@@ -1,5 +1,5 @@
-import { useEffect, useLayoutEffect, useState, useRef, useContext } from 'react';
-import { data, useNavigate } from 'react-router-dom';
+import { useEffect, useLayoutEffect, useState, useRef } from 'react';
+import {  useNavigate } from 'react-router-dom';
 import * as am5 from "@amcharts/amcharts5";
 import * as am5map from "@amcharts/amcharts5/map";
 import am5geodata_worldLow from "@amcharts/amcharts5-geodata/worldLow";
@@ -7,9 +7,7 @@ import styles from "../Kcss/Map.module.css"
 import { GetDbData } from './AdminPages/AdminFetch';
 import type { WineryGetType } from './AdminPages/AdminFetch';
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
-import { duration } from '@mui/material';
-
-
+import AOS from 'aos'
 
 
 let area: string | null = null;
@@ -17,17 +15,16 @@ export const getArea = () =>area;
 export const setArea = (val: string|null) => {area =val};
 
 const Chart = () => {
+    AOS.init({
+      duration: 1000,
+    });
+
     const navigate = useNavigate();
     const [Winerys, setWinerys] = useState<WineryGetType[]>([])
     const markerSeriesRef = useRef<any>(null);
     const chartRef = useRef<any>(null); 
     const [SelectedWinery, setSelectedWinery]= useState<WineryGetType>()
 
-    const selectedCircleRef     = useRef<am5.Circle | null>(null);
-const selectedPulseRef      = useRef<am5.Circle | null>(null);
-const selectedGlowRef       = useRef<am5.Circle | null>(null);
-const pulseAnimRef          = useRef<any>(null);
-const pulseOpacityAnimRef   = useRef<any>(null);
 
     useLayoutEffect(() => { 
         let root = am5.Root.new("chartdiv");
@@ -48,29 +45,49 @@ const pulseOpacityAnimRef   = useRef<any>(null);
                 wheelY: "zoom",
                 minZoomLevel: 1,
                 maxZoomLevel: 16,
-                maxPanOut: 0
+                maxPanOut: 0,
             })
         );
+        var gradient = am5.RadialGradient.new(root, {
+        stops: [
+            { color: am5.color(0xe05080), offset: 0 },    
+            { color: am5.color(0xb03050), offset: 0.35 }, 
+            { color: am5.color(0x8f2040), offset: 0.65 },
+            { color: am5.color(0x5a1828), offset: 1 }    
+        ]
+});
 
 
         chartRef.current = chart;
+
+        chart.animate({
+            key: "rotationX",
+            from: 0,
+            to: 360,
+            duration: 30000,
+            loops: Infinity
+        });
 
 
         let PolygonSeries  = chart.series.push(
             am5map.MapPolygonSeries.new(root,{
                 geoJSON: am5geodata_worldLow,
+                fill: am5.color("#d1b883"),
+
             })
         );
 
         PolygonSeries.mapPolygons.template.setAll({
             tooltipText : "{name}",
-            interactive: true
+            interactive: true,
+            stroke: am5.color("#000000")
         })
         let backgroundSeries = chart.series.unshift(
              am5map.MapPolygonSeries.new(root, {})
         );
         backgroundSeries.mapPolygons.template.setAll({
-            fill: am5.color("#c0bcbc"),
+            fillGradient: gradient,
+            fillOpacity: 1
         });
 
         backgroundSeries.data.push({
@@ -194,8 +211,8 @@ const pulseOpacityAnimRef   = useRef<any>(null);
     }, [SelectedWinery])
 
   return (
-    <div >
-        <div className={styles.Search}>
+    <div className={styles.main}>
+        <div ata-aos="fade-up" data-aos-duration="3000" className={styles.Search}>
             <h1>Search winery:</h1>
             <select  onChange={(e) => ZoomOnSelect(parseInt(e.target.value))} > 
                 {Winerys.map((row) => <option value={row.id}>{row.name}, {row.region}</option>)}

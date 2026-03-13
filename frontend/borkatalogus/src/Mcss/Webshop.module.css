@@ -1,11 +1,21 @@
 .mainDiv {
     margin: 0;
     padding: 0;
-    background-color: var(--secondary-colour);
     min-height: 100vh;
     display: flex;
     align-items: flex-start;
     justify-content: center;
+    position: relative;
+}
+
+@keyframes wineOrb {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    100% {
+        transform: translate(40px, 25px) scale(1.10);
+    }
 }
 
 .filterOverlay {
@@ -31,7 +41,7 @@
     width: 100%;
     height: 100vh;
     backdrop-filter: blur(12px);
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(0, 0, 0, 0.40);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -41,7 +51,8 @@
 
 .container {
     width: 100%;
-    background-color: var(--secondary-colour);
+    position: relative;
+    z-index: 1;
 }
 
 .contentArea {
@@ -62,7 +73,7 @@
     margin-top: 30px;
 }
 
-.filterPanel > .filterBlock:first-child {
+.filterPanel>.filterBlock:first-child {
     border: none;
     box-shadow: none;
     padding: 0;
@@ -71,8 +82,8 @@
 
 .filterBlock {
     background-color: transparent;
-    border-radius: 12px;
-    color: var(--primary-colour);
+    border-radius: var(--inputs-radius);
+    color: rgba(255, 255, 255, 0.88);
     position: relative;
     animation: slideDown 0.45s ease forwards;
     opacity: 0;
@@ -84,29 +95,32 @@
     top: 50%;
     transform: translateY(-50%);
     font-size: 13px;
-    color: rgba(139, 30, 63, 0.45);
+    color: rgba(255, 255, 255, 0.40);
     pointer-events: none;
 }
 
 .filterBlock input {
     width: 100%;
     padding: 11px 12px 11px 36px;
-    color: var(--primary-colour);
-    border-radius: 10px;
-    border: 1.5px solid rgba(139, 30, 63, 0.3);
+    color: rgba(255, 255, 255, 0.88);
+    border-radius: var(--inputs-radius);
+    border: 1px solid rgba(255, 255, 255, 0.16);
     font-size: var(--label-font);
-    background: rgba(255, 255, 255, 0.85);
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
     transition: border-color 0.25s ease, box-shadow 0.25s ease;
     outline: none;
     box-sizing: border-box;
 }
 
-.filterBlock input::placeholder { color: rgba(139, 30, 63, 0.45); }
+.filterBlock input::placeholder {
+    color: rgba(255, 255, 255, 0.30);
+}
 
 .filterBlock input:focus {
-    border-color: rgba(139, 30, 63, 0.45);
-    box-shadow: 0 0 0 3px rgba(139, 30, 63, 0.08);
-    background: #fff;
+    border-color: rgba(255, 255, 255, 0.35);
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.06);
+    background: rgba(255, 255, 255, 0.12);
 }
 
 .filterTypes {
@@ -118,17 +132,17 @@
 .filterTypes span {
     font-size: var(--label-font);
     font-weight: 500;
-    color: rgba(139, 30, 63, 0.85);
+    color: rgba(255, 255, 255, 0.70);
     padding: 8px 10px;
-    border-radius: 8px;
+    border-radius: var(--inputs-radius);
     cursor: pointer;
     transition: background-color 0.2s ease, color 0.2s ease;
     letter-spacing: 0.01em;
 }
 
 .filterTypes span:hover {
-    background: rgba(139, 30, 63, 0.06);
-    color: var(--primary-colour);
+    background: rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.95);
 }
 
 .regionList {
@@ -139,27 +153,30 @@
     gap: 2px;
     padding-right: 4px;
 }
+
 .regionList span {
     font-size: var(--label-font);
     font-weight: 500;
-    color: rgba(139, 30, 63, 0.85);
+    color: rgba(255, 255, 255, 0.70);
     padding: 8px 10px;
-    border-radius: 8px;
+    border-radius: var(--inputs-radius);
     cursor: pointer;
     transition: background-color 0.2s ease, color 0.2s ease;
     letter-spacing: 0.01em;
 }
 
 .regionList span:hover {
-    background: rgba(139, 30, 63, 0.06);
-    color: var(--primary-colour);
+    background: rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.95);
 }
 
 .accordionBlock {
-    border-radius: 12px;
+    border-radius: var(--inputs-radius);
     overflow: hidden;
-    border: 1.5px solid rgba(139, 30, 63, 0.22);
-    background: rgba(255, 255, 255, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-top: 1px solid rgba(255, 255, 255, 0.28);
+    background: rgba(255, 255, 255, 0.11);
+    backdrop-filter: blur(16px);
     animation: slideDown 0.45s ease forwards;
     opacity: 0;
 }
@@ -174,21 +191,20 @@
     border: none;
     width: 100%;
     text-align: left;
-    color: var(--primary-colour);
+    color: rgba(255, 255, 255, 0.88);
     font-size: var(--label-font);
     font-weight: 700;
     letter-spacing: 0.03em;
     transition: background-color 0.2s ease;
-    font-family: inherit;
 }
 
 .accordionHeader:hover {
-    background: rgba(139, 30, 63, 0.04);
+    background: rgba(255, 255, 255, 0.05);
 }
 
 .accordionChevron {
     font-size: 11px;
-    color: rgba(139, 30, 63, 0.5);
+    color: rgba(255, 255, 255, 0.40);
     transition: transform 0.3s ease;
 }
 
@@ -197,21 +213,26 @@
 }
 
 .accordionBody {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-                padding 0.3s ease;
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.3s ease;
     padding: 0 16px;
 }
 
+.accordionBody>* {
+    overflow: hidden;
+    overflow: hidden;
+    padding: 0 10px;
+}
 .accordionBody.open {
-    max-height: 600px;
+    grid-template-rows: 1fr;
     padding: 4px 16px 16px;
 }
 
-.activeTaste, .activeRegion {
-    background-color: rgba(139, 30, 63, 0.1) !important;
-    color: var(--primary-colour) !important;
+.activeTaste,
+.activeRegion {
+    background-color: rgba(255, 255, 255, 0.14) !important;
+    color: #ffffff !important;
     font-weight: 700 !important;
 }
 
@@ -221,23 +242,23 @@
     gap: 12px;
     font-size: var(--label-font);
     font-weight: 500;
-    color: rgba(139, 30, 63, 0.9);
+    color: rgba(255, 255, 255, 0.80);
 }
 
 .filterPrice p {
     text-align: center;
     font-size: var(--label-font);
     letter-spacing: 0.03em;
-    color: rgba(139, 30, 63, 0.9);
+    color: rgba(255, 255, 255, 0.80);
 }
 
 .removeFilterBtn {
     width: 100%;
     background-color: transparent;
-    color: rgba(139, 30, 63, 0.75);
-    border: 1.5px solid rgba(139, 30, 63, 0.3);
+    color: rgba(255, 255, 255, 0.60);
+    border: 1px solid rgba(255, 255, 255, 0.18);
     padding: 10px;
-    border-radius: 10px;
+    border-radius: var(--image-radius);
     font-size: var(--label-font);
     font-weight: 600;
     cursor: pointer;
@@ -245,32 +266,36 @@
     letter-spacing: 0.02em;
     opacity: 0;
     animation: slideDown 0.45s ease forwards;
-    font-family: inherit;
 }
 
 .removeFilterBtn:hover {
-    background-color: rgba(139, 30, 63, 0.06);
-    border-color: rgba(139, 30, 63, 0.4);
-    color: var(--primary-colour);
+    background-color: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.30);
+    color: rgba(255, 255, 255, 0.90);
 }
 
-.removeFilterBtn:active { transform: translateY(1px); }
+.removeFilterBtn:active {
+    transform: translateY(1px);
+}
 
 .itemsGrid {
     display: flex;
     flex: 1;
     flex-wrap: wrap;
-    background-color: var(--secondary-colour);
     padding: 10px;
     gap: 30px;
     margin: 20px;
 }
 
-.filterToggle { display: none; }
-.applyFilterBtn { display: none; }
+.filterToggle {
+    display: none;
+}
+
+.applyFilterBtn {
+    display: none;
+}
 
 @media (max-width: 768px) {
-
     .contentArea {
         position: relative;
         flex-direction: column;
@@ -286,9 +311,10 @@
         gap: 8px;
         width: calc(100% - 20px);
         margin: 8px auto 0;
-        background-color: rgba(255,255,255,0.6);
-        color: var(--primary-colour);
-        border: 1.5px solid rgba(139,30,63,0.2);
+        background: rgba(255, 255, 255, 0.10);
+        backdrop-filter: blur(12px);
+        color: rgba(255, 255, 255, 0.88);
+        border: 1px solid rgba(255, 255, 255, 0.18);
         padding: 11px 20px;
         border-radius: 30px;
         font-size: var(--label-font);
@@ -297,7 +323,6 @@
         letter-spacing: 0.03em;
         transition: background-color 0.2s ease;
         z-index: 20;
-        font-family: inherit;
     }
 
     .filterPanel {
@@ -306,19 +331,17 @@
         top: auto;
         margin: 0 auto;
         gap: 8px;
-        background-color: white;
+        background: rgba(255, 255, 255, 0.07);
+        backdrop-filter: blur(20px);
         padding: 0 16px;
-        border-radius: 16px;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
-        border: 1.5px solid rgba(139, 30, 63, 0.1);
+        border-radius: var(--container-radius);
+        border: 1px solid rgba(255, 255, 255, 0.12);
         animation: none;
         max-height: 0;
         overflow: hidden;
         opacity: 0;
         pointer-events: none;
-        transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-                    opacity 0.3s ease,
-                    padding 0.3s ease;
+        transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease, padding 0.3s ease;
         z-index: 100;
     }
 
@@ -347,9 +370,10 @@
         justify-content: center;
         gap: 8px;
         width: 100%;
-        background-color: var(--primary-colour);
+        background: linear-gradient(135deg, rgba(192, 73, 106, 0.80), rgba(90, 14, 44, 0.90));
+        backdrop-filter: blur(8px);
         color: white;
-        border: none;
+        border: 1px solid rgba(255, 255, 255, 0.15);
         padding: 13px;
         border-radius: var(--inputs-radius);
         font-size: var(--label-font);
@@ -357,11 +381,15 @@
         cursor: pointer;
         transition: background-color 0.2s ease;
         letter-spacing: 0.02em;
-        font-family: inherit;
     }
 
-    .applyFilterBtn:hover { background-color: var(--primary-light-colour); }
-    .applyFilterBtn:active { transform: translateY(1px); }
+    .applyFilterBtn:hover {
+        background: rgba(192, 73, 106, 0.90);
+    }
+
+    .applyFilterBtn:active {
+        transform: translateY(1px);
+    }
 
     .itemsGrid {
         margin: 0;
@@ -371,11 +399,23 @@
 }
 
 @keyframes slideDown {
-    0%   { opacity: 0; transform: translateY(-20px); }
-    100% { opacity: 1; transform: translateY(0); }
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to   { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }

@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import style from '../Mcss/CurrentWine.module.css'
 import { formatPrice, WineContext, type Wine } from '../Mcontext/WineContextProvider';
 import { Rating } from '@mui/material';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 type CurrentWineProps = {
   cartIconRef: React.RefObject<HTMLDivElement | null>;
@@ -12,7 +12,7 @@ type CurrentWineProps = {
 
 const CurrentWine = ({ cartIconRef, setShowReview }: CurrentWineProps) => {
 
-  /* Add to cart Animation*/
+  /* Add to cart Animation */
   const startFlyAnimation = (imgElement: HTMLImageElement) => {
     const cartIcon = cartIconRef.current;
     if (!cartIcon) return;
@@ -31,7 +31,7 @@ const CurrentWine = ({ cartIconRef, setShowReview }: CurrentWineProps) => {
     requestAnimationFrame(() => {
       flyingImg.style.left = cartRect.left + "px";
       flyingImg.style.top = cartRect.top + "px";
-      flyingImg.style.transform = "scale(0.2)";
+      flyingImg.style.transform = "scale(0.15)";
       flyingImg.style.opacity = "0";
     });
 
@@ -39,24 +39,23 @@ const CurrentWine = ({ cartIconRef, setShowReview }: CurrentWineProps) => {
       flyingImg.remove();
     });
   };
-  /*-------------------*/
+  /* ------------------- */
 
   const { wines, currentWineId, setCartItems, setCurrentWineId } = useContext(WineContext);
   const wine = wines.find(w => w.id === currentWineId);
   const [detailsOpen, setDetailsOpen] = useState(false);
 
   useEffect(() => {
-  document.body.style.overflow = "hidden";
-  document.body.style.position = "fixed";
-  document.body.style.width = "100%";
-  
-  return () => {
-    document.body.style.overflow = "";
-    document.body.style.position = "";
-    document.body.style.width = "";
-  };
-}, []);
+    document.body.style.overflow = "hidden";
+    document.body.style.position = "fixed";
+    document.body.style.width = "100%";
 
+    return () => {
+      document.body.style.overflow = "";
+      document.body.style.position = "";
+      document.body.style.width = "";
+    };
+  }, []);
 
   const handleAddToCart = (addWineToCart: Wine) => {
     setCartItems(prev => {
@@ -72,94 +71,120 @@ const CurrentWine = ({ cartIconRef, setShowReview }: CurrentWineProps) => {
     });
   };
 
-
   const [closing, setClosing] = useState(false);
 
-  if (!wine) {
-    return undefined;
-  }
+  if (!wine) return undefined;
 
   const navigate = useNavigate();
 
   const close = () => {
-    setClosing(true)
+    setClosing(true);
     setTimeout(() => navigate("/webshop"), 300);
-  }
+  };
 
   const handleClick = (wine: Wine) => {
     setCurrentWineId(wine.id);
-  }
+  };
 
-  const avgRating = Array.isArray(wine.ratings) && wine.ratings.length > 0
-    ? wine.ratings.reduce((sum, r) => sum + r.score, 0) / wine.ratings.length
-    : 0;
-
+  const avgRating =
+    Array.isArray(wine.ratings) && wine.ratings.length > 0
+      ? wine.ratings.reduce((sum, r) => sum + r.score, 0) / wine.ratings.length
+      : 0;
 
   return (
-    <div className={style.mainDiv} onClick={(e) => { if (e.target === e.currentTarget) { close() } }}>
-      <div className={`${style.container} ${closing ? style.closing : ""}`} onClick={(e) => e.stopPropagation()}>
-        <button onClick={close} className={style.closeBtn}>X</button>
+    <div
+      className={style.mainDiv}
+      onClick={(e) => { if (e.target === e.currentTarget) close(); }}
+    >
+      <div
+        className={`${style.container} ${closing ? style.closing : ""}`}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button onClick={close} className={style.closeBtn}>✕</button>
+
         <div className={style.overlay}>
+
           <div className={style.wineLeftSide}>
-            <img src={wine.url ? wine.url : "wineTest.png"} alt="" className={style.currentWineImage} />
+            <img
+              src={wine.url ? wine.url : "wineTest.png"}
+              alt={wine.name}
+              className={style.currentWineImage}
+            />
           </div>
+
           <div className={style.wineRightSide}>
+
             <div className={style.wineTitle}>
-              <span>{wine.name}</span>
+              {wine.name}
             </div>
+
             <div className={style.wineRating}>
               <span>
-                <Rating value={avgRating} precision={0.5} readOnly />
+                <Rating value={avgRating} precision={0.5} readOnly size="small" />
                 <p>({wine.ratings.length})</p>
-                <i className="fa-solid fa-grip-lines-vertical"></i>
-                <b onClick={() => { handleClick(wine); setShowReview(true) }}>View All ratings</b>
+                <i className="fa-solid fa-grip-lines-vertical" />
+                <b onClick={() => { handleClick(wine); setShowReview(true); }}>
+                  View all ratings
+                </b>
               </span>
             </div>
+
+            <div className={style.divider} />
+
             <div className={style.winePrice}>
-              <span>{formatPrice(wine.price)}</span>
+              {formatPrice(wine.price)}
             </div>
+
             <div className={style.wineDescription}>
-              <p>
-                {wine.description}
-              </p>
+              <p>{wine.description}</p>
             </div>
-            <div className={style.detailsToggle} onClick={() => setDetailsOpen(!detailsOpen)}>
+
+            <div
+              className={style.detailsToggle}
+              onClick={() => setDetailsOpen(!detailsOpen)}
+            >
               Wine Details
-              <i className={`fa-solid fa-chevron-${detailsOpen ? "up" : "down"}`}></i>
+              <i className={`fa-solid fa-chevron-${detailsOpen ? "up" : "down"}`} />
             </div>
-              <div className={`${style.wineDetails} ${detailsOpen ? style.open : ""}`}>
-                <div>
-                  <i className="fa-solid fa-wine-glass"></i>
-                  <span>{wine.type}</span>
-                </div>
-                <div>
-                  <i className="fa-solid fa-wine-bottle"></i>
-                  <span>{wine.alcoholContent} %</span>
-                </div>
-                <div>
-                  <i className="fa-brands fa-pagelines"></i>
-                  <span>{wine.grapes.map(g => g.name).join(", ")}</span>
-                </div>
-                <div>
-                  <i className="fa-solid fa-calendar"></i>
-                  <span>{wine.year}</span>
-                </div>
+
+            <div className={`${style.wineDetails} ${detailsOpen ? style.open : ""}`}>
+              <div>
+                <i className="fa-solid fa-wine-glass" />
+                <span>{wine.type}</span>
               </div>
+              <div>
+                <i className="fa-solid fa-wine-bottle" />
+                <span>{wine.alcoholContent} %</span>
+              </div>
+              <div>
+                <i className="fa-brands fa-pagelines" />
+                <span>{wine.grapes.map(g => g.name).join(", ")}</span>
+              </div>
+              <div>
+                <i className="fa-solid fa-calendar" />
+                <span>{wine.year}</span>
+              </div>
+            </div>
+
             <div className={style.wineBtn}>
               <button
                 onClick={() => {
                   handleAddToCart(wine);
-
-                  const img = document.querySelector(`.${style.currentWineImage}`) as HTMLImageElement;
+                  const img = document.querySelector(
+                    `.${style.currentWineImage}`
+                  ) as HTMLImageElement;
                   if (img) startFlyAnimation(img);
-                }}>Add to cart
+                }}
+              >
+               Add to Cart
               </button>
             </div>
+
           </div>
         </div>
       </div>
-    </div >
-  )
-}
+    </div>
+  );
+};
 
-export default CurrentWine
+export default CurrentWine; 

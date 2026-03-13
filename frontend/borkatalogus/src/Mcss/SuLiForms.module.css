@@ -1,16 +1,19 @@
-/* Main Div + signUp/logIn side */
 .formSide {
     position: absolute;
     width: 100%;
     height: auto;
     min-height: 580px;
     backface-visibility: hidden;
-    background: white;
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.16);
+    backdrop-filter: blur(32px) saturate(1.1);
+    -webkit-backdrop-filter: blur(32px) saturate(1.1);
+    border: 1px solid rgba(255, 255, 255, 0.30);
+    border-top: 1px solid rgba(255, 255, 255, 0.50);
     border-radius: var(--container-radius);
     padding: 30px;
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+    box-shadow:
+        0 25px 50px rgba(0, 0, 0, 0.20),
+        inset 0 1px 0 rgba(255, 255, 255, 0.35);
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -24,9 +27,7 @@
 .loginForm {
     transform: rotateY(0deg);
 }
-/*---------------*/
 
-/* Form Elements */
 .formHeader {
     text-align: center;
     margin-bottom: 22px;
@@ -35,12 +36,10 @@
 .formTitle {
     font-size: var(--large-title-font);
     font-weight: 700;
-    color: var(--primary-colour);
     margin: 0 0 8px 0;
-    background: linear-gradient(135deg, var(--primary-colour), var(--primary-light-colour));
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: #ffffff;
+    background: none;
+    -webkit-text-fill-color: #ffffff;
 }
 
 .formGroup {
@@ -58,7 +57,7 @@
 
 .formLabel {
     display: block;
-    color: var(--primary-colour);
+    color: rgba(255, 255, 255, 0.80);
     font-size: var(--label-font);
     font-weight: 600;
     margin-bottom: 6px;
@@ -67,23 +66,29 @@
 .formInput {
     width: 100%;
     padding: 14px 18px;
-    border: 2px solid #e2e8f0;
+    border: 1px solid rgba(255, 255, 255, 0.20);
     border-radius: var(--inputs-radius);
     font-size: var(--label-font);
-    background: white;
+    background: rgba(255, 255, 255, 0.10);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: rgba(255, 255, 255, 0.90);
     transition: all 0.3s ease;
     outline: none;
 }
 
-.formInput:focus {
-    border-color: var(--primary-light-colour);
-    background: white;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px #8e183b39;
+.formInput::placeholder {
+    color: rgba(255, 255, 255, 0.30);
 }
 
-.formLabelsInputs
-{
+.formInput:focus {
+    border-color: rgba(255, 255, 255, 0.45);
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.20);
+}
+
+.formLabelsInputs {
     margin-top: 6vh;
     display: flex;
     flex-direction: column;
@@ -108,29 +113,48 @@
 }
 
 .passwordToggle:hover {
-    color: var(--primary-colour)
+    color: var(--primary-colour);
 }
-/*---------------*/
 
-/* Buttons + Switch elements */
 .submitBtn {
     width: 100%;
-    background: linear-gradient(135deg, var(--primary-light-colour), var(--primary-colour));
+    background: linear-gradient(135deg, #d4567a 0%, #a82050 50%, #7a1535 100%);
     color: white;
-    border: none;
+    border: 1px solid rgba(255, 255, 255, 0.25);
     padding: 16px;
     border-radius: var(--inputs-radius);
     font-size: var(--label-font);
     font-weight: 600;
+    letter-spacing: 0.08em;
     cursor: pointer;
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    box-shadow:
+        0 4px 20px rgba(0, 0, 0, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.20);
+}
+
+.submitBtn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #e0698a 0%, #c0496a 100%);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    z-index: -1;
+}
+
+.submitBtn:hover::before {
+    opacity: 1;
 }
 
 .submitBtn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 12px 35px #8e183b39;
+    border-color: rgba(255, 255, 255, 0.35);
+    box-shadow:
+        0 8px 30px rgba(0, 0, 0, 0.30),
+        inset 0 1px 0 rgba(255, 255, 255, 0.25);
 }
 
 .submitBtn:active {
@@ -150,13 +174,13 @@
 }
 
 .switchText {
-    color: var(--primary-colour);
+    color: rgba(255, 255, 255, 0.60);
     font-size: var(--label-font);
     margin: 0;
 }
 
 .switchLink {
-    color: var(--primary-colour);
+    color: rgba(255, 255, 255, 0.90);
     font-weight: 600;
     cursor: pointer;
     transition: color 0.2s;
@@ -164,38 +188,38 @@
 }
 
 .switchLink:hover {
-    color: var(--primary-light-colour);
+    color: #ffffff;
+    text-decoration: underline;
+    text-underline-offset: 3px;
 }
-/*---------------*/
 
-/* Animation */
 @keyframes fadeInOpacity {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
-/*---------------*/
 
-/* Mobile */
-@media (max-width: 768px) 
-{
-    .formSide
-    {
+@media (max-width: 768px) {
+    .formSide {
         min-height: 500px;
     }
-    .formHeader 
-    {
+    .formHeader {
         margin-bottom: 0px;
     }
-    .formActions 
-    {
+    .formActions {
         margin-top: 3vh;
         gap: 1vh;
     }
-
+    .submitBtn {
+        padding: 12px;
+        font-size: 15px;
+    }
+    .formSwitch {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+    }
+    .switchLink {
+        margin-left: 0;
+    }
 }
-/* ------------- */

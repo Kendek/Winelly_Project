@@ -22,10 +22,10 @@ const AdminGrape = () => {
 
   const [UpdateDb, setUptadeDb]= useState(false)
 
-   function accept(path:string, id:number){
+  async function accept(path:string, id:number){
        console.log("Accepted!")
-       AdminDelete(path, id)
-       setUptadeDb(!UpdateDb)
+       await AdminDelete(path, id)
+       setGrapes(grapes.filter(grapes => grapes.id !== id));
     }
 
 
@@ -48,6 +48,8 @@ const AdminGrape = () => {
     };
 
   useEffect(()=>{
+    console.log("Fetch")
+    setGrapes([])
     const fetchGrapes = async () => {
       try {
         const data = await GetDbData("/api/grape")
@@ -66,10 +68,11 @@ const AdminGrape = () => {
     fetchGrapes()
 
   },[UpdateDb])
+
   const [grapes, setGrapes] = useState<Grape[]>([
   ])
 
-  function PostGrapes(e:any) {
+  async function PostGrapes(e:any) {
      // Prevent the browser from reloading the page
     e.preventDefault();
 
@@ -80,8 +83,9 @@ const AdminGrape = () => {
 
     // Or you can work with it as a plain object:
     const formJson = Object.fromEntries(formData.entries());
-    PostGrape(formJson as GrapPostType)
-    setUptadeDb(!UpdateDb)
+    await PostGrape(formJson as GrapPostType)
+    setUptadeDb(UpdateDb => !UpdateDb)
+
   }
 
   const [openDelete, setDelete] = useState(false);

@@ -1,8 +1,11 @@
 ::-webkit-scrollbar {
     display: none;
 }
-
-
+.WineBottle {
+    transform: scale(10%);
+    position: absolute;
+    visibility: hidden;
+}
 .HomeMain {
     color: #a82a4f;
     scrollbar-width: none;
@@ -11,83 +14,158 @@
     gap: 0;
     flex-direction: column;
     overflow: hidden;
+    overflow-y: scroll;
 }
-
 .HomeFirst {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
+    justify-content: center;
     width: 100%;
     flex-direction: column;
     background-repeat: no-repeat;
     background-size: cover;
     height: 100vh;
-    
     background-image: url("../public/HomeBG.png");
-}
-
-.WineBottle {
-    transform: scale(10%);
-    position: absolute;
-    visibility: hidden;
+    padding-right: 12%;
 }
 
 .TextContainer {
-    margin-top: 8%;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     flex-direction: column;
-    gap: 10px;
-    margin-left: 40%;
+    gap: 22px;
     color: white;
-    text-align: center;
-    text-shadow: 2px 2px black;
-    font-size: larger;
-    width: 40vw;
+    text-align: left;
+    width: 32vw;
+    padding: 48px 40px;
+    border-radius: 20px;
+    height: 60%;
 
-    h2 {
-        text-decoration: underline;
-    }
+    background: linear-gradient(135deg, rgba(255,255,255,0.07) 0%, rgba(139,30,63,0.12) 100%);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.12),
+        0 40px 80px rgba(0, 0, 0, 0.45);
 
-    h1 {
-        font-weight: bold;
-    }
+    animation: UpDown 3s ease-in-out infinite;
+
+    h2 { text-decoration: none; }
+    h1 { font-weight: bold; }
 }
 
-@media screen and (max-width: 768px) {
-    .TextContainer {
-        width: 80vw;
-        margin-left: 0%;
-        font-size: large;
-    }
-
-    .FavCardContainer {
-        flex-direction: column;
-        flex-wrap: wrap;
-        justify-content: left;
-        align-items: normal;
-    }
-
-    .HomeSecond {
-        background-image: none;
-    }
-}
-
-.HomeSecond {
-    background-color: white;
-    background-image: url("../public/OilCrownBg2.png");
-    background-size: cover;
-    width: 100%;
-    height: 90vh;
-    display: flex;
+.HeroTag {
+    display: inline-flex;
     align-items: center;
-    flex-direction: column;
+    gap: 8px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.9);
+    padding: 8px 16px;
+    border-radius: 100px;
+    width: fit-content;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.15),
+        0 4px 24px rgba(0, 0, 0, 0.2);
+}
+
+.HeroHeading {
+    font-size: clamp(1.5rem, 2.8vw, 2.2rem);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, #ffffff 0%, #f0a0b8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0;
+    text-shadow: none;
+}
+
+.HeroBody {
+    font-size: clamp(0.85rem, 1.1vw, 0.95rem);
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0;
+    font-weight: 300;
+    letter-spacing: 0.01em;
+    text-shadow: none;
+}
+
+.HeroDivider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(196, 40, 79, 0.6), transparent);
+}
+
+.HeroOrderBtn {
+    width: 100%;
+    background: linear-gradient(135deg, #d03262, #8B1E3F);
+    color: white;
+    border: none;
+    padding: 14px 20px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 4px;
+    text-align: center;
+}
+
+.HeroOrderBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 35px rgba(142, 24, 59, 0.4);
 }
 
 .Stars :global(.MuiRating-iconFilled),
 .Stars :global(.MuiRating-iconEmpty) {
-    color: white;
+    color: rgba(255,255,255,0.9);
     font-size: 150%;
+}
+
+.StarsRow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 0.05em;
+}
+
+@media screen and (max-width: 768px) {
+    .HomeFirst {
+        justify-content: center;
+        align-items: center;
+        padding-right: 0;
+    }
+    .TextContainer {
+        width: 85vw;
+        align-items: center;
+        text-align: center;
+    }}
+.HomeSecond { 
+    width: 100%;
+    padding-top: 3vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.GradientBackground{
+    background: radial-gradient(ellipse at 20% 30%, #c4284f 0%, #8a1530 35%, #3d0a18 65%, #1a060e 100%);   
+}
+.HomeDivider{
+    width: 100%;
+    height: 2vh;
+    background-color: black;
 }
 
 .FlexBox {
@@ -97,36 +175,33 @@
     justify-content: center;
     width: 100%;
 }
-
 .LineDecor {
-    width: 40%;
+    width: 30%;
+    margin: 50px;
     height: 1%;
-    border: 4px solid #a82a4f;
+    border: 3px solid white;
+    box-shadow: black 0px 0px 5px;
 }
-
 .Title {
+    text-shadow: 2px 2px black;
     width: 50%;
     text-align: center;
-    font-weight: bold;
-    color: #a82a4f;
     transform: scale(150%);
     margin-top: 2%;
     margin-bottom: 2%;
     font-size: xx-large;
-    text-shadow: 1px 1px black;
+    font-weight: bold;
+    color: white;
 }
-
 .FavCardContainer {
-    z-index: 1;
+    z-index: 10;
     display: flex;
     width: 90%;
-    flex-direction: row;
     gap: 10%;
-    height: 80%;
     justify-content: center;
     align-items: center;
+    min-height: 80vh;
 }
-
 .OrderButton {
     width: 70%;
     margin-left: auto;
@@ -141,67 +216,80 @@
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
+    cursor: pointer;
 }
-
 .OrderButton:hover {
     transform: translateY(-2px);
     box-shadow: 0 12px 35px #8e183b39;
 }
-
-
-
 .ImgBg {
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
     margin-top: 10%;
     display: flex;
     flex-direction: column;
     margin-left: auto;
     margin-right: auto;
-    width: 80%;
+    width: 215px;
+    height: 215px;
     background-image: url("../public/GrapePlant.jpg");
     background-position: 70%;
-    background-size: 210%;
+    background-size: 250%;
     border-radius: 50%;
     transition: 1s;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 
     img {
 
-        transform: scale(130%);
+        transform: scale(120%);
     }
 }
-
 .CardTitle {
     text-shadow: 0px 1px 0px black (255, 255, 255, 0.397);
     text-align: left;
-    padding: 2%;
-    font-size: x-small;
-
+    font-size: xx-large !important;
+    font-weight: bold;
 }
-
 .CardDesc {
-    z-index: 1;
     display: block;
     margin-top: 10%;
-}
+    display: flex;
+    gap: 5px   ;
+    flex-direction: column;
+    align-items: center;
 
-.CardDesc,
-.CardTitle,
-.Discount,
-.CardPrice {
-    color: black;
-    font-size: large;
 }
-
-.Discount {
-    float: right;
-    text-decoration: line-through;
-    color: #a82a4f;
+.ScrollDown {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom: 20px;      
+  left: 5%;          
+  transform: translateX(-50%);  
+  cursor: pointer;
+  width: 90px;
+  border-radius: 50%;
+  height: 90px;
+  animation: Pulse 5s linear infinite;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    0 4px 24px rgba(0, 0, 0, 0.2);
+  .ScrollIcon{
+    color: white;
+    font-size: 40px;
+  }
 }
-
-.CardPrice {
-    float: right;
+.CardDesc,.CardTitle,.Discount,.CardPrice {
+    font-size: larger;
+        color: #8B1E3F !important;
 }
-
 .CardRating {
     font-size: x-large;
     float: left;
@@ -212,15 +300,181 @@
     align-items: center;
     justify-content: center;
     transform: scale(130%);
+    color: white !important;
+}
+.CardIMG{
+    width: 215px;
+    height: 265px;
+    object-fit: contain;  
+    object-position: center;
+    display: block;
+    transition: 1s;
+}
+.CircleRing {
+  position: absolute;
+  inset: -10px;
+  border-radius: 50%;
+  border: 2px dashed #8B1E3F;
+  animation: spinSlow 20s linear infinite;
+  pointer-events: none;
+}
+@keyframes spinSlow {
+  to { transform: rotate(360deg); }
+}
+@keyframes Pulse {
+    50% {
+        background-color: rgba(255, 255, 255, 0.281);
+    }
+    100% {
+        background-color: transparent;
+    }
+}
+@keyframes UpDown {
+    50% {
+        transform: translateY(8px);
+    }
+    100% {
+        transform: translateY(0);
+    }
 }
 
-.UnderLine {
-    text-decoration: underline;
+.HomeThird {
+    min-height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 5%;
+    position: relative;
+
 }
 
-.White {
-    border: 2px white solid;
-    width: 80%;
+.HomeThird::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 60% 50%, rgba(196, 40, 79, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+
 }
 
-.HomeThird {}
+.HomeMapInfo {
+    width: 32vw;
+    min-height: 60vh;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 28px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: linear-gradient(135deg, rgba(255,255,255,0.04) 0%, rgba(139,30,63,0.08) 100%);
+    backdrop-filter: blur(12px);
+    text-align: left;
+    color: white;
+    padding: 48px 40px;
+    box-shadow:
+        0 0 0 1px rgba(255,255,255,0.05),
+        0 40px 80px rgba(0,0,0,0.4),
+        inset 0 1px 0 rgba(255,255,255,0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.HomeMapInfo::before {
+    content: '🍷';
+    position: absolute;
+    top: -20px;
+    right: -10px;
+    font-size: 120px;
+    opacity: 0.2;
+    pointer-events: none;
+    transform: rotate(-15deg);
+}
+
+.HomeMapGlobe {
+    width: 42vw;
+    height: 70vh;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255,255,255,0.08);
+    overflow: hidden;
+    box-shadow: 0 40px 80px rgba(0,0,0,0.4);
+}
+
+.MapHeading {
+    font-size: clamp(1.4rem, 2.5vw, 2rem);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, #ffffff 0%, #f0a0b8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0;
+}
+
+.MapBody {
+    font-size: clamp(0.85rem, 1.2vw, 1rem);
+    line-height: 1.75;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0;
+    font-weight: 300;
+    letter-spacing: 0.01em;
+}
+
+.MapDivider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(196, 40, 79, 0.6), transparent);
+}
+.MapTag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.9);
+    padding: 8px 16px;
+    border-radius: 100px;
+    width: fit-content;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.15),
+        0 4px 24px rgba(0, 0, 0, 0.2);
+}
+@media screen and (max-width: 768px) {
+    .TextContainer {
+        width: 80vw;
+        margin-left: 0%;
+        font-size: large;
+    }
+    .FavCardContainer {
+        padding-top: 100px;
+        flex-direction: column;
+        justify-content: left;
+        align-items: center;
+    }
+    .LineDecor {
+        display: none;
+    }
+    .ScrollDown {
+        left: 50%;
+    }
+    .HomeThird{
+        flex-direction: column;
+        margin-top: 300px;
+        gap: 10%;
+        div{
+            width: 90%;
+        }
+    }
+
+}
+

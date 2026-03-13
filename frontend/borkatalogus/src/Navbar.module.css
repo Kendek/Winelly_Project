@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: rgba(249, 246, 242);
+  background-color: var(--secondary-colour);
   color: var(--primary-colour);
   padding: 0 2.5rem;
   height: 68px;
@@ -12,17 +12,6 @@
   z-index: 9999;
   backdrop-filter: blur(18px) saturate(1.4);
   -webkit-backdrop-filter: blur(18px) saturate(1.4);
-}
-
-.navbar::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 2.5rem;
-  right: 2.5rem;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(139, 30, 63, 0.2), transparent);
-  pointer-events: none;
 }
 
 .navbarleft {
@@ -85,7 +74,7 @@
 }
 
 .pageLink {
-  color: rgba(139, 30, 63);
+  color: var(--primary-colour);
   font-size: var(--label-font);
   font-weight: 500;
   text-decoration: none;
@@ -135,7 +124,7 @@
 }
 
 .navbarright p {
-  color: rgba(139, 30, 63);
+  color: var(--primary-colour);
   font-size: var(--label-font);
   font-weight: 500;
   margin: 0;
@@ -150,7 +139,7 @@
 }
 
 .carticon {
-  color: rgba(139, 30, 63, 0.8);
+  color: rgba(139, 30, 63);
   font-size: var(--label-font);
   text-decoration: none;
   padding: 0.5rem 0.8rem;
@@ -186,42 +175,42 @@
 .usericon {
   color: var(--primary-colour);
   font-size: var(--label-font);
-  font-weight: 600;
+  font-weight: 500;
   text-decoration: none;
-  padding: 0.45rem 1.1rem;
+  padding: 0.5rem 1.2rem;
   border-radius: 100px;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  border: 1.5px solid rgba(139, 30, 63, 0.35);
-  transition: background-color 0.22s ease, color 0.22s ease, border-color 0.22s ease;
+  border: none;
+  background: none;
+  transition: color 0.22s ease, background-color 0.22s ease;
   white-space: nowrap;
+  cursor: pointer;
 }
 
 .usericon:hover {
-  background-color: var(--primary-colour);
-  color: var(--secondary-colour);
-  border-color: var(--primary-colour);
+  color: var(--primary-colour);
+  background-color: rgba(139, 30, 63, 0.06);
 }
 
 .usericonlogin {
-  color: var(--secondary-colour);
-  background-color: var(--primary-colour);
+  color: var(--primary-colour);
   font-size: var(--label-font);
   font-weight: 700;
   text-decoration: none;
-  padding: 0.45rem 1.1rem;
+  padding: 0.5rem 1.2rem;
   border-radius: 100px;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  border: 1.5px solid var(--primary-colour);
-  transition: background-color 0.22s ease, box-shadow 0.22s ease;
-  box-shadow: 0 2px 12px rgba(139, 30, 63, 0.3);
+  border: none;
+  background-color: rgba(139, 30, 63, 0.1);
+  transition: background-color 0.22s ease;
   white-space: nowrap;
+  cursor: pointer;
 }
 
 .usericonlogin:hover {
-  background-color: var(--primary-light-colour);
-  box-shadow: 0 4px 16px rgba(139, 30, 63, 0.4);
+  background-color: rgba(139, 30, 63, 0.15);
 }
 
 .userLogout {
@@ -293,13 +282,8 @@
 }
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 @media screen and (max-width: 768px) {
@@ -307,11 +291,6 @@
   .navbar {
     padding: 0 1rem;
     height: 60px;
-  }
-
-  .navbar::after {
-    left: 1rem;
-    right: 1rem;
   }
 
   .navbarleft {
@@ -358,18 +337,6 @@
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: -8px 0 40px rgba(20, 5, 10, 0.12);
     overflow-y: auto;
-  }
-
-  .navlinksActive::before,
-  .navlinks::before {
-    content: '';
-    display: block;
-    width: 36px;
-    height: 3px;
-    background-color: rgba(139, 30, 63, 0.2);
-    border-radius: 100px;
-    margin-bottom: 1.5rem;
-    flex-shrink: 0;
   }
 
   .navlinks .pageLink,

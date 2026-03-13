@@ -35,15 +35,14 @@ const AdminWine = () => {
   const [selectedGrapes, setSelectedGrapes] = useState<number[]>([])
   const [selectedPatchGrapes, setSelectedPatchGrapes] = useState<number[]>([])
 
-  const [defaultGrapeOptions, setDefaultGrapeOptions] =useState<GrapeOptionsType[]>([
-
-  ])
-
+  const [defaultGrapeOptions, setDefaultGrapeOptions] =useState<GrapeOptionsType[]>([])
 
   const [postIMG, setPostIMG] = useState(null)
   const [PatchIMG, setPatchIMG] = useState<File | string | null>(null)
 
-  function PostWine(e:any) {
+  const [UpdateState, setUpdateState] = useState(true)
+
+  async function PostWine(e:any) {
        // Prevent the browser from reloading the page
       e.preventDefault();
     
@@ -56,7 +55,7 @@ const AdminWine = () => {
       const formJson = Object.fromEntries(formData.entries());
 
 
-      PostDbWine({
+     await PostDbWine({
         name: formJson.Name as string,
         type: formJson.type as string,
         description: formJson.description as string,
@@ -68,10 +67,13 @@ const AdminWine = () => {
         wineryId: parseInt(formJson.winery as string),
         grapeIds: selectedGrapes
       } as WinePostType)
+      setWines([])
+      setUpdateState(UpdateState => !UpdateState)
     }
 
        function accept(path:string, id:number){
            console.log("Accepted!")
+           setWines(Wines.filter(wine => wine.id !== id));
            AdminDelete(path, id)
         }
     
@@ -104,12 +106,13 @@ const AdminWine = () => {
           setWines(WineData)
           setWinerys(WineryData)
           setGrapes(GrapeData)
+          setUpdateState(UpdateState => !UpdateState)
         } catch (error) {
           console.error("Error fetching data:", error)
         }
       }
       FetchWinesAndWinerys()
-    }, [])
+    }, [UpdateState])
   
 
 
@@ -166,7 +169,7 @@ const AdminWine = () => {
 
     }
 
-    const PatchWine = (e:any) =>{
+    async function PatchWine(e:any){
 
       e.preventDefault();
     
@@ -183,7 +186,7 @@ const AdminWine = () => {
         return;
       }
 
-      PatchDbWine({
+     await PatchDbWine({
         name: formJson.Name as string,
         type: formJson.type as string,
         description: formJson.description as string,
@@ -194,6 +197,9 @@ const AdminWine = () => {
         wineryId: parseInt(formJson.winery as string),
         grapeIds: selectedPatchGrapes
       } as WinePatchType, SelectedWine["id"])
+
+    setWines([])
+    setUpdateState(UpdateState => !UpdateState)
     }
 
 

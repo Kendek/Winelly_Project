@@ -22,9 +22,12 @@ const AdminWinery = () => {
 
   const [SelectedWinery, setSelectedWinery] = useState()
 
+  const [UpdateState, setUpdateState]  = useState(true)
   
     useEffect(() => {
-        const AccountsFetch = async () =>{
+      setWinerys([])
+      console.log("Fetch")
+        var AccountsFetch = async () =>{
           try {
             const WineryData = await GetDbData("/api/winery")
             setWinerys(WineryData)
@@ -33,10 +36,12 @@ const AdminWinery = () => {
           }
         }
         AccountsFetch()
-      }, [])
+      }, [UpdateState])
 
        const accept = (id:number) => {
            AdminDelete("/api/winery", id)
+           setWinerys(Winerys.filter(winery => winery.id !== id));
+
         }
     
         const reject = () => {
@@ -57,7 +62,7 @@ const AdminWinery = () => {
                 reject
             });
         };
-      function PostWinery(e:any) {
+      async function PostWinery(e:any) {
          // Prevent the browser from reloading the page
         e.preventDefault();
     
@@ -68,12 +73,18 @@ const AdminWinery = () => {
     
         // Or you can work with it as a plain object:
         const formJson = Object.fromEntries(formData.entries());
-        PostDbWinery({
+
+        await PostDbWinery({
           name: formJson.name as string,
           region: formJson.region as string,
           country: formJson.country as string,
           establishedYear: parseInt(formJson.establishedYear as string),
+          description: formJson.description as string,
+          mapUrl: formJson.mapUrl as string
         } as WineryPostType)
+
+        setUpdateState(UpdateState =>!UpdateState)
+      
       }
 
       const SelectPatch =  (id:number) =>{
@@ -88,12 +99,13 @@ const AdminWinery = () => {
         } catch (error) {
           console.error("Error fetching data:", error)
         }
+
       }
       FetchSelectedWinery()
 
     }
 
-    const PatchWinery = (e:any) =>{
+    async function PatchWinery(e:any){
 
       e.preventDefault();
     
@@ -110,16 +122,19 @@ const AdminWinery = () => {
         return;
       }
 
-      PatchDbWinery({
+     await PatchDbWinery({
         name: formJson.name as string,
         region: formJson.region as string,
         country: formJson.country as string,
         establishedYear: parseInt(formJson.establishedYear as string),
+        description: formJson.description as string,
+        mapUrl: formJson.mapUrl as string 
       } as WineryPostType, SelectedWinery["id"])
+              setUpdateState(UpdateState =>!UpdateState)
     }
       
   return (
-      <div>
+      <div className={styles.WineryContainer}>
 
      <div  className={styles.WineMain}>
       <h1 className={styles.AdminTitles}>Winerys</h1>
@@ -142,6 +157,12 @@ const AdminWinery = () => {
                    <label>
                       Established: <input onKeyDown={handleNumberKeyDown} type='number' name='establishedYear'/>
                    </label>
+                   <label>
+                      Description <textarea name='description'></textarea>
+                   </label>
+                   <label>
+                      Google Map Url: <input type="text" name='mapUrl' />
+                   </label>
                     <div>
                         <button type="submit" className={styles.Add}>Add Winery</button>   
                     </div>
@@ -162,6 +183,8 @@ const AdminWinery = () => {
               <TableCell>Region</TableCell>
               <TableCell>Country</TableCell>
               <TableCell>Established</TableCell>
+              <TableCell>Map Url</TableCell>
+              <TableCell>Description</TableCell>
               <TableCell>Delete</TableCell>
             </TableRow>
           </TableHead>
@@ -173,6 +196,8 @@ const AdminWinery = () => {
                   <TableCell>{row.region}</TableCell>
                   <TableCell>{row.country}</TableCell>
                   <TableCell>{row.established}</TableCell>
+                  <TableCell>{row.mapUrl}</TableCell>
+                  <TableCell>{row.description}</TableCell>
                   <TableCell>
                          <button onClick={() => showTemplate(row.id)} className={styles.DeleteDbBtn}>Delete</button>
                   </TableCell>
@@ -213,6 +238,12 @@ const AdminWinery = () => {
                   <label>
                     Established: <input onKeyDown={handleNumberKeyDown} type='number' name='establishedYear' defaultValue={`${SelectedWinery["establishedYear"]}`} />
                   </label>
+                    <label>
+                      Description <textarea defaultValue={`${SelectedWinery["description"]}`} name='description'></textarea>
+                   </label>
+                   <label>
+                      Google Map Url: <input defaultValue={`${SelectedWinery["mapUrl"]}`}  type="text" name='mapUrl' />
+                   </label>
 
                   <div style={{display:"flex", justifyContent:"center"}}>
                   <button type="submit" className={styles.Add}>Update Winery</button>   

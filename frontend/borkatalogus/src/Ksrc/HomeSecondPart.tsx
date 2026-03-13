@@ -1,20 +1,25 @@
-import { useEffect, useState } from "react"
+import { useEffect,  useState } from "react"
 import styles from "../Kcss/Home.module.css"
 import FavCard from "./FavCard"
 import { GetDbData } from "./AdminPages/AdminFetch"
 import type { WineGetType } from "./AdminPages/AdminFetch"
-import { useRef } from 'react';
-import { createElement } from "react"
+
 
 const HomeSecondPart = () => {
 
-  const [FavWines, setFavWines] = useState<WineGetType[]>([])
+  const [Wines, setWines] = useState<WineGetType[]>([])
+  const [RandomWines, setRandomWines] =useState<WineGetType[]>([])
+
+  const [randomRatings, setRandomRatings]  = useState<number[]>([])
+  
+
+
 
     useEffect(() => {
       const FetchWinesAndWinerys = async () =>{
         try {
           const WineData = await GetDbData("/api/wine")
-          setFavWines(WineData)
+          setWines(WineData)
         } catch (error) {
           console.error("Error fetching data:", error)
         }
@@ -22,14 +27,31 @@ const HomeSecondPart = () => {
       FetchWinesAndWinerys()
     }, [])
 
-    const FavRef = useRef(null)
+ useEffect(() =>{
+  if (!Wines || Wines.length === 0) return;
+  const pickCount = Math.min(3, Wines.length);
+  const shuffled = [...Wines].sort(() => Math.random() - 0.5);
+  const picked = shuffled.slice(0, pickCount);
 
-  function Greeting( name:string ) {
-  return createElement(
-    FavCard,
-    
-  );
-}
+  setRandomWines(picked);
+  console.log("RandomWines:", picked);
+
+ }, [Wines])
+
+useEffect(() =>{
+    if (RandomWines.length === 0) return;         
+
+
+    const averages: number[] = RandomWines.map(wine => {
+      const scores: number[] = wine.ratings?.map((r: any) => r.score) ?? [];
+      if (scores.length === 0) return 0;
+      const total = scores.reduce((sum, s) => sum + s, 0);
+      return total / scores.length;
+    });
+
+    setRandomRatings(averages);                    
+    console.log("randomRatings (averages):", averages);
+}, [RandomWines])
 
 
   return (
@@ -37,26 +59,22 @@ const HomeSecondPart = () => {
           
           <div className={styles.FlexBox}>
             <div className={styles.LineDecor}></div>
-            <span className={styles.Title}>Explore our wines!</span>
+            <span className={styles.Title}> Explore some of our wines!</span>
             <div className={styles.LineDecor}></div>
           </div>
       
-
+         {RandomWines.length > 2 && randomRatings.length> 2 &&
         <div className={styles.FavCardContainer}>
-          {FavWines  &&
-          <div ref={FavRef}>
-                {/*{Greeting("asd")}*/}
+          
 
-                {/* <FavCard  classname="FavCardUp"></FavCard> */}
-                {/* <FavCard  classname="FavCardDown"></FavCard> */}
-                {/* <FavCard  classname="FavCardUp"></FavCard> */}
-             </div>
-          }
+                <FavCard duration="2200" WineId={RandomWines[0]["id"]} CardImg={RandomWines[0]["url"]} classname="FavCardDown" name={RandomWines[0]["name"]} price={RandomWines[0]["price"]} rating={randomRatings[0]}></FavCard>
+
+                <FavCard duration="1200" WineId={RandomWines[1]["id"]} CardImg={RandomWines[1]["url"]} classname="FavCardUp" name={RandomWines[1]["name"]} price={RandomWines[1]["price"]} rating={randomRatings[1]}></FavCard>
+
+                <FavCard duration="2200" WineId={RandomWines[2]["id"]} CardImg={RandomWines[2]["url"]} classname="FavCardDown" name={RandomWines[2]["name"]} price={RandomWines[2]["price"]} rating={randomRatings[2]}></FavCard> 
+              
         </div>
-
-            
-
-        
+        } 
       </div>
   )
 }

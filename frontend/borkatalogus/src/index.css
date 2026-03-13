@@ -5,8 +5,21 @@
   font-style: normal;
 }
 
-body {
-  background-color: var(--secondary-colour)
+html, body {
+    background: transparent;
+    margin: 0;
+    padding: 0;
+}
+#bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background: radial-gradient(ellipse at 20% 30%, #c4284f 0%, #8a1530 35%, #3d0a18 65%, #1a060e 100%);
+}
+#root
+{
+  position: relative;
+  z-index: 1;
 }
 
 * {
