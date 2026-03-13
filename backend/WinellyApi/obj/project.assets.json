@@ -3976,5 +3976,13 @@
         }
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file C:\\Programozas\\2025-26 susu\\Vizsgaremek\\Winelly_Project\\Winelly_Project\\backend\\WinellyApi\\obj\\project.nuget.cache : '<' is an invalid start of a property name. Expected a '\"'. Path: $ | LineNumber: 2 | BytePositionInLine: 0."
+    }
+  ]
 }

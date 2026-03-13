@@ -1,10 +1,6 @@
 {
   "version": 2,
-<<<<<<< HEAD
   "dgSpecHash": "Y0ImjjiqqWA=",
-=======
-  "dgSpecHash": "Ray2j4zswsE=",
->>>>>>> 26732effdecdb16dcaa10cfe24ca2413c6650baa
   "success": true,
   "projectFilePath": "C:\\Programozas\\2025-26 susu\\Vizsgaremek\\Winelly_Project\\Winelly_Project\\backend\\WinellyApi\\WinellyApi.csproj",
   "expectedPackageFiles": [
@@ -62,5 +58,15 @@
     "C:\\Users\\Kukola Kende\\.nuget\\packages\\system.composition.typedparts\\9.0.0\\system.composition.typedparts.9.0.0.nupkg.sha512",
     "C:\\Users\\Kukola Kende\\.nuget\\packages\\system.identitymodel.tokens.jwt\\8.0.1\\system.identitymodel.tokens.jwt.8.0.1.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "message": "Problem reading the cache file C:\\Programozas\\2025-26 susu\\Vizsgaremek\\Winelly_Project\\Winelly_Project\\backend\\WinellyApi\\obj\\project.nuget.cache : '<' is an invalid start of a property name. Expected a '\"'. Path: $ | LineNumber: 2 | BytePositionInLine: 0.",
+      "projectPath": "C:\\Programozas\\2025-26 susu\\Vizsgaremek\\Winelly_Project\\Winelly_Project\\backend\\WinellyApi\\WinellyApi.csproj",
+      "warningLevel": 1,
+      "filePath": "C:\\Programozas\\2025-26 susu\\Vizsgaremek\\Winelly_Project\\Winelly_Project\\backend\\WinellyApi\\WinellyApi.csproj",
+      "targetGraphs": []
+    }
+  ]
 }

@@ -6,12 +6,8 @@ import { WineContext, type Wine } from '../Mcontext/WineContextProvider';
 import CurrentWine from '../Mcomponents/CurrentWine';
 import Review from './Review';
 import { Rating } from '@mui/material';
-<<<<<<< HEAD
 import { getArea, setArea } from '../Ksrc/WorldMap';
-=======
-import { getArea, setArea } from "../Ksrc/WorldMap";
 import { useLocation } from 'react-router-dom';
->>>>>>> 036812be0e7555b2a9b0d73fcfc23176a56ac1bb
 
 type WebshopProps = {
   cartIconRef: React.RefObject<HTMLDivElement | null>
@@ -74,7 +70,6 @@ const Webshop = ({ cartIconRef }: WebshopProps) => {
   }, {});
   const tasteList = Object.entries(tasteCounts);
 
-<<<<<<< HEAD
   const [selectedRegion, setSelectedRegion] = useState<string | null>(getArea()?.toLocaleLowerCase() || null);
   console.log(selectedRegion)
   const regionFilter = (region: string) => {
@@ -84,17 +79,6 @@ const Webshop = ({ cartIconRef }: WebshopProps) => {
         return null;
       }
       return region;
-=======
-  const [selectedRegion, setSelectedRegion] = useState<string | null>(regionArea ? regionArea.toLowerCase() : null);
-  const regionFilter = (region: string) => {
-    const lower = region.toLowerCase();
-    setSelectedRegion(prev => {
-      if (prev === lower) {
-        setArea(null);
-        return null;
-      }
-      return lower;
->>>>>>> 036812be0e7555b2a9b0d73fcfc23176a56ac1bb
     });
   };
 
