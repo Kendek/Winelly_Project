@@ -289,11 +289,6 @@ const FillDisplayBoxWithInfo = () => {
                     easing: am5.ease.inOut(am5.ease.cubic)
                 })
 
-                circle.animate({
-                    key: "fill",
-                    to: am5.color("#FFD700"),
-                    duration:  2500
-                })
             },750)
 
         }

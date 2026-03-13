@@ -1,3 +1,7 @@
+:root{
+    overflow: hidden;
+}
+
 .MapMain{
     width: 100vw;
     height: 100%;
@@ -8,8 +12,7 @@
 .ChartDiv{
     width: 100vw;
     height: 80vh; 
-    
-}
+}   
 .Search {
     display: flex;
     justify-content: center;
@@ -73,6 +76,7 @@
         overflow-y: hidden;
 }
 .InfoBox {
+    animation: FadeIn 0.4s linear;
     min-width: 400px;
     position: absolute;
     top: 50%;
@@ -223,4 +227,13 @@
 
 .InfoBoxMapLink:hover {
     color: white;
+}
+
+@keyframes FadeIn{
+    0%{
+        opacity: 0%;
+    }
+    100%{
+        opacity: 100%;
+    }
 }
