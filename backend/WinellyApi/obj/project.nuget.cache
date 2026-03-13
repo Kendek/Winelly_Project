@@ -1,6 +1,10 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "Y0ImjjiqqWA=",
+=======
+  "dgSpecHash": "Ray2j4zswsE=",
+>>>>>>> 26732effdecdb16dcaa10cfe24ca2413c6650baa
   "success": true,
   "projectFilePath": "C:\\Programozas\\2025-26 susu\\Vizsgaremek\\Winelly_Project\\Winelly_Project\\backend\\WinellyApi\\WinellyApi.csproj",
   "expectedPackageFiles": [

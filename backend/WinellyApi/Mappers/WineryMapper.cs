@@ -17,6 +17,8 @@ namespace WinellyApi.Mappers
                 Lat = wineryModel.Lat,
                 Lon = wineryModel.Lon,
                 EstablishedYear = wineryModel.EstablishedYear,
+                Description = wineryModel.Description,
+                MapUrl = wineryModel.MapUrl,
                 Wines = wineryModel.Wines.Select(w => w.ToWineDto()).ToList(),
             };
         }
@@ -31,6 +33,8 @@ namespace WinellyApi.Mappers
                 Lat = geoRes.Lat,
                 Lon = geoRes.Lon,
                 EstablishedYear = wineryDto.EstablishedYear,
+                Description= wineryDto.Description,
+                MapUrl = wineryDto.MapUrl,
             };
         }
     }
