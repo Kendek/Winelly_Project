@@ -6,14 +6,16 @@
     align-items: flex-start;
     justify-content: center;
     position: relative;
-
-    background: radial-gradient(ellipse at 20% 30%, #c4284f 0%, #8a1530 35%, #3d0a18 65%, #1a060e 100%);
-    background-attachment: fixed;
 }
 
 @keyframes wineOrb {
-    0% { transform: translate(0, 0) scale(1); }
-    100% { transform: translate(40px, 25px) scale(1.10); }
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    100% {
+        transform: translate(40px, 25px) scale(1.10);
+    }
 }
 
 .filterOverlay {
@@ -71,7 +73,7 @@
     margin-top: 30px;
 }
 
-.filterPanel > .filterBlock:first-child {
+.filterPanel>.filterBlock:first-child {
     border: none;
     box-shadow: none;
     padding: 0;
@@ -81,7 +83,7 @@
 .filterBlock {
     background-color: transparent;
     border-radius: var(--inputs-radius);
-    color: rgba(255,255,255,0.88);
+    color: rgba(255, 255, 255, 0.88);
     position: relative;
     animation: slideDown 0.45s ease forwards;
     opacity: 0;
@@ -100,7 +102,7 @@
 .filterBlock input {
     width: 100%;
     padding: 11px 12px 11px 36px;
-    color: rgba(255,255,255,0.88);
+    color: rgba(255, 255, 255, 0.88);
     border-radius: var(--inputs-radius);
     border: 1px solid rgba(255, 255, 255, 0.16);
     font-size: var(--label-font);
@@ -140,7 +142,7 @@
 
 .filterTypes span:hover {
     background: rgba(255, 255, 255, 0.08);
-    color: rgba(255,255,255,0.95);
+    color: rgba(255, 255, 255, 0.95);
 }
 
 .regionList {
@@ -165,7 +167,7 @@
 
 .regionList span:hover {
     background: rgba(255, 255, 255, 0.08);
-    color: rgba(255,255,255,0.95);
+    color: rgba(255, 255, 255, 0.95);
 }
 
 .accordionBlock {
@@ -189,7 +191,7 @@
     border: none;
     width: 100%;
     text-align: left;
-    color: rgba(255,255,255,0.88);
+    color: rgba(255, 255, 255, 0.88);
     font-size: var(--label-font);
     font-weight: 700;
     letter-spacing: 0.03em;
@@ -211,14 +213,19 @@
 }
 
 .accordionBody {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s ease;
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.3s ease;
     padding: 0 16px;
 }
 
+.accordionBody>* {
+    overflow: hidden;
+    overflow: hidden;
+    padding: 0 10px;
+}
 .accordionBody.open {
-    max-height: 600px;
+    grid-template-rows: 1fr;
     padding: 4px 16px 16px;
 }
 
@@ -235,14 +242,14 @@
     gap: 12px;
     font-size: var(--label-font);
     font-weight: 500;
-    color: rgba(255,255,255,0.80);
+    color: rgba(255, 255, 255, 0.80);
 }
 
 .filterPrice p {
     text-align: center;
     font-size: var(--label-font);
     letter-spacing: 0.03em;
-    color: rgba(255,255,255,0.80);
+    color: rgba(255, 255, 255, 0.80);
 }
 
 .removeFilterBtn {
@@ -264,7 +271,7 @@
 .removeFilterBtn:hover {
     background-color: rgba(255, 255, 255, 0.08);
     border-color: rgba(255, 255, 255, 0.30);
-    color: rgba(255,255,255,0.90);
+    color: rgba(255, 255, 255, 0.90);
 }
 
 .removeFilterBtn:active {
@@ -306,7 +313,7 @@
         margin: 8px auto 0;
         background: rgba(255, 255, 255, 0.10);
         backdrop-filter: blur(12px);
-        color: rgba(255,255,255,0.88);
+        color: rgba(255, 255, 255, 0.88);
         border: 1px solid rgba(255, 255, 255, 0.18);
         padding: 11px 20px;
         border-radius: 30px;
@@ -366,7 +373,7 @@
         background: linear-gradient(135deg, rgba(192, 73, 106, 0.80), rgba(90, 14, 44, 0.90));
         backdrop-filter: blur(8px);
         color: white;
-        border: 1px solid rgba(255,255,255,0.15);
+        border: 1px solid rgba(255, 255, 255, 0.15);
         padding: 13px;
         border-radius: var(--inputs-radius);
         font-size: var(--label-font);
@@ -392,11 +399,23 @@
 }
 
 @keyframes slideDown {
-    0% { opacity: 0; transform: translateY(-20px); }
-    100% { opacity: 1; transform: translateY(0); }
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }

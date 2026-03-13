@@ -16,8 +16,7 @@
 .slideOutLeft {
     animation: checkoutSlideOutRight 0.4s ease forwards;
 }
-.hide
-{
+.hide {
     display: none;
 }
 
@@ -26,24 +25,34 @@
     gap: 40px;
     max-width: 1200px;
     width: 100%;
-    background: white;
+    background: rgba(255, 255, 255, 0.13);
+    backdrop-filter: blur(32px) saturate(1.1);
+    -webkit-backdrop-filter: blur(32px) saturate(1.1);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-top: 1px solid rgba(255, 255, 255, 0.38);
     border-radius: 1rem;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    box-shadow:
+        0 25px 50px rgba(0, 0, 0, 0.22),
+        inset 0 1px 0 rgba(255, 255, 255, 0.30);
     padding: 40px;
 }
-
 
 .leftSide {
     display: flex;
     flex-direction: column;
     gap: 16px;
+    flex: 1;
 }
 
 .section {
-    background: white;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     border-radius: 14px;
     padding: 16px 18px;
-    border: 3px solid var(--primary-colour);
+    border: 1px solid rgba(255, 255, 255, 0.20);
+    border-top: 1px solid rgba(255, 255, 255, 0.32);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15);
     transition: all 0.25s ease;
 }
 
@@ -51,7 +60,7 @@
     margin: 0;
     font-size: var(--title-font);
     font-weight: 600;
-    color: var(--primary-colour);
+    color: #ffffff;
 }
 
 .sectionBody {
@@ -76,26 +85,28 @@
 
 .sectionBody input {
     width: 100%;
-    padding: 8px 10px;
+    padding: 10px 14px;
     border-radius: 8px;
-    border: 2px solid var(--primary-colour);
-    background: white;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    background: rgba(255, 255, 255, 0.10);
+    backdrop-filter: blur(8px);
+    color: #ffffff;
     font-size: 14px;
     outline: none;
     transition: all 0.3s ease;
     margin-top: 1vh;
+    box-sizing: border-box;
 }
 
-.sectionBody input:focus{
-    border-color: var(--primary-light-colour);
-    background: white;
+.sectionBody input:focus {
+    border-color: rgba(255, 255, 255, 0.40);
+    background: rgba(255, 255, 255, 0.15);
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px #8e183b39;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.20);
 }
 
-
-.sectionBody input::placeholder{
-    color: #7f8199;
+.sectionBody input::placeholder {
+    color: rgba(255, 255, 255, 0.30);
 }
 
 .row {
@@ -110,10 +121,11 @@
     align-self: flex-end;
     padding: 9px 22px;
     border-radius: 999px;
-    border: none;
-    background: var(--primary-colour);
+    border: 1px solid rgba(255, 255, 255, 0.20);
+    background: linear-gradient(135deg, #d4567a 0%, #a82050 50%, #7a1535 100%);
     color: #fff;
     font-size: 14px;
+    font-weight: 600;
     cursor: pointer;
     transition: transform 0.1s ease, box-shadow 0.2s ease;
 }
@@ -121,7 +133,6 @@
 .sectionButton:hover,
 .purchaseButton:hover {
     transform: translateY(-2px);
-    box-shadow: 0 12px 35px #8e183b39;
 }
 
 .sectionButton:active,
@@ -129,12 +140,15 @@
     transform: translateY(0);
 }
 
-
 .rightSide {
-    background: white;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     border-radius: 14px;
     padding: 16px 18px;
-    border: 3px solid var(--primary-colour);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-top: 1px solid rgba(255, 255, 255, 0.30);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
     display: flex;
     flex-direction: column;
     gap: 14px;
@@ -145,12 +159,13 @@
     margin: 0;
     font-size: var(--title-font);
     font-weight: 600;
-    color: var(--primary-colour);
+    color: #ffffff;
 }
 
 .summaryList {
     border-radius: 10px;
-    background: var(--secondary-colour);
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.12);
     padding: 10px;
     display: flex;
     flex-direction: column;
@@ -162,11 +177,10 @@
     display: flex;
     align-items: center;
     font-size: var(--label-font);
-    color: var(--primary-colour);
+    color: rgba(255, 255, 255, 0.88);
     gap: 12px;
     padding: 6px 0;
 }
-
 
 .summaryHeaderRow>*:nth-child(1),
 .summaryItemRow>*:nth-child(1) {
@@ -196,8 +210,9 @@
 
 .summaryHeaderRow {
     font-weight: 600;
-    border-bottom: 1px solid var(--primary-colour);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.20);
     padding-bottom: 6px;
+    color: #ffffff;
 }
 
 .summaryItemRow {
@@ -208,7 +223,7 @@
     width: 40px;
     height: 40px;
     border-radius: 8px;
-    background: rgba(149, 149, 149, 0.226);
+    background: rgba(255, 255, 255, 0.10);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -223,6 +238,12 @@
 .trash {
     cursor: pointer;
     text-align: center;
+    color: rgba(255, 100, 120, 0.80);
+    transition: color 0.2s ease;
+}
+
+.trash:hover {
+    color: rgba(255, 100, 120, 1);
 }
 
 .summaryFooter {
@@ -237,45 +258,49 @@
     display: flex;
     justify-content: space-between;
     font-size: var(--label-font);
-    color: var(--primary-colour);
+    color: rgba(255, 255, 255, 0.65);
+    letter-spacing: 0.03em;
 }
 
 .summaryRowTotal {
     margin-top: 4px;
-    font-weight: 600;
+    font-weight: 700;
+    color: #ffffff;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.14);
+    letter-spacing: 0.04em;
 }
 
 .backLink {
     display: inline-block;
     margin-top: 20px;
-    color: #555;
+    color: rgba(255, 255, 255, 0.50);
     font-size: var(--label-font);
     text-decoration: none;
     cursor: pointer;
+    transition: color 0.2s ease;
 }
 
 .backLink:hover {
-    color: #b62752;
+    color: rgba(255, 255, 255, 0.90);
 }
-
 
 @keyframes checkoutSlideInRight {
     from {
         transform: translateX(100%);
         opacity: 0;
     }
-
     to {
         transform: translateX(0);
         opacity: 1;
     }
 }
+
 @keyframes checkoutSlideOutRight {
     from {
         transform: translateX(0);
         opacity: 1;
     }
-
     to {
         transform: translateX(-100%);
         opacity: 0;
@@ -283,9 +308,8 @@
 }
 
 @media (max-width: 768px) {
-    .containerCheckout{
+    .containerCheckout {
         flex-direction: column;
         padding: 20px;
     }
-
 }

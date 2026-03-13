@@ -23,7 +23,7 @@ AOS.init({
   <div data-aos="fade-down" data-aos-duration="1500" className={styles.TextContainer}>
 
     <div className={styles.HeroTag}>
-      🍷 Premium Wine Collection
+      <i className="fa-solid fa-wine-glass"></i> Premium Wine Collection
     </div>
 
     <h1 className={styles.HeroHeading}>
@@ -43,13 +43,13 @@ AOS.init({
     </p>
 
     <p className={styles.HeroBody}>
-      🌍 Worldwide shipping, every day of the year, at an affordable price.
+      <i className="fa-solid fa-globe"></i> Worldwide shipping, every day of the year, at an affordable price.
     </p>
 
     <div className={styles.HeroDivider} />
 
     <button className={styles.HeroOrderBtn} onClick={() => navigate('/webshop')}>
-      Order Now 🛒
+      Order Now <i className="fa-solid fa-cart-shopping"></i>
     </button>
 
   </div>

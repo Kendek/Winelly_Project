@@ -89,7 +89,7 @@ const HomeThirdPart = () => {
 
     <div className={styles.HomeMapInfo}>
       <div className={styles.MapTag}>
-        🌍 Global Wineries
+        <i className="fa-solid fa-globe"></i>  Global Wineries
       </div>
 
       <h1 className={styles.MapHeading}>

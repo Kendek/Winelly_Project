@@ -100,7 +100,7 @@ const SignUp = ({ flipForm }: Props) => {
 
         <div className={styles.formSwitch}>
           <p className={styles.switchText}>
-            Already have an account?
+            Already have an account? 
             <span className={styles.switchLink} onClick={() => { flipForm(); ResetFields() }}>
               Sign in
             </span>
