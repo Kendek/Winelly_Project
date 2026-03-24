@@ -43,6 +43,7 @@ html, body {
   --inputs-radius: 12px;
   --image-radius: 10px;
   --smalldiv-radius: 4px;
+
 }
 
 @media screen and (max-width: 768px) {

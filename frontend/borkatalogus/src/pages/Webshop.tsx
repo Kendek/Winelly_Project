@@ -16,13 +16,17 @@ type WebshopProps = {
 const Webshop = ({ cartIconRef }: WebshopProps) => {
 
   const { wines, currentWineId, setCurrentWineId } = useContext(WineContext)
+  console.log(currentWineId)
   const location = useLocation();
 
-  useEffect(() => {
-    if (location.state?.wineId) {
-      setCurrentWineId(location.state.wineId);
-    }
-  }, [location.state]);
+ useEffect(() => {
+  if (location.state?.wineId) {
+    setCurrentWineId(location.state.wineId);
+    window.history.replaceState({}, document.title);
+  } else {
+    setCurrentWineId(null);
+  }
+}, [location.state]);
 
   const [maxPrice, setMaxPrice] = useState(0);
   const [priceValue, setPriceValue] = useState<number[]>([0, 0]);
@@ -294,7 +298,7 @@ const Webshop = ({ cartIconRef }: WebshopProps) => {
         </div>
       </div>
 
-      {currentWineId && (
+      {currentWineId && wines.length > 0 &&(
         <div className={style.overlay}>
           <CurrentWine cartIconRef={cartIconRef} setShowReview={setShowReview} />
         </div>

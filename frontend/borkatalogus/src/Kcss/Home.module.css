@@ -41,7 +41,7 @@
     padding: 48px 40px;
     border-radius: 20px;
     height: 60%;
-
+    min-height: 600px;
     background: linear-gradient(135deg, rgba(255,255,255,0.07) 0%, rgba(139,30,63,0.12) 100%);
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
@@ -248,7 +248,7 @@
 }
 .CardTitle {
     text-shadow: 0px 1px 0px black (255, 255, 255, 0.397);
-    text-align: left;
+    text-align: center;
     font-size: xx-large !important;
     font-weight: bold;
 }
@@ -465,15 +465,18 @@
         display: none;
     }
     .ScrollDown {
-        left: 50%;
+        visibility: hidden;
     }
     .HomeThird{
         flex-direction: column;
-        margin-top: 300px;
+        margin-top: 100px;
         gap: 10%;
         div{
             width: 90%;
         }
+    }
+    .HomeSecond{
+        margin-bottom: 500px;
     }
 
 }

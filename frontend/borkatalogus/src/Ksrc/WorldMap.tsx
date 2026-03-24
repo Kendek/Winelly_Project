@@ -9,7 +9,14 @@ import type { WineryGetType } from './AdminPages/AdminFetch';
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 import AOS from 'aos'
 
-
+type ClickedMarkerType ={
+    title:string | undefined,
+    area: string | undefined,
+    description: string | undefined,
+    year: number | undefined,
+    url: string | undefined,
+    country: string| undefined
+}
 let area: string | null = null;
 export const getArea = () =>area;
 export const setArea = (val: string|null) => {area =val};
@@ -24,8 +31,90 @@ const Chart = () => {
     const markerSeriesRef = useRef<any>(null);
     const chartRef = useRef<any>(null); 
     const [SelectedWinery, setSelectedWinery]= useState<WineryGetType>()
+    const [hideOrShow, sethideOrShow] = useState(false)
 
+    const [clickedMarker, setClickedMarker] = useState<ClickedMarkerType | null>()
 
+    const InfoDiv  = useRef<any>(null)
+
+    const NavigateToWebshop= (area:string | undefined) =>{
+        if(area)
+            setArea(area)
+        navigate('/webshop');
+    }
+
+    const DisplayInfoBox=(e: am5.ISpritePointerEvent) =>{
+            setClickedMarker(null)
+           const dataContext = e["target"]?.["_dataItem"]?.["dataContext"] as {
+            title?:string,
+            area?: string,
+            country?:string, 
+            url?:string,
+            description?:string,
+            year?:number
+            };
+            if(dataContext)
+            {
+                setClickedMarker({
+                    title: dataContext.title,
+                    area: dataContext.area,
+                    description: dataContext.description,
+                    year: dataContext.year,
+                    url: dataContext.url,
+                    country: dataContext.country
+                })
+            }
+            sethideOrShow(true)
+    }
+
+const FillDisplayBoxWithInfo = () => {
+    if (!clickedMarker) return null;
+    return (
+        <>
+            <div className={styles.InfoBoxTag}>
+                <i className="fa-solid fa-wine-bottle"></i> Winery Details
+            </div>
+
+            <h3 className={styles.InfoBoxTitle}>{clickedMarker.title}</h3>
+
+            <div className={styles.InfoBoxDivider} />
+
+            <div className={styles.InfoBoxRow}>
+                <div className={styles.InfoBoxField}>
+                    <span className={styles.InfoBoxLabel}>Area</span>
+                    <span className={styles.InfoBoxValue}>{clickedMarker.area}</span>
+                </div>
+                <div className={styles.InfoBoxField}>
+                    <span className={styles.InfoBoxLabel}>Country</span>
+                    <span className={styles.InfoBoxValue}>{clickedMarker.country}</span>
+                </div>
+                <div className={styles.InfoBoxField}>
+                    <span className={styles.InfoBoxLabel}>Established</span>
+                    <span className={styles.InfoBoxValue}>{clickedMarker.year}</span>
+                </div>
+            </div>
+
+            <div className={styles.InfoBoxDivider} />
+
+            <p className={styles.InfoBoxDescription}>{clickedMarker.description}</p>
+
+            {clickedMarker.url && (
+                <a className={styles.InfoBoxMapLink} href={clickedMarker.url} target="_blank" rel="noopener noreferrer">
+                    <i className="fa-solid fa-location-dot"></i> View on Map →
+                </a>
+            )}
+
+            <div className={styles.InfoBoxActions}>
+                <button className={styles.InfoBoxShopBtn} onClick={() => NavigateToWebshop(clickedMarker.area)}>
+                    Check out Wines from this Region <i className="fa-solid fa-cart-shopping"></i>
+                </button>
+                <button className={styles.InfoBoxSecondaryBtn} onClick={() => sethideOrShow(false)}>
+                    Close
+                </button>
+            </div>
+        </>
+    );
+}
     useLayoutEffect(() => { 
         let root = am5.Root.new("chartdiv");
 
@@ -104,11 +193,7 @@ const Chart = () => {
             })
 
             circle.events.on("click", (e) => {
-                const dataContext = e["target"]?.["_dataItem"]?.["dataContext"] as { area?: string };
-                if(dataContext.area)
-                    setArea(dataContext?.area)
-                console.log(area)
-                navigate('/webshop');
+                    DisplayInfoBox(e)
                 });
 
 
@@ -134,7 +219,11 @@ const Chart = () => {
                     geometry: { type:"Point",  coordinates: [marker.lon, marker.lat]},
                     title:`${marker.name}, ${marker.region}`,
                     area: `${marker.region}`,
-                    id: marker.id
+                    id: marker.id,
+                    description: marker.description,
+                    year: marker.establishedYear,
+                    url: marker.mapUrl,
+                    country: marker.country
                 });
             });
         }
@@ -200,20 +289,25 @@ const Chart = () => {
                     easing: am5.ease.inOut(am5.ease.cubic)
                 })
 
-                circle.animate({
-                    key: "fill",
-                    to: am5.color("#FFD700"),
-                    duration:  2500
-                })
             },750)
 
         }
     }, [SelectedWinery])
+    
+    useEffect(() => {
+    document.body.style.overflow = location.pathname== "/map" ? "hidden" : "auto";
+    return () => { document.body.style.overflow = "auto"; };
+  }, [location.pathname]);  
 
   return (
     <div className={styles.main}>
         <div ata-aos="fade-up" data-aos-duration="3000" className={styles.Search}>
             <h1>Search winery:</h1>
+            {hideOrShow && (
+                <div ref={InfoDiv} className={`${styles.InfoBox} ${styles.asd}`}>
+                    {FillDisplayBoxWithInfo()}
+                </div>
+            )}
             <select  onChange={(e) => ZoomOnSelect(parseInt(e.target.value))} > 
                 {Winerys.map((row) => <option value={row.id}>{row.name}, {row.region}</option>)}
             </select>
