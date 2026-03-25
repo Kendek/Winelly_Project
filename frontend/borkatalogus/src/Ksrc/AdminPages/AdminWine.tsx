@@ -106,7 +106,7 @@ const AdminWine = () => {
           setWines(WineData)
           setWinerys(WineryData)
           setGrapes(GrapeData)
-          setUpdateState(UpdateState => !UpdateState)
+          //setUpdateState(UpdateState => !UpdateState)
         } catch (error) {
           console.error("Error fetching data:", error)
         }
